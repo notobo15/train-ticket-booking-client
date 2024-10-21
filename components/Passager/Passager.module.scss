@@ -1,0 +1,96 @@
+.wrapper {
+  position: relative;
+}
+.input {
+  font-family: CodecPro;
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  vertical-align: top;
+  width: 100%;
+  font-family: CodecPro;
+}
+
+.label {
+  transform: translateY(-50%) translateY(-10px);
+  font-size: 0.563125em;
+  line-height: 1.331853496;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  line-height: 1.333333333;
+  text-transform: none;
+  display: block;
+  transform-origin: top left;
+  font-size: 1em;
+  line-height: 1.25;
+  text-transform: none;
+  color: hsl(206, 32%, 39%);
+  z-index: 2;
+  pointer-events: none;
+  position: absolute;
+  right: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transform: translateY(-50%);
+  transition: color 200ms cubic-bezier(0, 0, 0.2, 1) 0ms,
+    transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms,
+    font-size 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+  font-size: 0.563125em;
+  line-height: 1.331853496;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: hsl(206, 32%, 39%);
+  font-weight: 600;
+  left: 12px;
+  top: 18px;
+}
+.main {
+  align-items: center;
+  display: inline-flex;
+  transition: 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  position: relative;
+  color: hsl(206, 48%, 24%);
+  border: 1px solid transparent;
+  border-radius: 0.375rem;
+  margin: 4px 0px;
+  cursor: text;
+  width: 100%;
+  height: 56px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.375rem;
+  background-color: var(--col-bg-canvas-prim);
+}
+.mainLabel {
+  flex-grow: 1;
+  padding: 20px 4px 6px 12px;
+  padding-top: 26px;
+  padding-bottom: 8px;
+  user-select: none;
+}
+.wrapperDropDown {
+  width: 336px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 1.5rem;
+  box-shadow: rgba(32, 65, 91, 0.2) 0px 1px 1px 0px,
+    rgba(32, 65, 91, 0.2) 0px 12px 16px 0px;
+  z-index: 1300;
+  padding: 16px 16px 20px;
+  /*  */
+  position: absolute;
+  inset: 0px auto auto 0px;
+  margin: 0px;
+  top: 0;
+  top: 100%;
+  // transform: translate(448px, 451px);
+}
+.btn[disabled] {
+  outline-color: var(--col-disabled-200);
+  color: var(--col-disabled-400);
+  background-color: var(--col-disabled-100);
+}
