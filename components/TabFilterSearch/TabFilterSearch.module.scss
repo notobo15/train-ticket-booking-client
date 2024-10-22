@@ -1,0 +1,227 @@
+.wrapper {
+  padding-bottom: 6px;
+}
+.wrapper {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.wrapper {
+  position: relative;
+  border-bottom: 0.0625rem solid rgb(229, 236, 240);
+  transition: border-color 0.5s;
+}
+
+.wrapper {
+  padding-top: 6px;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: repeat(24, 1fr);
+}
+.mainInner {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  grid-column: 1 / -1;
+}
+
+.mainWrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.labelResult {
+  box-sizing: content-box;
+  height: var(--cta-label-height);
+  padding: 2px 0px;
+  animation: animation-1rd92cb 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  overflow: hidden;
+  margin-left: 8px;
+
+  --cta-label-height: calc(
+    calc(1.125em * 1.111111111 * 2) + calc(0.625em * 1.2 * 1) + 4px
+  );
+
+  & > :not(:last-child) {
+    margin-right: 8px;
+    margin-bottom: 0;
+  }
+}
+
+.loadingDone {
+  display: grid;
+  grid-template-columns: minmax(0px, 1fr);
+  grid-template-rows: var(--cta-label-height) var(--cta-label-height);
+  -webkit-box-align: center;
+  align-items: center;
+  transition: transform 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  transform: translateY(calc(var(--cta-label-height) * -1));
+}
+.labelLoading {
+  font-size: 1.125em;
+  line-height: 1.11111;
+  text-transform: none;
+  font-weight: 600;
+  color: rgb(143, 172, 193);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: opacity 0.5s;
+  /*  */
+  opacity: 0;
+}
+.containerResult {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: stretch;
+  transition: opacity 0.5s;
+  /*  */
+  opacity: 1;
+}
+.labelHeading {
+  font-size: 0.625em;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: hsl(206, 32%, 39%);
+
+  margin-bottom: 4px;
+  margin-right: 0;
+}
+.result {
+  font-size: 1.125em;
+  line-height: 1.111111111;
+  text-transform: none;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.actionContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+.actionWrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+.actionLabel {
+  font-size: 0.563125em;
+  line-height: 1.331853496;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: hsl(205, 25%, 53%);
+  margin-top: 2px;
+  margin-left: 16px;
+}
+.sortingContainer {
+  margin-left: 8px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.sortingItem {
+  font-size: 0.875em;
+  line-height: 1.142857143;
+  text-transform: none;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  min-height: 32px;
+  padding: 8px 16px;
+}
+.active {
+  --chip-background: hsla(203, 100%, 59%, 0.1);
+  --chip-border-color: transparent;
+  --chip-color: hsl(206, 48%, 24%);
+  --chip-icon-color: hsl(206, 100%, 51%);
+  --chip-hover-background: hsla(203, 100%, 59%, 0.1);
+  --chip-hover-border-color: transparent;
+  --chip-hover-color: hsl(207, 98%, 40%);
+  --chip-hover-icon-color: hsl(206, 100%, 51%);
+  --chip-active-background: hsla(203, 100%, 59%, 0.2);
+  --chip-active-border-color: transparent;
+  --chip-active-color: hsl(206, 48%, 24%);
+  --chip-active-icon-color: hsl(206, 100%, 51%);
+}
+
+.sortingItem {
+  font-size: 0.875em;
+  line-height: 1.142857143;
+  text-transform: none;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sortingItemSelected {
+  --chip-background: hsla(203, 100%, 59%, 0.1);
+  --chip-border-color: transparent;
+  --chip-color: hsl(206, 48%, 24%);
+  --chip-icon-color: hsl(206, 100%, 51%);
+  --chip-hover-background: hsla(203, 100%, 59%, 0.1);
+  --chip-hover-border-color: transparent;
+  --chip-hover-color: hsl(207, 98%, 40%);
+  --chip-hover-icon-color: hsl(206, 100%, 51%);
+  --chip-active-background: hsla(203, 100%, 59%, 0.2);
+  --chip-active-border-color: transparent;
+  --chip-active-color: hsl(206, 48%, 24%);
+  --chip-active-icon-color: hsl(206, 100%, 51%);
+  border-style: solid;
+  border-width: 0.0625rem;
+  border-radius: 999px;
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  cursor: inherit;
+  outline: 0;
+  background: var(--chip-background);
+  border-color: var(--chip-border-color);
+  color: var(--chip-color);
+  min-height: 32px;
+  padding: 7px 15px;
+  padding-left: 11px;
+}
+@media (min-width: 600px) {
+  .labelResult {
+    margin-left: 16px;
+  }
+}
+@media (min-width: 768px) {
+  .wrapper {
+    padding-left: 6.25%;
+    padding-right: 6.25%;
+  }
+}
+@media (min-width: 480px) {
+  .wrapper {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+@media (min-width: 360px) {
+  .wrapper {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+@media (min-width: 992px) {
+  .mainInner {
+    grid-column: 2 / -2;
+  }
+}
