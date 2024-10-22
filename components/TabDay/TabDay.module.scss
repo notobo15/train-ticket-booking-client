@@ -1,0 +1,97 @@
+.main {
+}
+.mainInner {
+  display: grid;
+  grid-template-columns: repeat(24, 1fr);
+  overflow-y: hidden;
+}
+.tabs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  grid-column: 1 / -1;
+}
+.tab {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 80px;
+  color: hsl(205, 25%, 53%);
+  flex-grow: 1;
+  flex-basis: 0;
+}
+.tabLabel {
+  font-size: 0.75em;
+  line-height: 1.333333333;
+  text-transform: none;
+  font-weight: 500;
+}
+.active {
+  background-color: hsl(0, 0%, 100%);
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+  color: hsl(207, 98%, 40%);
+  justify-content: center;
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 1px 1px 0px hsla(206, 48%, 24%, 0.1),
+    0px 2px 4px 0px hsla(206, 48%, 24%, 0.1);
+  position: relative;
+  height: 80px;
+  color: hsl(205, 25%, 53%);
+  flex-grow: 1;
+  flex-basis: 0;
+}
+.wrapper {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+@media (min-width: 360px) {
+  .wrapper {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 480px) {
+  .wrapper {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+
+@media (min-width: 600px) {
+  .tabLabel {
+    font-size: 0.875em;
+    line-height: 1.142857143;
+    text-transform: none;
+    font-weight: 400;
+  }
+}
+@media (min-width: 768px) {
+  .wrapper {
+    padding-left: 6.25%;
+    padding-right: 6.25%;
+  }
+  .tabLabel {
+    font-size: 1em;
+    line-height: 1.25;
+    text-transform: none;
+  }
+}
+
+@media (min-width: 992px) {
+  .tabs {
+    grid-column: 2 / -2;
+  }
+}
