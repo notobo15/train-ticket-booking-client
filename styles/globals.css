@@ -1,0 +1,530 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-display: fallback;
+  font-family: CodecPro;
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url(/fonts/codec-pro-regular.woff2) format("woff2"),
+    url(/fonts/codec-pro-regular.woff) format("woff");
+}
+
+@font-face {
+  font-display: fallback;
+  font-family: CodecPro;
+  font-style: italic;
+  font-weight: 400;
+  src:
+    url(/fonts/codec-pro-italic.woff2) format("woff2"),
+    url(/fonts/codec-pro-italic.woff) format("woff");
+}
+
+@font-face {
+  font-display: fallback;
+  font-family: CodecPro;
+  font-style: normal;
+  font-weight: 500;
+  src:
+    url(/fonts/codec-pro-bold.woff2) format("woff2"),
+    url(/fonts/codec-pro-bold.woff) format("woff");
+}
+
+@font-face {
+  font-display: fallback;
+  font-family: CodecPro;
+  font-style: normal;
+  font-weight: 600;
+  src:
+    url(/fonts/codec-pro-extrabold.woff2) format("woff2"),
+    url(/fonts/codec-pro-extrabold.woff) format("woff");
+}
+
+:root {
+  --header-gradient: linear-gradient(135deg, #f5fcff, #e0f5ff);
+  --page-gradient: linear-gradient(135deg, #f5fcff, #e0f5ff);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  --col-white-canvas: #fff;
+  --col-white-glass: hsla(0, 0%, 100%, 0.5);
+  --col-white-film: hsla(0, 0%, 100%, 0.1);
+  --col-black-canvas: #000;
+  --col-black-glass: rgba(0, 0, 0, 0.5);
+  --col-black-film: rgba(0, 0, 0, 0.1);
+  --col-transparent: hsla(0, 0%, 100%, 0);
+  --col-bg-canvas-prim: #fff;
+  --col-bg-canvas-sec: #f8fafc;
+  --col-bg-canvas-ter: #eff3f6;
+  --col-bg-canvas-prim-inv: #2b3036;
+  --col-bg-canvas-sec-inv: #434d56;
+  --col-bg-canvas-ter-inv: #5c6975;
+  --col-bg-glass-prim: hsla(0, 0%, 100%, 0.5);
+  --col-bg-glass-sec: rgba(241, 245, 249, 0.5);
+  --col-bg-glass-ter: rgba(222, 230, 237, 0.5);
+  --col-bg-glass-prim-inv: rgba(0, 7, 15, 0.83);
+  --col-bg-glass-sec-inv: rgba(0, 12, 26, 0.74);
+  --col-bg-glass-ter-inv: rgba(0, 21, 41, 0.64);
+  --col-bg-film-prim: hsla(0, 0%, 100%, 0.1);
+  --col-bg-film-sec: rgba(184, 204, 224, 0.1);
+  --col-bg-film-ter: rgba(95, 135, 165, 0.1);
+  --col-bg-film-prim-inv: rgba(0, 7, 15, 0.83);
+  --col-bg-film-sec-inv: rgba(0, 12, 26, 0.74);
+  --col-bg-film-ter-inv: rgba(0, 21, 41, 0.64);
+  --col-bg-el-sunken-canvas: #eff3f6;
+  --col-bg-el-sunken-glass: rgba(222, 230, 237, 0.5);
+  --col-bg-el-sunken-film: rgba(95, 135, 165, 0.1);
+  --col-bg-el-flat-canvas: #fff;
+  --col-bg-el-flat-glass: hsla(0, 0%, 100%, 0.5);
+  --col-bg-el-flat-film: hsla(0, 0%, 100%, 0.1);
+  --col-bg-el-raised-canvas: #fff;
+  --col-bg-el-raised-glass: hsla(0, 0%, 100%, 0.5);
+  --col-bg-el-raised-film: hsla(0, 0%, 100%, 0.1);
+  --col-bg-el-floating-canvas: #fff;
+  --col-bg-el-floating-glass: hsla(0, 0%, 100%, 0.5);
+  --col-bg-el-floating-film: hsla(0, 0%, 100%, 0.1);
+  --col-b-prim: rgba(0, 54, 102, 0.11);
+  --col-b-prim-inv: rgba(198, 210, 220, 0.5);
+  --col-text-prim: rgba(0, 7, 15, 0.83);
+  --col-text-sec: rgba(0, 21, 41, 0.64);
+  --col-text-ter: rgba(0, 29, 56, 0.53);
+  --col-text-prim-inv: #fff;
+  --col-text-sec-inv: hsla(0, 0%, 100%, 0.5);
+  --col-text-ter-inv: rgba(198, 210, 220, 0.5);
+  --col-icon-prim: rgba(0, 29, 56, 0.53);
+  --col-icon-sec: rgba(0, 45, 82, 0.22);
+  --col-icon-prim-inv: #fff;
+  --col-icon-sec-inv: rgba(222, 230, 237, 0.5);
+  --col-s-default: rgba(67, 77, 86, 0.1);
+  --col-s-inv: rgba(67, 77, 86, 0.85);
+  --col-neutral-100: rgba(95, 135, 165, 0.1);
+  --col-neutral-200: rgba(0, 54, 102, 0.11);
+  --col-neutral-400: rgba(47, 79, 106, 0.5);
+  --col-neutral-500: rgba(0, 29, 56, 0.53);
+  --col-neutral-600: rgba(0, 21, 41, 0.64);
+  --col-neutral-800: rgba(0, 7, 15, 0.83);
+  --col-link-100: rgba(0, 157, 255, 0.1);
+  --col-link-200: rgba(0, 149, 255, 0.18);
+  --col-link-400: rgba(0, 132, 240, 0.77);
+  --col-link-500: rgba(0, 122, 230, 0.86);
+  --col-link-600: rgba(0, 97, 189, 0.89);
+  --col-link-800: rgba(0, 7, 15, 0.83);
+  --col-cta-100: rgba(0, 170, 255, 0.12);
+  --col-cta-200: rgba(0, 166, 255, 0.2);
+  --col-cta-400: rgba(0, 157, 255, 0.82);
+  --col-cta-500: rgba(0, 143, 245, 0.95);
+  --col-cta-600: rgba(0, 121, 214, 0.95);
+  --col-cta-800: rgba(0, 39, 82, 0.95);
+  --col-selected-100: rgba(0, 170, 255, 0.12);
+  --col-selected-200: rgba(0, 166, 255, 0.2);
+  --col-selected-400: rgba(0, 157, 255, 0.82);
+  --col-selected-500: rgba(0, 143, 245, 0.95);
+  --col-selected-600: rgba(0, 121, 214, 0.95);
+  --col-selected-800: rgba(0, 39, 82, 0.95);
+  --col-disabled-100: rgba(95, 135, 165, 0.1);
+  --col-disabled-200: rgba(0, 54, 102, 0.11);
+  --col-disabled-400: rgba(47, 79, 106, 0.5);
+  --col-disabled-500: rgba(0, 29, 56, 0.53);
+  --col-disabled-600: rgba(0, 21, 41, 0.64);
+  --col-disabled-800: rgba(0, 7, 15, 0.83);
+  --col-informative-100: rgba(0, 157, 255, 0.1);
+  --col-informative-200: rgba(0, 149, 255, 0.18);
+  --col-informative-400: rgba(0, 132, 240, 0.77);
+  --col-informative-500: rgba(0, 122, 230, 0.86);
+  --col-informative-600: rgba(0, 97, 189, 0.89);
+  --col-informative-800: rgba(0, 7, 15, 0.83);
+  --col-negative-100: rgba(255, 56, 96, 0.1);
+  --col-negative-200: rgba(255, 0, 51, 0.12);
+  --col-negative-400: rgba(255, 0, 38, 0.6);
+  --col-negative-500: rgba(240, 0, 32, 0.73);
+  --col-negative-600: rgba(204, 0, 24, 0.82);
+  --col-negative-800: rgba(15, 0, 1, 0.82);
+  --col-notice-100: rgba(255, 123, 0, 0.12);
+  --col-notice-200: rgba(255, 115, 0, 0.2);
+  --col-notice-400: rgba(240, 100, 0, 0.85);
+  --col-notice-500: rgba(224, 86, 0, 0.95);
+  --col-notice-600: rgba(189, 63, 0, 0.95);
+  --col-notice-800: rgba(15, 5, 0, 0.83);
+  --col-special-100: rgba(250, 183, 0, 0.2);
+  --col-special-200: rgba(245, 171, 0, 0.31);
+  --col-special-400: rgba(204, 136, 0, 0.95);
+  --col-special-500: rgba(179, 113, 0, 0.95);
+  --col-special-600: rgba(153, 97, 0, 0.95);
+  --col-special-800: rgba(15, 9, 0, 0.83);
+  --col-positive-100: rgba(0, 199, 36, 0.13);
+  --col-positive-200: rgba(0, 194, 42, 0.21);
+  --col-positive-400: rgba(0, 158, 40, 0.78);
+  --col-positive-500: rgba(0, 138, 37, 0.85);
+  --col-positive-600: rgba(0, 112, 32, 0.87);
+  --col-positive-800: rgba(0, 15, 5, 0.84);
+  --col-bad-100: rgba(255, 56, 96, 0.1);
+  --col-bad-200: rgba(255, 0, 51, 0.12);
+  --col-bad-400: rgba(255, 0, 38, 0.6);
+  --col-bad-500: rgba(240, 0, 32, 0.73);
+  --col-bad-600: rgba(204, 0, 24, 0.82);
+  --col-bad-800: rgba(15, 0, 1, 0.82);
+  --col-poor-100: rgba(255, 123, 0, 0.12);
+  --col-poor-200: rgba(255, 115, 0, 0.2);
+  --col-poor-400: rgba(240, 100, 0, 0.85);
+  --col-poor-500: rgba(224, 86, 0, 0.95);
+  --col-poor-600: rgba(189, 63, 0, 0.95);
+  --col-poor-800: rgba(15, 5, 0, 0.83);
+  --col-fair-100: rgba(250, 183, 0, 0.2);
+  --col-fair-200: rgba(245, 171, 0, 0.31);
+  --col-fair-400: rgba(204, 136, 0, 0.95);
+  --col-fair-500: rgba(179, 113, 0, 0.95);
+  --col-fair-600: rgba(153, 97, 0, 0.95);
+  --col-fair-800: rgba(15, 9, 0, 0.83);
+  --col-good-100: rgba(0, 199, 36, 0.13);
+  --col-good-200: rgba(0, 194, 42, 0.21);
+  --col-good-400: rgba(0, 158, 40, 0.78);
+  --col-good-500: rgba(0, 138, 37, 0.85);
+  --col-good-600: rgba(0, 112, 32, 0.87);
+  --col-good-800: rgba(0, 15, 5, 0.84);
+  --col-blue-100: rgba(0, 157, 255, 0.1);
+  --col-blue-200: rgba(0, 149, 255, 0.18);
+  --col-blue-400: rgba(0, 132, 240, 0.77);
+  --col-blue-500: rgba(0, 122, 230, 0.86);
+  --col-blue-600: rgba(0, 97, 189, 0.89);
+  --col-blue-800: rgba(0, 7, 15, 0.83);
+  --col-green-100: rgba(0, 199, 36, 0.13);
+  --col-green-200: rgba(0, 194, 42, 0.21);
+  --col-green-400: rgba(0, 158, 40, 0.78);
+  --col-green-500: rgba(0, 138, 37, 0.85);
+  --col-green-600: rgba(0, 112, 32, 0.87);
+  --col-green-800: rgba(0, 15, 5, 0.84);
+  --col-yellow-100: rgba(250, 183, 0, 0.2);
+  --col-yellow-200: rgba(245, 171, 0, 0.31);
+  --col-yellow-400: rgba(204, 136, 0, 0.95);
+  --col-yellow-500: rgba(179, 113, 0, 0.95);
+  --col-yellow-600: rgba(153, 97, 0, 0.95);
+  --col-yellow-800: rgba(15, 9, 0, 0.83);
+  --col-orange-100: rgba(255, 123, 0, 0.12);
+  --col-orange-200: rgba(255, 115, 0, 0.2);
+  --col-orange-400: rgba(240, 100, 0, 0.85);
+  --col-orange-500: rgba(224, 86, 0, 0.95);
+  --col-orange-600: rgba(189, 63, 0, 0.95);
+  --col-orange-800: rgba(15, 5, 0, 0.83);
+  --col-red-100: rgba(255, 56, 96, 0.1);
+  --col-red-200: rgba(255, 0, 51, 0.12);
+  --col-red-400: rgba(255, 0, 38, 0.6);
+  --col-red-500: rgba(240, 0, 32, 0.73);
+  --col-red-600: rgba(204, 0, 24, 0.82);
+  --col-red-800: rgba(15, 0, 1, 0.82);
+  --col-teal-100: rgba(0, 194, 171, 0.13);
+  --col-teal-200: rgba(0, 179, 158, 0.2);
+  --col-teal-400: rgba(0, 158, 145, 0.83);
+  --col-teal-500: rgba(0, 133, 124, 0.85);
+  --col-teal-600: rgba(0, 107, 102, 0.87);
+  --col-teal-800: rgba(0, 15, 15, 0.84);
+  --col-purple-100: rgba(137, 107, 255, 0.1);
+  --col-purple-200: rgba(60, 0, 255, 0.1);
+  --col-purple-400: rgba(79, 20, 255, 0.5);
+  --col-purple-500: rgba(64, 0, 240, 0.56);
+  --col-purple-600: rgba(61, 0, 214, 0.65);
+  --col-purple-800: rgba(4, 0, 15, 0.82);
+  --col-coral-100: rgba(255, 96, 56, 0.1);
+  --col-coral-200: rgba(255, 51, 0, 0.14);
+  --col-coral-400: rgba(240, 36, 0, 0.64);
+  --col-coral-500: rgba(230, 31, 0, 0.76);
+  --col-coral-600: rgba(199, 23, 0, 0.84);
+  --col-coral-800: rgba(15, 1, 0, 0.82);
+  --col-pink-100: rgba(255, 56, 175, 0.1);
+  --col-pink-200: rgba(255, 0, 149, 0.12);
+  --col-pink-400: rgba(224, 0, 123, 0.56);
+  --col-pink-500: rgba(204, 0, 109, 0.67);
+  --col-pink-600: rgba(184, 0, 95, 0.76);
+  --col-pink-800: rgba(15, 0, 8, 0.82);
+  --col-magenta-100: rgba(225, 56, 255, 0.1);
+  --col-magenta-200: rgba(221, 0, 255, 0.12);
+  --col-magenta-400: rgba(210, 0, 230, 0.58);
+  --col-magenta-500: rgba(186, 0, 199, 0.69);
+  --col-magenta-600: rgba(155, 0, 163, 0.75);
+  --col-magenta-800: rgba(15, 0, 15, 0.82);
+  --col-indigo-100: rgba(56, 116, 255, 0.1);
+  --col-indigo-200: rgba(0, 85, 255, 0.14);
+  --col-indigo-400: rgba(0, 72, 255, 0.56);
+  --col-indigo-500: rgba(0, 65, 245, 0.67);
+  --col-indigo-600: rgba(0, 54, 214, 0.74);
+  --col-indigo-800: rgba(0, 3, 15, 0.82);
+  --col-grass-100: rgba(119, 199, 0, 0.16);
+  --col-grass-200: rgba(119, 199, 0, 0.26);
+  --col-grass-400: rgba(81, 148, 0, 0.79);
+  --col-grass-500: rgba(71, 133, 0, 0.85);
+  --col-grass-600: rgba(55, 107, 0, 0.87);
+  --col-grass-800: rgba(4, 10, 0, 0.85);
+  --col-bronze-100: rgba(165, 125, 95, 0.1);
+  --col-bronze-200: rgba(102, 37, 0, 0.11);
+  --col-bronze-400: rgba(106, 72, 47, 0.5);
+  --col-bronze-500: rgba(51, 21, 0, 0.54);
+  --col-bronze-600: rgba(41, 16, 0, 0.64);
+  --col-bronze-800: rgba(15, 5, 0, 0.83);
+  --col-silver-100: rgba(0, 157, 255, 0.1);
+  --col-silver-200: rgba(0, 149, 255, 0.18);
+  --col-silver-400: rgba(47, 79, 106, 0.5);
+  --col-silver-500: rgba(0, 29, 56, 0.53);
+  --col-silver-600: rgba(0, 21, 41, 0.64);
+  --col-silver-800: rgba(0, 7, 15, 0.83);
+  --col-gold-100: rgba(144, 125, 55, 0.1);
+  --col-gold-200: rgba(102, 70, 0, 0.13);
+  --col-gold-400: rgba(96, 76, 36, 0.5);
+  --col-gold-500: rgba(56, 37, 0, 0.55);
+  --col-gold-600: rgba(36, 23, 0, 0.65);
+  --col-gold-800: rgba(15, 9, 0, 0.83);
+  --col-platinum-100: rgba(0, 170, 255, 0.12);
+  --col-platinum-200: rgba(0, 166, 255, 0.2);
+  --col-platinum-400: rgba(47, 79, 106, 0.5);
+  --col-platinum-500: rgba(0, 29, 56, 0.53);
+  --col-platinum-600: rgba(0, 21, 41, 0.64);
+  --col-platinum-800: rgba(0, 7, 15, 0.83);
+  --col-bus-100: rgba(0, 157, 255, 0.1);
+  --col-bus-200: rgba(0, 149, 255, 0.18);
+  --col-bus-400: rgba(0, 132, 240, 0.77);
+  --col-bus-500: rgba(0, 122, 230, 0.86);
+  --col-bus-600: rgba(0, 97, 189, 0.89);
+  --col-bus-800: rgba(0, 7, 15, 0.83);
+  --col-train-100: rgba(0, 219, 15, 0.14);
+  --col-train-200: rgba(0, 214, 18, 0.24);
+  --col-train-400: rgba(0, 158, 40, 0.78);
+  --col-train-500: rgba(0, 138, 37, 0.85);
+  --col-train-600: rgba(0, 112, 32, 0.87);
+  --col-train-800: rgba(0, 15, 5, 0.84);
+  --col-carpool-100: rgba(255, 123, 0, 0.12);
+  --col-carpool-200: rgba(255, 115, 0, 0.2);
+  --col-carpool-400: rgba(240, 100, 0, 0.85);
+  --col-carpool-500: rgba(224, 86, 0, 0.95);
+  --col-carpool-600: rgba(189, 63, 0, 0.95);
+  --col-carpool-800: rgba(15, 5, 0, 0.83);
+  --col-ferry-100: rgba(0, 170, 255, 0.12);
+  --col-ferry-200: rgba(0, 166, 255, 0.2);
+  --col-ferry-400: rgba(0, 157, 255, 0.82);
+  --col-ferry-500: rgba(0, 143, 245, 0.95);
+  --col-ferry-600: rgba(0, 121, 214, 0.95);
+  --col-ferry-800: rgba(0, 39, 82, 0.95);
+  --col-shuttle-100: rgba(0, 194, 171, 0.13);
+  --col-shuttle-200: rgba(0, 179, 158, 0.2);
+  --col-shuttle-400: rgba(0, 158, 145, 0.83);
+  --col-shuttle-500: rgba(0, 133, 124, 0.85);
+  --col-shuttle-600: rgba(0, 107, 102, 0.87);
+  --col-shuttle-800: rgba(0, 15, 15, 0.84);
+  --col-plane-100: rgba(95, 135, 165, 0.1);
+  --col-plane-200: rgba(0, 54, 102, 0.11);
+  --col-plane-400: rgba(47, 79, 106, 0.5);
+  --col-plane-500: rgba(0, 29, 56, 0.53);
+  --col-plane-600: rgba(0, 21, 41, 0.64);
+  --col-plane-800: rgba(0, 7, 15, 0.83);
+  --col-brand-prim-100: rgba(0, 170, 255, 0.12);
+  --col-brand-prim-200: rgba(0, 166, 255, 0.2);
+  --col-brand-prim-400: rgba(0, 157, 255, 0.82);
+  --col-brand-prim-500: rgba(0, 143, 245, 0.95);
+  --col-brand-prim-600: rgba(0, 121, 214, 0.95);
+  --col-brand-prim-800: rgba(0, 39, 82, 0.95);
+  --col-brand-sec-100: rgba(245, 94, 0, 0.11);
+  --col-brand-sec-200: rgba(250, 96, 0, 0.18);
+  --col-brand-sec-400: rgba(250, 87, 0, 0.73);
+  --col-brand-sec-500: rgba(240, 80, 0, 0.88);
+  --col-brand-sec-600: rgba(214, 68, 0, 0.95);
+  --col-brand-sec-800: rgba(77, 18, 0, 0.95);
+  --d-0: 0rem;
+  --d-100: 0.5rem;
+  --d-150: 0.75rem;
+  --d-200: 1rem;
+  --d-250: 1.25rem;
+  --d-300: 1.5rem;
+  --d-350: 1.75rem;
+  --d-400: 2rem;
+  --d-450: 2.25rem;
+  --d-500: 2.5rem;
+  --d-550: 2.75rem;
+  --d-600: 3rem;
+  --d-700: 3.5rem;
+  --d-800: 4rem;
+  --d-900: 4.5rem;
+  --d-1000: 5rem;
+  --d-1100: 5.5rem;
+  --d-1200: 6rem;
+  --d-1400: 7rem;
+  --d-scale: 0.5rem;
+  --d-006: 0.03125rem;
+  --d-012: 0.0625rem;
+  --d-025: 0.125rem;
+  --d-050: 0.25rem;
+  --d-075: 0.375rem;
+  --ff-system: "ui-sans-serif", "system-ui", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
+  --ff-brand: CodecPro;
+  --ff-display: CodecPro;
+  --fs-rem: 1rem;
+  --fs-56: 0.5625rem;
+  --fs-62: 0.625rem;
+  --fs-75: 0.75rem;
+  --fs-87: 0.875rem;
+  --fs-100: 1rem;
+  --fs-112: 1.125rem;
+  --fs-125: 1.25rem;
+  --fs-150: 1.5rem;
+  --fs-175: 1.75rem;
+  --fs-200: 2rem;
+  --fs-225: 2.25rem;
+  --fs-250: 2.5rem;
+  --fs-275: 2.75rem;
+  --fs-300: 3rem;
+  --fs-350: 3.5rem;
+  --fs-400: 4rem;
+  --fs-450: 4.5rem;
+  --fs-500: 5rem;
+  --fs-600: 6rem;
+  --fs-base: 0.01rem;
+  --fw-normal: 400;
+  --fw-bold: 500;
+  --fw-bolder: 600;
+  --ls-tighter: -0.03em;
+  --ls-tight: -0.02em;
+  --ls-normal: 0em;
+  --ls-wide: 0.04em;
+  --ls-wider: 0.08em;
+  --lh-reset: 1;
+  --lh-75: 0.75rem;
+  --lh-100: 1rem;
+  --lh-125: 1.25rem;
+  --lh-150: 1.5rem;
+  --lh-175: 1.75rem;
+  --lh-200: 2rem;
+  --lh-225: 2.25rem;
+  --lh-275: 2.75rem;
+  --lh-300: 3rem;
+  --lh-350: 3.5rem;
+  --lh-400: 4rem;
+  --lh-450: 4.5rem;
+  --lh-500: 5rem;
+  --lh-600: 6rem;
+  --s-xs: 0 0.0625rem 0.0625rem 0 rgba(67, 77, 86, 0.1), 0 0.0625rem 0.125rem 0 rgba(67, 77, 86, 0.1);
+  --s-sm: 0 0.0625rem 0.0625rem 0 rgba(67, 77, 86, 0.1), 0 0.125rem 0.25rem 0 rgba(67, 77, 86, 0.1);
+  --s-md: 0 0.0625rem 0.25rem 0 rgba(67, 77, 86, 0.1), 0 0.375rem 0.75rem 0 rgba(67, 77, 86, 0.1);
+  --s-lg: 0 0.0625rem 0.25rem 0 rgba(67, 77, 86, 0.1), 0 0.75rem 1rem 0 rgba(67, 77, 86, 0.1);
+  --s-b-xs: 0 0 0 0.0625rem rgba(0, 54, 102, 0.11), 0 0.0625rem 0.0625rem 0 rgba(67, 77, 86, 0.1),
+    0 0.0625rem 0.125rem 0 rgba(67, 77, 86, 0.1);
+  --s-b-sm: 0 0 0 0.0625rem rgba(0, 54, 102, 0.11), 0 0.0625rem 0.0625rem 0 rgba(67, 77, 86, 0.1),
+    0 0.125rem 0.25rem 0 rgba(67, 77, 86, 0.1);
+  --s-b-md: 0 0 0 0.0625rem rgba(0, 54, 102, 0.11), 0 0.0625rem 0.25rem 0 rgba(67, 77, 86, 0.1),
+    0 0.375rem 0.75rem 0 rgba(67, 77, 86, 0.1);
+  --s-b-lg: 0 0 0 0.0625rem rgba(0, 54, 102, 0.11), 0 0.0625rem 0.25rem 0 rgba(67, 77, 86, 0.1),
+    0 0.75rem 1rem 0 rgba(67, 77, 86, 0.1);
+  --s-inv-xs: 0 0.0625rem 0.0625rem 0 rgba(67, 77, 86, 0.85), 0 0.0625rem 0.125rem 0 rgba(67, 77, 86, 0.85);
+  --s-inv-sm: 0 0.0625rem 0.0625rem 0 rgba(67, 77, 86, 0.85), 0 0.125rem 0.25rem 0 rgba(67, 77, 86, 0.85);
+  --s-inv-md: 0 0.0625rem 0.25rem 0 rgba(67, 77, 86, 0.85), 0 0.375rem 0.75rem 0 rgba(67, 77, 86, 0.85);
+  --s-inv-lg: 0 0.0625rem 0.25rem 0 rgba(67, 77, 86, 0.85), 0 0.75rem 1rem 0 rgba(67, 77, 86, 0.85);
+  --s-inv-b-xs: 0 0 0 0.0625rem rgba(198, 210, 220, 0.5), 0 0.0625rem 0.0625rem 0 rgba(67, 77, 86, 0.85),
+    0 0.0625rem 0.125rem 0 rgba(67, 77, 86, 0.85);
+  --s-inv-b-sm: 0 0 0 0.0625rem rgba(198, 210, 220, 0.5), 0 0.0625rem 0.0625rem 0 rgba(67, 77, 86, 0.85),
+    0 0.125rem 0.25rem 0 rgba(67, 77, 86, 0.85);
+  --s-inv-b-md: 0 0 0 0.0625rem rgba(198, 210, 220, 0.5), 0 0.0625rem 0.25rem 0 rgba(67, 77, 86, 0.85),
+    0 0.375rem 0.75rem 0 rgba(67, 77, 86, 0.85);
+  --s-inv-b-lg: 0 0 0 0.0625rem rgba(198, 210, 220, 0.5), 0 0.0625rem 0.25rem 0 rgba(67, 77, 86, 0.85),
+    0 0.75rem 1rem 0 rgba(67, 77, 86, 0.85);
+  --s-el-sunken: 0 0 0 0 hsla(0, 0%, 100%, 0);
+  --s-el-flat: 0 0 0 0.0625rem rgba(0, 54, 102, 0.11), 0 0.0625rem 0.0625rem 0 rgba(67, 77, 86, 0.1),
+    0 0.0625rem 0.125rem 0 rgba(67, 77, 86, 0.1);
+  --s-el-raised: 0 0 0 0.0625rem rgba(0, 54, 102, 0.11), 0 0.0625rem 0.0625rem 0 rgba(67, 77, 86, 0.1),
+    0 0.125rem 0.25rem 0 rgba(67, 77, 86, 0.1);
+  --s-el-floating: 0 0 0 0.0625rem rgba(0, 54, 102, 0.11), 0 0.0625rem 0.25rem 0 rgba(67, 77, 86, 0.1),
+    0 0.75rem 1rem 0 rgba(67, 77, 86, 0.1);
+  --s-none: none;
+  --bw-hairline: 0.03125rem;
+  --bw-sm: 0.0625rem;
+  --bw-md: 0.125rem;
+  --bw-lg: 0.25rem;
+  --o-0: 0;
+  --o-10: 0.1;
+  --o-20: 0.2;
+  --o-50: 0.5;
+  --o-70: 0.7;
+  --o-85: 0.85;
+  --o-95: 0.95;
+  --o-100: 1;
+  --r-none: 0rem;
+  --r-xs: 0.375rem;
+  --r-sm: 0.5rem;
+  --r-md: 0.75rem;
+  --r-lg: 1.5rem;
+  --r-xl: 2.5rem;
+  --r-pill: 62.4375rem;
+  --r-circle: 50%;
+  --blur-sm: 0.25rem;
+  --blur-md: 0.5rem;
+  --blur-lg: 1rem;
+  --header-gradient: linear-gradient(135deg, #f5fcff, #e0f5ff);
+  --page-gradient: linear-gradient(135deg, #f5fcff, #e0f5ff);
+}
+
+*,
+:after,
+:before,
+::backdrop {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x: ;
+  --tw-pan-y: ;
+  --tw-pinch-zoom: ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position: ;
+  --tw-gradient-via-position: ;
+  --tw-gradient-to-position: ;
+  --tw-ordinal: ;
+  --tw-slashed-zero: ;
+  --tw-numeric-figure: ;
+  --tw-numeric-spacing: ;
+  --tw-numeric-fraction: ;
+  --tw-ring-inset: ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgba(147, 197, 253, 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur: ;
+  --tw-brightness: ;
+  --tw-contrast: ;
+  --tw-grayscale: ;
+  --tw-hue-rotate: ;
+  --tw-invert: ;
+  --tw-saturate: ;
+  --tw-sepia: ;
+  --tw-drop-shadow: ;
+  --tw-backdrop-blur: ;
+  --tw-backdrop-brightness: ;
+  --tw-backdrop-contrast: ;
+  --tw-backdrop-grayscale: ;
+  --tw-backdrop-hue-rotate: ;
+  --tw-backdrop-invert: ;
+  --tw-backdrop-opacity: ;
+  --tw-backdrop-saturate: ;
+  --tw-backdrop-sepia: ;
+  --tw-contain-size: ;
+  --tw-contain-layout: ;
+  --tw-contain-paint: ;
+  --tw-contain-style:          
+    ;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
