@@ -1,0 +1,25 @@
+{
+  "LocaleSwitcher": {
+    "label": "",
+    "Locale": "{locale, select, en {Tiếng Anh} vi {Tiếng Việt} other {Unknown}}"
+  },
+  "Header": {
+    "policy": "Chính sách",
+    "help": "Trợ giúp",
+    "signin": "Đăng nhập"
+  },
+  "HomePage": {
+    "title": "Tìm vé xe buýt giá rẻ cho chuyến đi tiếp theo của bạn",
+    "description": "Dễ dàng so sánh và đặt chuyến đi tiếp theo của bạn với Busbud."
+  },
+  "NotFoundPage": {
+    "title": "Halaman Tidak Ditemukan",
+    "description": "Ups! Sepertinya Anda menemukan halaman yang tidak ada. Jangan khawatir, sihir internasionalisasi kami masih bekerja keras di bagian lain aplikasi. Silakan kembali untuk menjelajahi lebih lanjut!"
+  },
+  "Navigation": {
+    "home": "Beranda"
+  },
+  "Footer": {
+    "copyright": "© 2024 Aplikasi Anda. Hak cipta dilindungi."
+  }
+}
