@@ -1,0 +1,44 @@
+/*  */
+.btnWrapper {
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  border: 0px;
+  margin: 0px;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  appearance: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-size: 1.125em;
+  line-height: 1.11111;
+  text-transform: none;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  padding: 0.875rem 1.25rem;
+  width: 100%;
+  color: rgb(255, 255, 255);
+  text-align: left;
+  background: rgb(24, 119, 242);
+  margin-bottom: 16px;
+  margin-right: 0px;
+  padding: 0.75rem 1.25rem 0.75rem 0.75rem;
+  border: 1px solid;
+}
+.btnInner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.btnIcon {
+  margin-right: 8px;
+  display: inherit;
+  margin-bottom: 4px;
+}
+/*  */
