@@ -1,0 +1,59 @@
+/* HardSeatCarriage.module.scss */
+.carriage {
+  display: flex;
+  flex-direction: column;
+  //   padding: 20px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+
+  & > div:nth-child(2) {
+    margin-right: 20px;
+  }
+  & > div:nth-child(3) {
+    margin-left: 20px;
+  }
+  &:nth-child(7) {
+    margin-bottom: 20px;
+    position: relative;
+  }
+  &:nth-child(7)::before {
+    content: "Bàn";
+    line-height: 1.9;
+    width: calc(50% - 25px);
+    height: 30px;
+    position: absolute;
+    background: #6d5353;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    left: 5px;
+    bottom: -35px;
+  }
+
+  &:nth-child(7)::after {
+    content: "Bàn";
+    line-height: 1.9;
+    width: calc(50% - 25px);
+    height: 30px;
+    position: absolute;
+    background: #6d5353;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    right: 5px;
+    bottom: -35px;
+  }
+  &:nth-child(8) {
+    margin-top: 20px;
+  }
+}
+
+.emptySeat {
+  width: 50px;
+  height: 50px;
+  background-color: #f0f0f0;
+}
