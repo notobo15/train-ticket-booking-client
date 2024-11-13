@@ -1,0 +1,43 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  margin-bottom: 40px;
+}
+.formGroupRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+.formGroupHeading {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  margin-bottom: 16px;
+}
+.headingLabel {
+  font-size: 1em;
+  line-height: 1.25;
+  text-transform: none;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.headingDes {
+  font-size: 0.875em;
+  line-height: 1.142857143;
+  text-transform: none;
+  color: hsl(205, 25%, 53%);
+}
