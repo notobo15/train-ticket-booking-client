@@ -23,17 +23,7 @@ export default function Index() {
                   className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default block h-500 text-center max-sm:hidden sm:mb-200 sm:text-left"
                   href="https://www.busbud.com/en"
                 >
-                  <svg
-                    height={40}
-                    width="134.04580152671755"
-                    aria-hidden="true"
-                    className="t-22ef3q-root-svg"
-                    viewBox="0 0 439 131"
-                    role="img"
-                    aria-label="Busbud.com"
-                  >
-                    <use href="https://www.busbud.com/dscl/8.16.3/images/BrandLogo/LogoBusbud/LogoBusbud.svg#root" />
-                  </svg>
+                  {/* BrandLogo */}
                 </a>
                 <p className="text-size-62 leading-75 tracking-wide uppercase mb-200 font-weight-bold text-color-secondary sm:hidden">
                   follow us
@@ -42,13 +32,7 @@ export default function Index() {
                   <li>
                     <span className="max-w-full font-weight-bold text-size-75 leading-100 inline-flex items-center gap-x-025">
                       <span className="shrink-0">
-                        <svg
-                          fill="none"
-                          height={24}
-                          width={24}
-                          aria-hidden="true"
-                          className="text-icon-color-primary"
-                        >
+                        <svg fill="none" height={24} width={24} aria-hidden="true" className="text-icon-color-primary">
                           <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Social/instagram/md.svg#root"></use>
                         </svg>
                       </span>
@@ -66,13 +50,7 @@ export default function Index() {
                   <li>
                     <span className="max-w-full font-weight-bold text-size-75 leading-100 inline-flex items-center gap-x-025">
                       <span className="shrink-0">
-                        <svg
-                          fill="none"
-                          height={24}
-                          width={24}
-                          aria-hidden="true"
-                          className="text-icon-color-primary"
-                        >
+                        <svg fill="none" height={24} width={24} aria-hidden="true" className="text-icon-color-primary">
                           <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Social/facebook/md.svg#root"></use>
                         </svg>
                       </span>
@@ -90,13 +68,7 @@ export default function Index() {
                   <li>
                     <span className="max-w-full font-weight-bold text-size-75 leading-100 inline-flex items-center gap-x-025">
                       <span className="shrink-0">
-                        <svg
-                          fill="none"
-                          height={24}
-                          width={24}
-                          aria-hidden="true"
-                          className="text-icon-color-primary"
-                        >
+                        <svg fill="none" height={24} width={24} aria-hidden="true" className="text-icon-color-primary">
                           <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Social/x/md.svg#root"></use>
                         </svg>
                       </span>

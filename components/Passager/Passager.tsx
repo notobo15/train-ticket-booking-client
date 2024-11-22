@@ -5,53 +5,22 @@ import "react-toastify/dist/ReactToastify.css";
 import styles from "./Passager.module.scss";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import clsx from "clsx";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { selectSearchState, setPassegers } from "@/redux/features/searchSlice";
 
 export default function Index() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  interface Passager {
-    value: number;
-    id: number;
-    title: string;
-    description: string;
-  }
-  const [passengers, setPassengers] = useState<Passager[]>([
-    {
-      id: 1,
-      value: 1,
-      title: "Adults",
-      description: "19-59 years",
-    },
-    {
-      id: 2,
-      value: 0,
-      title: "Children",
-      description: "0-6 years",
-    },
-    {
-      id: 3,
-      value: 0,
-      title: "Students",
-      description: "7-18 years",
-    },
-    {
-      id: 4,
-      value: 0,
-      title: "Seniors",
-      description: "60+ years",
-    },
-  ]);
-
+  // const [passengers, setPassengers] = useState<IPassager[]>();
+  const passengers = useAppSelector(selectSearchState).passagers;
+  const dispatch = useAppDispatch();
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
   };
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (
-      wrapperRef.current &&
-      !wrapperRef.current.contains(event.target as Node)
-    ) {
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
       setIsDropdownOpen(false);
     }
   };
@@ -65,9 +34,8 @@ export default function Index() {
 
   const totalPassengers = passengers.reduce((sum, item) => sum + item.value, 0);
 
-  const validatePassengers = (newPassengers: Passager[]): boolean => {
-    const children =
-      newPassengers.find((passenger) => passenger.id === 2)?.value || 0;
+  const validatePassengers = (newPassengers: IPassager[]): boolean => {
+    const children = newPassengers.find((passenger) => passenger.id === 2)?.value || 0;
     const total = newPassengers.reduce((sum, item) => sum + item.value, 0);
 
     if (total > 10) {
@@ -90,18 +58,31 @@ export default function Index() {
 
   const handleChange = (value: number, id: number) => {
     const newPassengers = passengers.map((passenger) =>
-      passenger.id === id
-        ? { ...passenger, value: value < 0 ? 0 : value }
-        : passenger
+      passenger.id === id ? { ...passenger, value: value < 0 ? 0 : value } : passenger
     );
 
     if (validatePassengers(newPassengers)) {
-      setPassengers(newPassengers);
+      dispatch(setPassegers(newPassengers));
+      // setPassengers(newPassengers);
     }
   };
 
   return (
     <div className={styles.wrapper} ref={wrapperRef}>
+      {passengers.map(
+        (item) =>
+          item.value !== 0 && (
+            <input
+              key={item.id}
+              type="hidden"
+              hidden
+              name={item.title.toLocaleLowerCase()}
+              defaultValue={item.value}
+              readOnly
+            />
+          )
+      )}
+
       <div className={styles.input} onClick={toggleDropdown}>
         <label htmlFor="customSelect" className={styles.label}>
           Passengers
@@ -115,7 +96,7 @@ export default function Index() {
       {isDropdownOpen && (
         <div className={styles.wrapperDropDown}>
           <div className="flex flex-col gap-100">
-            {passengers.map((item: Passager) => (
+            {passengers.map((item: IPassager) => (
               <Item
                 onChange={handleChange}
                 value={item.value}
@@ -177,12 +158,8 @@ function Item({
     <div className="px-100 py-050">
       <div className="flex items-center justify-between gap-100">
         <div className="flex flex-col">
-          <span className="max-w-full text-size-100 leading-125 inline-block text-color-secondary">
-            {title}
-          </span>
-          <span className="text-size-75 leading-100 text-color-secondary">
-            {description}
-          </span>
+          <span className="max-w-full text-size-100 leading-125 inline-block text-color-secondary">{title}</span>
+          <span className="text-size-75 leading-100 text-color-secondary">{description}</span>
         </div>
         <div className="flex items-center gap-100">
           <button

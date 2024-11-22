@@ -3,6 +3,8 @@
   font-family: CodecPro;
   & > :global(.react-datepicker-wrapper) {
     outline: none;
+
+    width: 100%;
   }
 
   & :global(.react-datepicker-popper) {
@@ -13,7 +15,8 @@
 
     background-color: rgb(255, 255, 255);
     border-radius: 1.5rem;
-    box-shadow: rgba(32, 65, 91, 0.2) 0px 1px 1px 0px,
+    box-shadow:
+      rgba(32, 65, 91, 0.2) 0px 1px 1px 0px,
       rgba(32, 65, 91, 0.2) 0px 12px 16px 0px;
     z-index: 1300;
     padding: 16px 16px 20px;
@@ -135,7 +138,8 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   transform: translateY(-50%);
-  transition: color 200ms cubic-bezier(0, 0, 0.2, 1) 0ms,
+  transition:
+    color 200ms cubic-bezier(0, 0, 0.2, 1) 0ms,
     transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms,
     font-size 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
   font-size: 0.563125em;
@@ -235,14 +239,9 @@
   color: red;
   font-size: 14px;
 }
-@media (min-width: 768px) {
-  .label {
-    left: 12px;
-    top: 28px;
-  }
-  .inputContent {
-    height: 48px;
-  }
+.label {
+  left: 12px;
+  top: 18px;
 }
 @media (min-width: 600px) {
   .label {
@@ -251,5 +250,19 @@
     line-height: 1.331853496;
     letter-spacing: 0.04em;
     text-transform: uppercase;
+  }
+  .label {
+    left: 12px;
+    top: 28px;
+  }
+}
+
+@media (min-width: 768px) {
+  .label {
+    left: 12px;
+    top: 28px;
+  }
+  .inputContent {
+    // height: 48px;
   }
 }

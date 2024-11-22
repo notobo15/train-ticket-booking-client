@@ -5,39 +5,41 @@ import "react-datepicker/dist/react-datepicker.css";
 import styles from "./DatePicker.module.scss";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import { FaTimes } from "react-icons/fa";
+import clsx from "clsx";
+import { formatDateToYMD } from "@/utils/formatDate";
 
 interface DatePickerInputProps {
   label: string;
+  name: string;
   placeholder?: string;
   minDate?: Date | null;
   isReturnDate?: boolean;
   onDateChange: (date: Date | null) => void;
-  defaultValue?: Date | null;
+  defaultValue?: string | null;
 }
 
 const CustomInput = React.forwardRef<HTMLDivElement, any>(
-  ({ value, onClick, placeholder, label, onClear, isReturnDate }, ref) => (
+  ({ value, onClick, placeholder, label, onClear, isReturnDate, name }, ref) => (
     <div className={styles.wrapperInput} onClick={onClick} ref={ref}>
       <label className={styles.label}>{label}</label>
       <div className={styles.inputContent}>
         <input
           className={styles.input}
           type="text"
-          value={value || ""}
+          defaultValue={value || ""}
           placeholder={value ? undefined : placeholder}
-          readOnly
+          name={name}
         />
-        {isReturnDate &&
-          value && ( // Chỉ hiển thị nút "X" nếu là Return Date và đã có giá trị
-            <span
-              onClick={(e: React.MouseEvent<HTMLElement>) => {
-                e.stopPropagation(); // Ngăn việc mở lại DatePicker khi xóa
-                onClear();
-              }}
-            >
-              <FaTimes className={styles.clearIcon} />
-            </span>
-          )}
+        {isReturnDate && value && (
+          <span
+            onClick={(e: React.MouseEvent<HTMLElement>) => {
+              e.stopPropagation();
+              onClear();
+            }}
+          >
+            <FaTimes className={styles.clearIcon} />
+          </span>
+        )}
       </div>
     </div>
   )
@@ -47,21 +49,24 @@ CustomInput.displayName = "CustomInput";
 
 const DatePickerInput = ({
   label,
+  name,
   placeholder = "Select a date",
   minDate = new Date(),
   isReturnDate = false,
   onDateChange,
   defaultValue = null,
 }: DatePickerInputProps) => {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(defaultValue);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(defaultValue ? new Date(defaultValue) : null);
 
   useEffect(() => {
-    setSelectedDate(defaultValue);
+    setSelectedDate(defaultValue ? new Date(defaultValue) : null);
   }, [defaultValue]);
 
   return (
     <div className={styles.wrapper}>
       <DatePicker
+        name={name}
+        value={formatDateToYMD(selectedDate)}
         selected={selectedDate}
         minDate={minDate || undefined}
         dateFormat="EEE, MMM dd"
@@ -70,6 +75,7 @@ const DatePickerInput = ({
           setSelectedDate(date);
           onDateChange(date);
         }}
+        className={clsx({ "date-return": isReturnDate })}
         customInput={
           <CustomInput
             label={label}
@@ -93,8 +99,7 @@ const DatePickerInput = ({
               <FaAngleLeft />
             </button>
             <span>
-              {date.toLocaleString("default", { month: "long" })}{" "}
-              {date.getFullYear()}
+              {date.toLocaleString("default", { month: "long" })} {date.getFullYear()}
             </span>
             <button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
               <FaAngleRight />

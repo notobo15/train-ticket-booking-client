@@ -53,10 +53,9 @@ export default function Index() {
               <div className="overflow-hidden">
                 <div className="group-[.size-sm]/card:pt-200 group-[.size-sm]/card:pb-250 group-[.size-sm]/card:px-250 group-[.size-md]/card:pt-300 group-[.size-md]/card:pb-350 group-[.size-md]/card:px-300">
                   <p className="text-size-87 leading-125">
-                    The bus is the best choice to get to Binghamton without a
-                    car. Traveling by bus offers a budget-friendly, secure, and
-                    easy way to go between the two cities. Alternatively, you
-                    can also use carpooling services.
+                    The bus is the best choice to get to Binghamton without a car. Traveling by bus offers a
+                    budget-friendly, secure, and easy way to go between the two cities. Alternatively, you can also use
+                    carpooling services.
                   </p>
                 </div>
               </div>
@@ -103,10 +102,9 @@ export default function Index() {
               <div className="overflow-hidden">
                 <div className="group-[.size-sm]/card:pt-200 group-[.size-sm]/card:pb-250 group-[.size-sm]/card:px-250 group-[.size-md]/card:pt-300 group-[.size-md]/card:pb-350 group-[.size-md]/card:px-300">
                   <p className="text-size-87 leading-125">
-                    The travel time from Albany to Binghamton is about 7h 30m,
-                    but the quickest bus can get you there in about 3h 10m. This
-                    is the time it takes to travel the 117 miles (189 km) that
-                    separate the two cities.
+                    The travel time from Albany to Binghamton is about 7h 30m, but the quickest bus can get you there in
+                    about 3h 10m. This is the time it takes to travel the 117 miles (189 km) that separate the two
+                    cities.
                   </p>
                 </div>
               </div>
@@ -152,9 +150,7 @@ export default function Index() {
             >
               <div className="overflow-hidden">
                 <div className="group-[.size-sm]/card:pt-200 group-[.size-sm]/card:pb-250 group-[.size-sm]/card:px-250 group-[.size-md]/card:pt-300 group-[.size-md]/card:pb-350 group-[.size-md]/card:px-300">
-                  <p className="text-size-87 leading-125">
-                    About 117 miles (189 km) separate Albany and Binghamton.
-                  </p>
+                  <p className="text-size-87 leading-125">About 117 miles (189 km) separate Albany and Binghamton.</p>
                 </div>
               </div>
             </div>
@@ -200,12 +196,10 @@ export default function Index() {
               <div className="overflow-hidden">
                 <div className="group-[.size-sm]/card:pt-200 group-[.size-sm]/card:pb-250 group-[.size-sm]/card:px-250 group-[.size-md]/card:pt-300 group-[.size-md]/card:pb-350 group-[.size-md]/card:px-300">
                   <p className="text-size-87 leading-125">
-                    You can choose from 1 travel times and travel with
-                    Adirondack Trailways and Greyhound. The number of buses
-                    operating from Albany to Binghamton may change based on the
-                    day of the week. Busbud can make your trip from Albany to
-                    Binghamton a breeze! Simply check the schedules and pick the
-                    bus that matches your needs and budget. It&apos;s that easy!
+                    You can choose from 1 travel times and travel with Adirondack Trailways and Greyhound. The number of
+                    buses operating from Albany to Binghamton may change based on the day of the week. Busbud can make
+                    your trip from Albany to Binghamton a breeze! Simply check the schedules and pick the bus that
+                    matches your needs and budget. It&apos;s that easy!
                   </p>
                 </div>
               </div>
@@ -218,8 +212,7 @@ export default function Index() {
             >
               <div className="grow min-w-0 px-100 py-075">
                 <h3 className="text-size-100 font-weight-bold leading-125 before:[content:counters(section,'.')_'._']">
-                  What time are the first and last bus from Albany to
-                  Binghamton?
+                  What time are the first and last bus from Albany to Binghamton?
                 </h3>
               </div>
               <div className="shrink-0">
@@ -253,8 +246,7 @@ export default function Index() {
               <div className="overflow-hidden">
                 <div className="group-[.size-sm]/card:pt-200 group-[.size-sm]/card:pb-250 group-[.size-sm]/card:px-250 group-[.size-md]/card:pt-300 group-[.size-md]/card:pb-350 group-[.size-md]/card:px-300">
                   <p className="text-size-87 leading-125">
-                    The bus service has you covered with departures starting at
-                    8:40am and ending at 4:30pm.
+                    The bus service has you covered with departures starting at 8:40am and ending at 4:30pm.
                   </p>
                 </div>
               </div>
@@ -267,8 +259,7 @@ export default function Index() {
             >
               <div className="grow min-w-0 px-100 py-075">
                 <h3 className="text-size-100 font-weight-bold leading-125 before:[content:counters(section,'.')_'._']">
-                  What are the departure and arrival stations when taking the
-                  bus from Albany to Binghamton?
+                  What are the departure and arrival stations when taking the bus from Albany to Binghamton?
                 </h3>
               </div>
               <div className="shrink-0">
@@ -302,11 +293,9 @@ export default function Index() {
               <div className="overflow-hidden">
                 <div className="group-[.size-sm]/card:pt-200 group-[.size-sm]/card:pb-250 group-[.size-sm]/card:px-250 group-[.size-md]/card:pt-300 group-[.size-md]/card:pb-350 group-[.size-md]/card:px-300">
                   <p className="text-size-87 leading-125">
-                    Most of the buses traveling from Albany to Binghamton leave
-                    from SUNY Collins Circle and arrive at Binghamton Bus
-                    Station. These are the main pick-up and drop-off locations
-                    on this route, but you can also find other options that
-                    could better fit your plans.
+                    Most of the buses traveling from Albany to Binghamton leave from SUNY Collins Circle and arrive at
+                    Binghamton Bus Station. These are the main pick-up and drop-off locations on this route, but you can
+                    also find other options that could better fit your plans.
                   </p>
                 </div>
               </div>
@@ -353,10 +342,8 @@ export default function Index() {
               <div className="overflow-hidden">
                 <div className="group-[.size-sm]/card:pt-200 group-[.size-sm]/card:pb-250 group-[.size-sm]/card:px-250 group-[.size-md]/card:pt-300 group-[.size-md]/card:pb-350 group-[.size-md]/card:px-300">
                   <p className="text-size-87 leading-125">
-                    You can save a lot of money on your trip from Albany to
-                    Binghamton by choosing to travel by bus. $37 is the starting
-                    point for the cost-effective bus ride to Binghamton from
-                    Albany.
+                    You can save a lot of money on your trip from Albany to Binghamton by choosing to travel by bus. $37
+                    is the starting point for the cost-effective bus ride to Binghamton from Albany.
                   </p>
                 </div>
               </div>
@@ -403,10 +390,8 @@ export default function Index() {
               <div className="overflow-hidden">
                 <div className="group-[.size-sm]/card:pt-200 group-[.size-sm]/card:pb-250 group-[.size-sm]/card:px-250 group-[.size-md]/card:pt-300 group-[.size-md]/card:pb-350 group-[.size-md]/card:px-300">
                   <p className="text-size-87 leading-125">
-                    The average price of a one-way ticket from Albany to
-                    Binghamton is $134. Over the last 30 days, the prices ranged
-                    between $37 and $193, so make sure to compare them to get
-                    the best option.
+                    The average price of a one-way ticket from Albany to Binghamton is $134. Over the last 30 days, the
+                    prices ranged between $37 and $193, so make sure to compare them to get the best option.
                   </p>
                 </div>
               </div>

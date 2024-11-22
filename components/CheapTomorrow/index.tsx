@@ -3,17 +3,12 @@ import React from "react";
 export default function Index() {
   return (
     <section className="grid grid-cols-[minmax(0,80rem)] justify-center pe-[5vw] ps-[5vw] md:pe-[6.25vw] md:ps-[6.25vw] py-500 gap-y-300 md:py-600 lg:py-800 lg:gap-y-500 !mt-0 bg-color-canvas-secondary">
-      <div
-        className="flex flex-col gap-y-300 lg:gap-y-500"
-        data-price-calendar-tab-pane="true"
-      >
+      <div className="flex flex-col gap-y-300 lg:gap-y-500" data-price-calendar-tab-pane="true">
         <div className="grid justify-items-center gap-y-200 text-balance text-center *:max-w-prose">
           <h2 className="font-family-display-html text-size-150 font-weight-bolder leading-175 tracking-tight md:font-family-display-html md:text-size-200 md:font-weight-bolder md:leading-225 md:tracking-tight text-balance text-center undefined">
             Cheap buses leaving tomorrow
           </h2>
-          <h3 className="text-size-100 leading-150 text-color-secondary">
-            One passenger / one way
-          </h3>
+          <h3 className="text-size-100 leading-150 text-color-secondary">One passenger / one way</h3>
           <div className="mt-200 flex flex-col items-center justify-center gap-100 sm:flex-row sm:gap-200">
             <button
               className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-literal-blue-100 text-color-scheme-literal-blue-800 hover:text-color-scheme-literal-blue-600 active:bg-color-scheme-literal-blue-200 active:text-color-scheme-literal-blue-800 vanilla-btn-links"
@@ -27,9 +22,7 @@ export default function Index() {
                   <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/MagnifyingGlass/md.svg#root"></use>
                 </svg>
               </span>
-              <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                Cheapest trips
-              </span>
+              <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">Cheapest trips</span>
             </button>
             <button
               className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-literal-blue-100 text-color-scheme-literal-blue-800 hover:text-color-scheme-literal-blue-600 active:bg-color-scheme-literal-blue-200 active:text-color-scheme-literal-blue-800 vanilla-btn-links"
@@ -43,9 +36,7 @@ export default function Index() {
                   <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/MagnifyingGlass/md.svg#root"></use>
                 </svg>
               </span>
-              <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                Fastest trips
-              </span>
+              <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">Fastest trips</span>
             </button>
           </div>
         </div>
@@ -56,9 +47,7 @@ export default function Index() {
               aria-label="Bus from Albany to Binghamton, departing from ALB Airport at 3:45pm on October 16, arriving at Binghamton Bus Station at 11:30pm on October 16. Duration: 7h 45m. Operated by: Adirondack Trailways. Price: $97"
             >
               <div className="max-w-full font-weight-bolder text-size-62 uppercase leading-75 tracking-wider my-050 block text-center text-color-scheme-functional-positive-600">
-                <span className="sr-only">
-                  This trip is recommended because it is:{" "}
-                </span>
+                <span className="sr-only">This trip is recommended because it is: </span>
                 Cheapest
               </div>
               <div
@@ -69,9 +58,7 @@ export default function Index() {
                 <div className="grid items-start gap-x-300 p-100 [gridArea:locations] [gridTemplateColumns:1fr_1fr] md:p-0">
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city'] gap-x-200 [gridTemplateAreas:'time_arrow'_'location_location'_'city_city'] [gridTemplateColumns:1fr_auto]">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Departure time: October 16 at{" "}
-                      </span>
+                      <span className="sr-only">Departure time: October 16 at </span>
                       <time dateTime="2024-10-16T15:45:00">3:45pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -98,9 +85,7 @@ export default function Index() {
                   </div>
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city']">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Arrival time: October 16 at{" "}
-                      </span>
+                      <span className="sr-only">Arrival time: October 16 at </span>
                       <time dateTime="2024-10-16T23:30:00">11:30pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -114,9 +99,7 @@ export default function Index() {
                   </div>
                 </div>
                 <div className="self-center pl-050 [gridArea:meta]">
-                  <span className="sr-only">
-                    Operated by: Adirondack Trailways
-                  </span>
+                  <span className="sr-only">Operated by: Adirondack Trailways</span>
                   <img
                     loading="lazy"
                     className="max-h-300"
@@ -135,9 +118,7 @@ export default function Index() {
                   className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-neutral-100 text-color-primary hover:text-color-secondary active:bg-color-scheme-neutral-200 active:text-color-primary self-center justify-self-end [gridArea:button]"
                   type="button"
                 >
-                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                    $97
-                  </span>
+                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">$97</span>
                   <span className="shrink-0 text-icon-color-primary">
                     <svg fill="none" height={24} width={24} aria-hidden="true">
                       <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Chevron/right/md.svg#root"></use>
@@ -151,9 +132,7 @@ export default function Index() {
               aria-label="Bus from Albany to Binghamton, departing from Albany Terminal at 4:30pm on October 16, arriving at Binghamton Bus Station at 11:30pm on October 16. Duration: 7h. Operated by: Adirondack Trailways. Price: $147"
             >
               <div className="max-w-full font-weight-bolder text-size-62 uppercase leading-75 tracking-wider my-050 block text-center text-color-scheme-functional-special-600">
-                <span className="sr-only">
-                  This trip is recommended because it is:{" "}
-                </span>
+                <span className="sr-only">This trip is recommended because it is: </span>
                 Fastest
               </div>
               <div
@@ -164,9 +143,7 @@ export default function Index() {
                 <div className="grid items-start gap-x-300 p-100 [gridArea:locations] [gridTemplateColumns:1fr_1fr] md:p-0">
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city'] gap-x-200 [gridTemplateAreas:'time_arrow'_'location_location'_'city_city'] [gridTemplateColumns:1fr_auto]">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Departure time: October 16 at{" "}
-                      </span>
+                      <span className="sr-only">Departure time: October 16 at </span>
                       <time dateTime="2024-10-16T16:30:00">4:30pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -193,9 +170,7 @@ export default function Index() {
                   </div>
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city']">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Arrival time: October 16 at{" "}
-                      </span>
+                      <span className="sr-only">Arrival time: October 16 at </span>
                       <time dateTime="2024-10-16T23:30:00">11:30pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -209,9 +184,7 @@ export default function Index() {
                   </div>
                 </div>
                 <div className="self-center pl-050 [gridArea:meta]">
-                  <span className="sr-only">
-                    Operated by: Adirondack Trailways
-                  </span>
+                  <span className="sr-only">Operated by: Adirondack Trailways</span>
                   <img
                     loading="lazy"
                     className="max-h-300"
@@ -230,9 +203,7 @@ export default function Index() {
                   className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-neutral-100 text-color-primary hover:text-color-secondary active:bg-color-scheme-neutral-200 active:text-color-primary self-center justify-self-end [gridArea:button]"
                   type="button"
                 >
-                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                    $147
-                  </span>
+                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">$147</span>
                   <span className="shrink-0 text-icon-color-primary">
                     <svg fill="none" height={24} width={24} aria-hidden="true">
                       <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Chevron/right/md.svg#root"></use>
@@ -250,9 +221,7 @@ export default function Index() {
                 <div className="grid items-start gap-x-300 p-100 [gridArea:locations] [gridTemplateColumns:1fr_1fr] md:p-0">
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city'] gap-x-200 [gridTemplateAreas:'time_arrow'_'location_location'_'city_city'] [gridTemplateColumns:1fr_auto]">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Departure time: October 16 at{" "}
-                      </span>
+                      <span className="sr-only">Departure time: October 16 at </span>
                       <time dateTime="2024-10-16T15:45:00">3:45pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -279,9 +248,7 @@ export default function Index() {
                   </div>
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city']">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Arrival time: October 16 at{" "}
-                      </span>
+                      <span className="sr-only">Arrival time: October 16 at </span>
                       <time dateTime="2024-10-16T23:30:00">11:30pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -295,9 +262,7 @@ export default function Index() {
                   </div>
                 </div>
                 <div className="self-center pl-050 [gridArea:meta]">
-                  <span className="sr-only">
-                    Operated by: Adirondack Trailways
-                  </span>
+                  <span className="sr-only">Operated by: Adirondack Trailways</span>
                   <img
                     loading="lazy"
                     className="max-h-300"
@@ -316,9 +281,7 @@ export default function Index() {
                   className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-neutral-100 text-color-primary hover:text-color-secondary active:bg-color-scheme-neutral-200 active:text-color-primary self-center justify-self-end [gridArea:button]"
                   type="button"
                 >
-                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                    $134
-                  </span>
+                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">$134</span>
                   <span className="shrink-0 text-icon-color-primary">
                     <svg fill="none" height={24} width={24} aria-hidden="true">
                       <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Chevron/right/md.svg#root"></use>
@@ -336,9 +299,7 @@ export default function Index() {
                 <div className="grid items-start gap-x-300 p-100 [gridArea:locations] [gridTemplateColumns:1fr_1fr] md:p-0">
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city'] gap-x-200 [gridTemplateAreas:'time_arrow'_'location_location'_'city_city'] [gridTemplateColumns:1fr_auto]">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Departure time: October 16 at{" "}
-                      </span>
+                      <span className="sr-only">Departure time: October 16 at </span>
                       <time dateTime="2024-10-16T11:00:00">11:00am</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -365,9 +326,7 @@ export default function Index() {
                   </div>
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city']">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Arrival time: October 16 at{" "}
-                      </span>
+                      <span className="sr-only">Arrival time: October 16 at </span>
                       <time dateTime="2024-10-16T20:30:00">8:30pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -381,9 +340,7 @@ export default function Index() {
                   </div>
                 </div>
                 <div className="self-center pl-050 [gridArea:meta]">
-                  <span className="sr-only">
-                    Operated by: Adirondack Trailways
-                  </span>
+                  <span className="sr-only">Operated by: Adirondack Trailways</span>
                   <img
                     loading="lazy"
                     className="max-h-300"
@@ -402,9 +359,7 @@ export default function Index() {
                   className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-neutral-100 text-color-primary hover:text-color-secondary active:bg-color-scheme-neutral-200 active:text-color-primary self-center justify-self-end [gridArea:button]"
                   type="button"
                 >
-                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                    $141
-                  </span>
+                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">$141</span>
                   <span className="shrink-0 text-icon-color-primary">
                     <svg fill="none" height={24} width={24} aria-hidden="true">
                       <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Chevron/right/md.svg#root"></use>
@@ -422,9 +377,7 @@ export default function Index() {
                 <div className="grid items-start gap-x-300 p-100 [gridArea:locations] [gridTemplateColumns:1fr_1fr] md:p-0">
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city'] gap-x-200 [gridTemplateAreas:'time_arrow'_'location_location'_'city_city'] [gridTemplateColumns:1fr_auto]">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Departure time: October 16 at{" "}
-                      </span>
+                      <span className="sr-only">Departure time: October 16 at </span>
                       <time dateTime="2024-10-16T11:00:00">11:00am</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -451,9 +404,7 @@ export default function Index() {
                   </div>
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city']">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Arrival time: October 16 at{" "}
-                      </span>
+                      <span className="sr-only">Arrival time: October 16 at </span>
                       <time dateTime="2024-10-16T20:30:00">8:30pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -467,9 +418,7 @@ export default function Index() {
                   </div>
                 </div>
                 <div className="self-center pl-050 [gridArea:meta]">
-                  <span className="sr-only">
-                    Operated by: Adirondack Trailways
-                  </span>
+                  <span className="sr-only">Operated by: Adirondack Trailways</span>
                   <img
                     loading="lazy"
                     className="max-h-300"
@@ -488,9 +437,7 @@ export default function Index() {
                   className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-neutral-100 text-color-primary hover:text-color-secondary active:bg-color-scheme-neutral-200 active:text-color-primary self-center justify-self-end [gridArea:button]"
                   type="button"
                 >
-                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                    $102
-                  </span>
+                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">$102</span>
                   <span className="shrink-0 text-icon-color-primary">
                     <svg fill="none" height={24} width={24} aria-hidden="true">
                       <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Chevron/right/md.svg#root"></use>
@@ -518,17 +465,12 @@ export default function Index() {
           </button>
         </div>
       </div>
-      <div
-        className="flex flex-col gap-y-300 lg:gap-y-500 hidden"
-        data-price-calendar-tab-pane="true"
-      >
+      <div className="flex flex-col gap-y-300 lg:gap-y-500 hidden" data-price-calendar-tab-pane="true">
         <div className="grid justify-items-center gap-y-200 text-balance text-center *:max-w-prose">
           <div className="font-family-display-html text-size-150 font-weight-bolder leading-175 tracking-tight md:font-family-display-html md:text-size-200 md:font-weight-bolder md:leading-225 md:tracking-tight text-balance text-center undefined">
             Cheap buses leaving Friday
           </div>
-          <h3 className="text-size-100 leading-150 text-color-secondary">
-            One passenger / one way
-          </h3>
+          <h3 className="text-size-100 leading-150 text-color-secondary">One passenger / one way</h3>
           <div className="mt-200 flex flex-col items-center justify-center gap-100 sm:flex-row sm:gap-200">
             <button
               className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-literal-blue-100 text-color-scheme-literal-blue-800 hover:text-color-scheme-literal-blue-600 active:bg-color-scheme-literal-blue-200 active:text-color-scheme-literal-blue-800 vanilla-btn-links"
@@ -542,9 +484,7 @@ export default function Index() {
                   <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/MagnifyingGlass/md.svg#root"></use>
                 </svg>
               </span>
-              <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                Cheapest trips
-              </span>
+              <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">Cheapest trips</span>
             </button>
             <button
               className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-literal-blue-100 text-color-scheme-literal-blue-800 hover:text-color-scheme-literal-blue-600 active:bg-color-scheme-literal-blue-200 active:text-color-scheme-literal-blue-800 vanilla-btn-links"
@@ -558,9 +498,7 @@ export default function Index() {
                   <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/MagnifyingGlass/md.svg#root"></use>
                 </svg>
               </span>
-              <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                Fastest trips
-              </span>
+              <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">Fastest trips</span>
             </button>
           </div>
         </div>
@@ -571,9 +509,7 @@ export default function Index() {
               aria-label="Bus from Albany to Binghamton, departing from 1400 Washington Ave. at 10:55am on October 18, arriving at Binghamton Bus Station at 2:05pm on October 18. Duration: 3h 10m. Operated by: Adirondack Trailways. Price: $51"
             >
               <div className="max-w-full font-weight-bolder text-size-62 uppercase leading-75 tracking-wider my-050 block text-center text-color-scheme-functional-positive-600">
-                <span className="sr-only">
-                  This trip is recommended because it is:{" "}
-                </span>
+                <span className="sr-only">This trip is recommended because it is: </span>
                 Cheapest
               </div>
               <div
@@ -584,9 +520,7 @@ export default function Index() {
                 <div className="grid items-start gap-x-300 p-100 [gridArea:locations] [gridTemplateColumns:1fr_1fr] md:p-0">
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city'] gap-x-200 [gridTemplateAreas:'time_arrow'_'location_location'_'city_city'] [gridTemplateColumns:1fr_auto]">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Departure time: October 18 at{" "}
-                      </span>
+                      <span className="sr-only">Departure time: October 18 at </span>
                       <time dateTime="2024-10-18T10:55:00">10:55am</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -613,9 +547,7 @@ export default function Index() {
                   </div>
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city']">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Arrival time: October 18 at{" "}
-                      </span>
+                      <span className="sr-only">Arrival time: October 18 at </span>
                       <time dateTime="2024-10-18T14:05:00">2:05pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -629,9 +561,7 @@ export default function Index() {
                   </div>
                 </div>
                 <div className="self-center pl-050 [gridArea:meta]">
-                  <span className="sr-only">
-                    Operated by: Adirondack Trailways
-                  </span>
+                  <span className="sr-only">Operated by: Adirondack Trailways</span>
                   <img
                     loading="lazy"
                     className="max-h-300"
@@ -650,9 +580,7 @@ export default function Index() {
                   className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-neutral-100 text-color-primary hover:text-color-secondary active:bg-color-scheme-neutral-200 active:text-color-primary self-center justify-self-end [gridArea:button]"
                   type="button"
                 >
-                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                    $51
-                  </span>
+                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">$51</span>
                   <span className="shrink-0 text-icon-color-primary">
                     <svg fill="none" height={24} width={24} aria-hidden="true">
                       <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Chevron/right/md.svg#root"></use>
@@ -666,9 +594,7 @@ export default function Index() {
               aria-label="Bus from Albany to Binghamton, departing from 1400 Washington Ave. at 10:55am on October 18, arriving at Binghamton Bus Station at 2:05pm on October 18. Duration: 3h 10m. Operated by: Adirondack Trailways. Price: $70"
             >
               <div className="max-w-full font-weight-bolder text-size-62 uppercase leading-75 tracking-wider my-050 block text-center text-color-scheme-functional-special-600">
-                <span className="sr-only">
-                  This trip is recommended because it is:{" "}
-                </span>
+                <span className="sr-only">This trip is recommended because it is: </span>
                 Fastest
               </div>
               <div
@@ -679,9 +605,7 @@ export default function Index() {
                 <div className="grid items-start gap-x-300 p-100 [gridArea:locations] [gridTemplateColumns:1fr_1fr] md:p-0">
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city'] gap-x-200 [gridTemplateAreas:'time_arrow'_'location_location'_'city_city'] [gridTemplateColumns:1fr_auto]">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Departure time: October 18 at{" "}
-                      </span>
+                      <span className="sr-only">Departure time: October 18 at </span>
                       <time dateTime="2024-10-18T10:55:00">10:55am</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -708,9 +632,7 @@ export default function Index() {
                   </div>
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city']">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Arrival time: October 18 at{" "}
-                      </span>
+                      <span className="sr-only">Arrival time: October 18 at </span>
                       <time dateTime="2024-10-18T14:05:00">2:05pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -724,9 +646,7 @@ export default function Index() {
                   </div>
                 </div>
                 <div className="self-center pl-050 [gridArea:meta]">
-                  <span className="sr-only">
-                    Operated by: Adirondack Trailways
-                  </span>
+                  <span className="sr-only">Operated by: Adirondack Trailways</span>
                   <img
                     loading="lazy"
                     className="max-h-300"
@@ -745,9 +665,7 @@ export default function Index() {
                   className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-neutral-100 text-color-primary hover:text-color-secondary active:bg-color-scheme-neutral-200 active:text-color-primary self-center justify-self-end [gridArea:button]"
                   type="button"
                 >
-                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                    $70
-                  </span>
+                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">$70</span>
                   <span className="shrink-0 text-icon-color-primary">
                     <svg fill="none" height={24} width={24} aria-hidden="true">
                       <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Chevron/right/md.svg#root"></use>
@@ -765,9 +683,7 @@ export default function Index() {
                 <div className="grid items-start gap-x-300 p-100 [gridArea:locations] [gridTemplateColumns:1fr_1fr] md:p-0">
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city'] gap-x-200 [gridTemplateAreas:'time_arrow'_'location_location'_'city_city'] [gridTemplateColumns:1fr_auto]">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Departure time: October 18 at{" "}
-                      </span>
+                      <span className="sr-only">Departure time: October 18 at </span>
                       <time dateTime="2024-10-18T12:00:00">12:00pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -794,9 +710,7 @@ export default function Index() {
                   </div>
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city']">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Arrival time: October 18 at{" "}
-                      </span>
+                      <span className="sr-only">Arrival time: October 18 at </span>
                       <time dateTime="2024-10-18T23:30:00">11:30pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -810,9 +724,7 @@ export default function Index() {
                   </div>
                 </div>
                 <div className="self-center pl-050 [gridArea:meta]">
-                  <span className="sr-only">
-                    Operated by: Adirondack Trailways
-                  </span>
+                  <span className="sr-only">Operated by: Adirondack Trailways</span>
                   <img
                     loading="lazy"
                     className="max-h-300"
@@ -831,9 +743,7 @@ export default function Index() {
                   className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-neutral-100 text-color-primary hover:text-color-secondary active:bg-color-scheme-neutral-200 active:text-color-primary self-center justify-self-end [gridArea:button]"
                   type="button"
                 >
-                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                    $133
-                  </span>
+                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">$133</span>
                   <span className="shrink-0 text-icon-color-primary">
                     <svg fill="none" height={24} width={24} aria-hidden="true">
                       <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Chevron/right/md.svg#root"></use>
@@ -851,9 +761,7 @@ export default function Index() {
                 <div className="grid items-start gap-x-300 p-100 [gridArea:locations] [gridTemplateColumns:1fr_1fr] md:p-0">
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city'] gap-x-200 [gridTemplateAreas:'time_arrow'_'location_location'_'city_city'] [gridTemplateColumns:1fr_auto]">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Departure time: October 18 at{" "}
-                      </span>
+                      <span className="sr-only">Departure time: October 18 at </span>
                       <time dateTime="2024-10-18T12:00:00">12:00pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -880,9 +788,7 @@ export default function Index() {
                   </div>
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city']">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Arrival time: October 18 at{" "}
-                      </span>
+                      <span className="sr-only">Arrival time: October 18 at </span>
                       <time dateTime="2024-10-18T23:30:00">11:30pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -896,9 +802,7 @@ export default function Index() {
                   </div>
                 </div>
                 <div className="self-center pl-050 [gridArea:meta]">
-                  <span className="sr-only">
-                    Operated by: Adirondack Trailways
-                  </span>
+                  <span className="sr-only">Operated by: Adirondack Trailways</span>
                   <img
                     loading="lazy"
                     className="max-h-300"
@@ -917,9 +821,7 @@ export default function Index() {
                   className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-neutral-100 text-color-primary hover:text-color-secondary active:bg-color-scheme-neutral-200 active:text-color-primary self-center justify-self-end [gridArea:button]"
                   type="button"
                 >
-                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                    $96
-                  </span>
+                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">$96</span>
                   <span className="shrink-0 text-icon-color-primary">
                     <svg fill="none" height={24} width={24} aria-hidden="true">
                       <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Chevron/right/md.svg#root"></use>
@@ -937,9 +839,7 @@ export default function Index() {
                 <div className="grid items-start gap-x-300 p-100 [gridArea:locations] [gridTemplateColumns:1fr_1fr] md:p-0">
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city'] gap-x-200 [gridTemplateAreas:'time_arrow'_'location_location'_'city_city'] [gridTemplateColumns:1fr_auto]">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Departure time: October 18 at{" "}
-                      </span>
+                      <span className="sr-only">Departure time: October 18 at </span>
                       <time dateTime="2024-10-18T15:45:00">3:45pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -966,9 +866,7 @@ export default function Index() {
                   </div>
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city']">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Arrival time: October 18 at{" "}
-                      </span>
+                      <span className="sr-only">Arrival time: October 18 at </span>
                       <time dateTime="2024-10-18T23:30:00">11:30pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -982,9 +880,7 @@ export default function Index() {
                   </div>
                 </div>
                 <div className="self-center pl-050 [gridArea:meta]">
-                  <span className="sr-only">
-                    Operated by: Adirondack Trailways
-                  </span>
+                  <span className="sr-only">Operated by: Adirondack Trailways</span>
                   <img
                     loading="lazy"
                     className="max-h-300"
@@ -1003,9 +899,7 @@ export default function Index() {
                   className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-neutral-100 text-color-primary hover:text-color-secondary active:bg-color-scheme-neutral-200 active:text-color-primary self-center justify-self-end [gridArea:button]"
                   type="button"
                 >
-                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                    $128
-                  </span>
+                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">$128</span>
                   <span className="shrink-0 text-icon-color-primary">
                     <svg fill="none" height={24} width={24} aria-hidden="true">
                       <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Chevron/right/md.svg#root"></use>
@@ -1033,17 +927,12 @@ export default function Index() {
           </button>
         </div>
       </div>
-      <div
-        className="flex flex-col gap-y-300 lg:gap-y-500 hidden"
-        data-price-calendar-tab-pane="true"
-      >
+      <div className="flex flex-col gap-y-300 lg:gap-y-500 hidden" data-price-calendar-tab-pane="true">
         <div className="grid justify-items-center gap-y-200 text-balance text-center *:max-w-prose">
           <div className="font-family-display-html text-size-150 font-weight-bolder leading-175 tracking-tight md:font-family-display-html md:text-size-200 md:font-weight-bolder md:leading-225 md:tracking-tight text-balance text-center undefined">
             Cheap buses leaving Saturday
           </div>
-          <h3 className="text-size-100 leading-150 text-color-secondary">
-            One passenger / one way
-          </h3>
+          <h3 className="text-size-100 leading-150 text-color-secondary">One passenger / one way</h3>
           <div className="mt-200 flex flex-col items-center justify-center gap-100 sm:flex-row sm:gap-200">
             <button
               className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-literal-blue-100 text-color-scheme-literal-blue-800 hover:text-color-scheme-literal-blue-600 active:bg-color-scheme-literal-blue-200 active:text-color-scheme-literal-blue-800 vanilla-btn-links"
@@ -1057,9 +946,7 @@ export default function Index() {
                   <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/MagnifyingGlass/md.svg#root"></use>
                 </svg>
               </span>
-              <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                Cheapest trips
-              </span>
+              <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">Cheapest trips</span>
             </button>
             <button
               className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-literal-blue-100 text-color-scheme-literal-blue-800 hover:text-color-scheme-literal-blue-600 active:bg-color-scheme-literal-blue-200 active:text-color-scheme-literal-blue-800 vanilla-btn-links"
@@ -1073,9 +960,7 @@ export default function Index() {
                   <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/MagnifyingGlass/md.svg#root"></use>
                 </svg>
               </span>
-              <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                Fastest trips
-              </span>
+              <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">Fastest trips</span>
             </button>
           </div>
         </div>
@@ -1086,9 +971,7 @@ export default function Index() {
               aria-label="Bus from Albany to Binghamton, departing from 1400 Washington Ave. at 10:55am on October 19, arriving at Binghamton Bus Station at 2:05pm on October 19. Duration: 3h 10m. Operated by: Adirondack Trailways. Price: $49"
             >
               <div className="max-w-full font-weight-bolder text-size-62 uppercase leading-75 tracking-wider my-050 block text-center text-color-scheme-functional-positive-600">
-                <span className="sr-only">
-                  This trip is recommended because it is:{" "}
-                </span>
+                <span className="sr-only">This trip is recommended because it is: </span>
                 Cheapest
               </div>
               <div
@@ -1099,9 +982,7 @@ export default function Index() {
                 <div className="grid items-start gap-x-300 p-100 [gridArea:locations] [gridTemplateColumns:1fr_1fr] md:p-0">
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city'] gap-x-200 [gridTemplateAreas:'time_arrow'_'location_location'_'city_city'] [gridTemplateColumns:1fr_auto]">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Departure time: October 19 at{" "}
-                      </span>
+                      <span className="sr-only">Departure time: October 19 at </span>
                       <time dateTime="2024-10-19T10:55:00">10:55am</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -1128,9 +1009,7 @@ export default function Index() {
                   </div>
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city']">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Arrival time: October 19 at{" "}
-                      </span>
+                      <span className="sr-only">Arrival time: October 19 at </span>
                       <time dateTime="2024-10-19T14:05:00">2:05pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -1144,9 +1023,7 @@ export default function Index() {
                   </div>
                 </div>
                 <div className="self-center pl-050 [gridArea:meta]">
-                  <span className="sr-only">
-                    Operated by: Adirondack Trailways
-                  </span>
+                  <span className="sr-only">Operated by: Adirondack Trailways</span>
                   <img
                     loading="lazy"
                     className="max-h-300"
@@ -1165,9 +1042,7 @@ export default function Index() {
                   className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-neutral-100 text-color-primary hover:text-color-secondary active:bg-color-scheme-neutral-200 active:text-color-primary self-center justify-self-end [gridArea:button]"
                   type="button"
                 >
-                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                    $49
-                  </span>
+                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">$49</span>
                   <span className="shrink-0 text-icon-color-primary">
                     <svg fill="none" height={24} width={24} aria-hidden="true">
                       <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Chevron/right/md.svg#root"></use>
@@ -1181,9 +1056,7 @@ export default function Index() {
               aria-label="Bus from Albany to Binghamton, departing from 1400 Washington Ave. at 10:55am on October 19, arriving at Binghamton Bus Station at 2:05pm on October 19. Duration: 3h 10m. Operated by: Adirondack Trailways. Price: $67"
             >
               <div className="max-w-full font-weight-bolder text-size-62 uppercase leading-75 tracking-wider my-050 block text-center text-color-scheme-functional-special-600">
-                <span className="sr-only">
-                  This trip is recommended because it is:{" "}
-                </span>
+                <span className="sr-only">This trip is recommended because it is: </span>
                 Fastest
               </div>
               <div
@@ -1194,9 +1067,7 @@ export default function Index() {
                 <div className="grid items-start gap-x-300 p-100 [gridArea:locations] [gridTemplateColumns:1fr_1fr] md:p-0">
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city'] gap-x-200 [gridTemplateAreas:'time_arrow'_'location_location'_'city_city'] [gridTemplateColumns:1fr_auto]">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Departure time: October 19 at{" "}
-                      </span>
+                      <span className="sr-only">Departure time: October 19 at </span>
                       <time dateTime="2024-10-19T10:55:00">10:55am</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -1223,9 +1094,7 @@ export default function Index() {
                   </div>
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city']">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Arrival time: October 19 at{" "}
-                      </span>
+                      <span className="sr-only">Arrival time: October 19 at </span>
                       <time dateTime="2024-10-19T14:05:00">2:05pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -1239,9 +1108,7 @@ export default function Index() {
                   </div>
                 </div>
                 <div className="self-center pl-050 [gridArea:meta]">
-                  <span className="sr-only">
-                    Operated by: Adirondack Trailways
-                  </span>
+                  <span className="sr-only">Operated by: Adirondack Trailways</span>
                   <img
                     loading="lazy"
                     className="max-h-300"
@@ -1260,9 +1127,7 @@ export default function Index() {
                   className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-neutral-100 text-color-primary hover:text-color-secondary active:bg-color-scheme-neutral-200 active:text-color-primary self-center justify-self-end [gridArea:button]"
                   type="button"
                 >
-                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                    $67
-                  </span>
+                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">$67</span>
                   <span className="shrink-0 text-icon-color-primary">
                     <svg fill="none" height={24} width={24} aria-hidden="true">
                       <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Chevron/right/md.svg#root"></use>
@@ -1280,9 +1145,7 @@ export default function Index() {
                 <div className="grid items-start gap-x-300 p-100 [gridArea:locations] [gridTemplateColumns:1fr_1fr] md:p-0">
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city'] gap-x-200 [gridTemplateAreas:'time_arrow'_'location_location'_'city_city'] [gridTemplateColumns:1fr_auto]">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Departure time: October 19 at{" "}
-                      </span>
+                      <span className="sr-only">Departure time: October 19 at </span>
                       <time dateTime="2024-10-19T15:45:00">3:45pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -1309,9 +1172,7 @@ export default function Index() {
                   </div>
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city']">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Arrival time: October 19 at{" "}
-                      </span>
+                      <span className="sr-only">Arrival time: October 19 at </span>
                       <time dateTime="2024-10-19T23:30:00">11:30pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -1325,9 +1186,7 @@ export default function Index() {
                   </div>
                 </div>
                 <div className="self-center pl-050 [gridArea:meta]">
-                  <span className="sr-only">
-                    Operated by: Adirondack Trailways
-                  </span>
+                  <span className="sr-only">Operated by: Adirondack Trailways</span>
                   <img
                     loading="lazy"
                     className="max-h-300"
@@ -1346,9 +1205,7 @@ export default function Index() {
                   className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-neutral-100 text-color-primary hover:text-color-secondary active:bg-color-scheme-neutral-200 active:text-color-primary self-center justify-self-end [gridArea:button]"
                   type="button"
                 >
-                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                    $128
-                  </span>
+                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">$128</span>
                   <span className="shrink-0 text-icon-color-primary">
                     <svg fill="none" height={24} width={24} aria-hidden="true">
                       <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Chevron/right/md.svg#root"></use>
@@ -1366,9 +1223,7 @@ export default function Index() {
                 <div className="grid items-start gap-x-300 p-100 [gridArea:locations] [gridTemplateColumns:1fr_1fr] md:p-0">
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city'] gap-x-200 [gridTemplateAreas:'time_arrow'_'location_location'_'city_city'] [gridTemplateColumns:1fr_auto]">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Departure time: October 19 at{" "}
-                      </span>
+                      <span className="sr-only">Departure time: October 19 at </span>
                       <time dateTime="2024-10-19T15:45:00">3:45pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -1395,9 +1250,7 @@ export default function Index() {
                   </div>
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city']">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Arrival time: October 19 at{" "}
-                      </span>
+                      <span className="sr-only">Arrival time: October 19 at </span>
                       <time dateTime="2024-10-19T23:30:00">11:30pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -1411,9 +1264,7 @@ export default function Index() {
                   </div>
                 </div>
                 <div className="self-center pl-050 [gridArea:meta]">
-                  <span className="sr-only">
-                    Operated by: Adirondack Trailways
-                  </span>
+                  <span className="sr-only">Operated by: Adirondack Trailways</span>
                   <img
                     loading="lazy"
                     className="max-h-300"
@@ -1432,9 +1283,7 @@ export default function Index() {
                   className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-neutral-100 text-color-primary hover:text-color-secondary active:bg-color-scheme-neutral-200 active:text-color-primary self-center justify-self-end [gridArea:button]"
                   type="button"
                 >
-                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                    $93
-                  </span>
+                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">$93</span>
                   <span className="shrink-0 text-icon-color-primary">
                     <svg fill="none" height={24} width={24} aria-hidden="true">
                       <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Chevron/right/md.svg#root"></use>
@@ -1452,9 +1301,7 @@ export default function Index() {
                 <div className="grid items-start gap-x-300 p-100 [gridArea:locations] [gridTemplateColumns:1fr_1fr] md:p-0">
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city'] gap-x-200 [gridTemplateAreas:'time_arrow'_'location_location'_'city_city'] [gridTemplateColumns:1fr_auto]">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Departure time: October 19 at{" "}
-                      </span>
+                      <span className="sr-only">Departure time: October 19 at </span>
                       <time dateTime="2024-10-19T10:55:00">10:55am</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -1481,9 +1328,7 @@ export default function Index() {
                   </div>
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city']">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Arrival time: October 19 at{" "}
-                      </span>
+                      <span className="sr-only">Arrival time: October 19 at </span>
                       <time dateTime="2024-10-19T14:05:00">2:05pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -1497,9 +1342,7 @@ export default function Index() {
                   </div>
                 </div>
                 <div className="self-center pl-050 [gridArea:meta]">
-                  <span className="sr-only">
-                    Operated by: Adirondack Trailways
-                  </span>
+                  <span className="sr-only">Operated by: Adirondack Trailways</span>
                   <img
                     loading="lazy"
                     className="max-h-300"
@@ -1518,9 +1361,7 @@ export default function Index() {
                   className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-neutral-100 text-color-primary hover:text-color-secondary active:bg-color-scheme-neutral-200 active:text-color-primary self-center justify-self-end [gridArea:button]"
                   type="button"
                 >
-                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                    $67
-                  </span>
+                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">$67</span>
                   <span className="shrink-0 text-icon-color-primary">
                     <svg fill="none" height={24} width={24} aria-hidden="true">
                       <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Chevron/right/md.svg#root"></use>
@@ -1548,17 +1389,12 @@ export default function Index() {
           </button>
         </div>
       </div>
-      <div
-        className="flex flex-col gap-y-300 lg:gap-y-500 hidden"
-        data-price-calendar-tab-pane="true"
-      >
+      <div className="flex flex-col gap-y-300 lg:gap-y-500 hidden" data-price-calendar-tab-pane="true">
         <div className="grid justify-items-center gap-y-200 text-balance text-center *:max-w-prose">
           <div className="font-family-display-html text-size-150 font-weight-bolder leading-175 tracking-tight md:font-family-display-html md:text-size-200 md:font-weight-bolder md:leading-225 md:tracking-tight text-balance text-center undefined">
             Cheap buses leaving Sunday
           </div>
-          <h3 className="text-size-100 leading-150 text-color-secondary">
-            One passenger / one way
-          </h3>
+          <h3 className="text-size-100 leading-150 text-color-secondary">One passenger / one way</h3>
           <div className="mt-200 flex flex-col items-center justify-center gap-100 sm:flex-row sm:gap-200">
             <button
               className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-literal-blue-100 text-color-scheme-literal-blue-800 hover:text-color-scheme-literal-blue-600 active:bg-color-scheme-literal-blue-200 active:text-color-scheme-literal-blue-800 vanilla-btn-links"
@@ -1572,9 +1408,7 @@ export default function Index() {
                   <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/MagnifyingGlass/md.svg#root"></use>
                 </svg>
               </span>
-              <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                Cheapest trips
-              </span>
+              <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">Cheapest trips</span>
             </button>
             <button
               className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-literal-blue-100 text-color-scheme-literal-blue-800 hover:text-color-scheme-literal-blue-600 active:bg-color-scheme-literal-blue-200 active:text-color-scheme-literal-blue-800 vanilla-btn-links"
@@ -1588,9 +1422,7 @@ export default function Index() {
                   <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/MagnifyingGlass/md.svg#root"></use>
                 </svg>
               </span>
-              <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                Fastest trips
-              </span>
+              <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">Fastest trips</span>
             </button>
           </div>
         </div>
@@ -1601,9 +1433,7 @@ export default function Index() {
               aria-label="Bus from Albany to Binghamton, departing from 1400 Washington Ave. at 10:55am on October 20, arriving at Binghamton Bus Station at 2:05pm on October 20. Duration: 3h 10m. Operated by: Adirondack Trailways. Price: $51"
             >
               <div className="max-w-full font-weight-bolder text-size-62 uppercase leading-75 tracking-wider my-050 block text-center text-color-scheme-functional-positive-600">
-                <span className="sr-only">
-                  This trip is recommended because it is:{" "}
-                </span>
+                <span className="sr-only">This trip is recommended because it is: </span>
                 Cheapest
               </div>
               <div
@@ -1614,9 +1444,7 @@ export default function Index() {
                 <div className="grid items-start gap-x-300 p-100 [gridArea:locations] [gridTemplateColumns:1fr_1fr] md:p-0">
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city'] gap-x-200 [gridTemplateAreas:'time_arrow'_'location_location'_'city_city'] [gridTemplateColumns:1fr_auto]">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Departure time: October 20 at{" "}
-                      </span>
+                      <span className="sr-only">Departure time: October 20 at </span>
                       <time dateTime="2024-10-20T10:55:00">10:55am</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -1643,9 +1471,7 @@ export default function Index() {
                   </div>
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city']">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Arrival time: October 20 at{" "}
-                      </span>
+                      <span className="sr-only">Arrival time: October 20 at </span>
                       <time dateTime="2024-10-20T14:05:00">2:05pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -1659,9 +1485,7 @@ export default function Index() {
                   </div>
                 </div>
                 <div className="self-center pl-050 [gridArea:meta]">
-                  <span className="sr-only">
-                    Operated by: Adirondack Trailways
-                  </span>
+                  <span className="sr-only">Operated by: Adirondack Trailways</span>
                   <img
                     loading="lazy"
                     className="max-h-300"
@@ -1680,9 +1504,7 @@ export default function Index() {
                   className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-neutral-100 text-color-primary hover:text-color-secondary active:bg-color-scheme-neutral-200 active:text-color-primary self-center justify-self-end [gridArea:button]"
                   type="button"
                 >
-                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                    $51
-                  </span>
+                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">$51</span>
                   <span className="shrink-0 text-icon-color-primary">
                     <svg fill="none" height={24} width={24} aria-hidden="true">
                       <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Chevron/right/md.svg#root"></use>
@@ -1696,9 +1518,7 @@ export default function Index() {
               aria-label="Bus from Albany to Binghamton, departing from 1400 Washington Ave. at 10:55am on October 20, arriving at Binghamton Bus Station at 2:05pm on October 20. Duration: 3h 10m. Operated by: Adirondack Trailways. Price: $70"
             >
               <div className="max-w-full font-weight-bolder text-size-62 uppercase leading-75 tracking-wider my-050 block text-center text-color-scheme-functional-special-600">
-                <span className="sr-only">
-                  This trip is recommended because it is:{" "}
-                </span>
+                <span className="sr-only">This trip is recommended because it is: </span>
                 Fastest
               </div>
               <div
@@ -1709,9 +1529,7 @@ export default function Index() {
                 <div className="grid items-start gap-x-300 p-100 [gridArea:locations] [gridTemplateColumns:1fr_1fr] md:p-0">
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city'] gap-x-200 [gridTemplateAreas:'time_arrow'_'location_location'_'city_city'] [gridTemplateColumns:1fr_auto]">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Departure time: October 20 at{" "}
-                      </span>
+                      <span className="sr-only">Departure time: October 20 at </span>
                       <time dateTime="2024-10-20T10:55:00">10:55am</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -1738,9 +1556,7 @@ export default function Index() {
                   </div>
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city']">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Arrival time: October 20 at{" "}
-                      </span>
+                      <span className="sr-only">Arrival time: October 20 at </span>
                       <time dateTime="2024-10-20T14:05:00">2:05pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -1754,9 +1570,7 @@ export default function Index() {
                   </div>
                 </div>
                 <div className="self-center pl-050 [gridArea:meta]">
-                  <span className="sr-only">
-                    Operated by: Adirondack Trailways
-                  </span>
+                  <span className="sr-only">Operated by: Adirondack Trailways</span>
                   <img
                     loading="lazy"
                     className="max-h-300"
@@ -1775,9 +1589,7 @@ export default function Index() {
                   className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-neutral-100 text-color-primary hover:text-color-secondary active:bg-color-scheme-neutral-200 active:text-color-primary self-center justify-self-end [gridArea:button]"
                   type="button"
                 >
-                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                    $70
-                  </span>
+                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">$70</span>
                   <span className="shrink-0 text-icon-color-primary">
                     <svg fill="none" height={24} width={24} aria-hidden="true">
                       <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Chevron/right/md.svg#root"></use>
@@ -1795,9 +1607,7 @@ export default function Index() {
                 <div className="grid items-start gap-x-300 p-100 [gridArea:locations] [gridTemplateColumns:1fr_1fr] md:p-0">
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city'] gap-x-200 [gridTemplateAreas:'time_arrow'_'location_location'_'city_city'] [gridTemplateColumns:1fr_auto]">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Departure time: October 20 at{" "}
-                      </span>
+                      <span className="sr-only">Departure time: October 20 at </span>
                       <time dateTime="2024-10-20T12:00:00">12:00pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -1824,9 +1634,7 @@ export default function Index() {
                   </div>
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city']">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Arrival time: October 20 at{" "}
-                      </span>
+                      <span className="sr-only">Arrival time: October 20 at </span>
                       <time dateTime="2024-10-20T23:30:00">11:30pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -1840,9 +1648,7 @@ export default function Index() {
                   </div>
                 </div>
                 <div className="self-center pl-050 [gridArea:meta]">
-                  <span className="sr-only">
-                    Operated by: Adirondack Trailways
-                  </span>
+                  <span className="sr-only">Operated by: Adirondack Trailways</span>
                   <img
                     loading="lazy"
                     className="max-h-300"
@@ -1861,9 +1667,7 @@ export default function Index() {
                   className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-neutral-100 text-color-primary hover:text-color-secondary active:bg-color-scheme-neutral-200 active:text-color-primary self-center justify-self-end [gridArea:button]"
                   type="button"
                 >
-                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                    $128
-                  </span>
+                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">$128</span>
                   <span className="shrink-0 text-icon-color-primary">
                     <svg fill="none" height={24} width={24} aria-hidden="true">
                       <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Chevron/right/md.svg#root"></use>
@@ -1881,9 +1685,7 @@ export default function Index() {
                 <div className="grid items-start gap-x-300 p-100 [gridArea:locations] [gridTemplateColumns:1fr_1fr] md:p-0">
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city'] gap-x-200 [gridTemplateAreas:'time_arrow'_'location_location'_'city_city'] [gridTemplateColumns:1fr_auto]">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Departure time: October 20 at{" "}
-                      </span>
+                      <span className="sr-only">Departure time: October 20 at </span>
                       <time dateTime="2024-10-20T12:00:00">12:00pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -1910,9 +1712,7 @@ export default function Index() {
                   </div>
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city']">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Arrival time: October 20 at{" "}
-                      </span>
+                      <span className="sr-only">Arrival time: October 20 at </span>
                       <time dateTime="2024-10-20T23:30:00">11:30pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -1926,9 +1726,7 @@ export default function Index() {
                   </div>
                 </div>
                 <div className="self-center pl-050 [gridArea:meta]">
-                  <span className="sr-only">
-                    Operated by: Adirondack Trailways
-                  </span>
+                  <span className="sr-only">Operated by: Adirondack Trailways</span>
                   <img
                     loading="lazy"
                     className="max-h-300"
@@ -1947,9 +1745,7 @@ export default function Index() {
                   className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-neutral-100 text-color-primary hover:text-color-secondary active:bg-color-scheme-neutral-200 active:text-color-primary self-center justify-self-end [gridArea:button]"
                   type="button"
                 >
-                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                    $93
-                  </span>
+                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">$93</span>
                   <span className="shrink-0 text-icon-color-primary">
                     <svg fill="none" height={24} width={24} aria-hidden="true">
                       <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Chevron/right/md.svg#root"></use>
@@ -1967,9 +1763,7 @@ export default function Index() {
                 <div className="grid items-start gap-x-300 p-100 [gridArea:locations] [gridTemplateColumns:1fr_1fr] md:p-0">
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city'] gap-x-200 [gridTemplateAreas:'time_arrow'_'location_location'_'city_city'] [gridTemplateColumns:1fr_auto]">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Departure time: October 20 at{" "}
-                      </span>
+                      <span className="sr-only">Departure time: October 20 at </span>
                       <time dateTime="2024-10-20T15:45:00">3:45pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -1996,9 +1790,7 @@ export default function Index() {
                   </div>
                   <div className="grid gap-y-025 [gridTemplateAreas:'time'_'location'_'city']">
                     <div className="max-w-full font-weight-bold text-size-112 leading-125 inline-block [gridArea:time]">
-                      <span className="sr-only">
-                        Arrival time: October 20 at{" "}
-                      </span>
+                      <span className="sr-only">Arrival time: October 20 at </span>
                       <time dateTime="2024-10-20T23:30:00">11:30pm</time>
                     </div>
                     <div className="max-w-full font-weight-bold text-size-62 uppercase leading-75 tracking-wider inline-block text-color-tertiary [gridArea:city] [overflowWrap:'anywhere']">
@@ -2012,9 +1804,7 @@ export default function Index() {
                   </div>
                 </div>
                 <div className="self-center pl-050 [gridArea:meta]">
-                  <span className="sr-only">
-                    Operated by: Adirondack Trailways
-                  </span>
+                  <span className="sr-only">Operated by: Adirondack Trailways</span>
                   <img
                     loading="lazy"
                     className="max-h-300"
@@ -2033,9 +1823,7 @@ export default function Index() {
                   className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-150 pe-150 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-neutral-100 text-color-primary hover:text-color-secondary active:bg-color-scheme-neutral-200 active:text-color-primary self-center justify-self-end [gridArea:button]"
                   type="button"
                 >
-                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">
-                    $128
-                  </span>
+                  <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">$128</span>
                   <span className="shrink-0 text-icon-color-primary">
                     <svg fill="none" height={24} width={24} aria-hidden="true">
                       <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Chevron/right/md.svg#root"></use>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 export default function Index() {
   return (
@@ -42,21 +42,9 @@ export default function Index() {
                     </div>
                     <svg className="sr-only">
                       <defs>
-                        <linearGradient
-                          id="half_gradient"
-                          x1={0}
-                          x2="100%"
-                          y1={0}
-                          y2={0}
-                        >
-                          <stop
-                            offset="50%"
-                            stopColor="var(--col-special-400)"
-                          />
-                          <stop
-                            offset="50%"
-                            stopColor="var(--col-neutral-200)"
-                          />
+                        <linearGradient id="half_gradient" x1={0} x2="100%" y1={0} y2={0}>
+                          <stop offset="50%" stopColor="var(--col-special-400)" />
+                          <stop offset="50%" stopColor="var(--col-neutral-200)" />
                         </linearGradient>
                         <symbol viewBox="0 0 24 24" id="star">
                           <path d="m20.34 9.06-4.07-.59a2.8 2.8 0 0 1-1.87-1.34l-1.82-3.65C12.42 3.16 12.22 3 12 3c-.22 0-.42.16-.58.48L9.6 7.13a2.8 2.8 0 0 1-1.87 1.34l-4.07.6c-.71.1-.87.59-.36 1.08L6.24 13c.55.59.81 1.38.72 2.18l-.7 4.01c-.08.51.11.81.47.81.17 0 .32-.05.47-.13l3.63-1.9a2.82 2.82 0 0 1 2.32 0l3.65 1.9c.15.08.3.12.48.13.35 0 .55-.3.46-.8l-.7-4.02c-.1-.8.17-1.6.72-2.19l2.94-2.84c.51-.5.35-.98-.36-1.09Z"></path>
@@ -64,44 +52,19 @@ export default function Index() {
                       </defs>
                     </svg>
                     <div className="flex flex-nowrap items-center">
-                      <svg
-                        className="-mx-012 first:mx-0 last:mx-0"
-                        width={24}
-                        height={24}
-                        viewBox="0 0 24 24"
-                      >
+                      <svg className="-mx-012 first:mx-0 last:mx-0" width={24} height={24} viewBox="0 0 24 24">
                         <use xlinkHref="#star" fill="var(--col-special-400)" />
                       </svg>
-                      <svg
-                        className="-mx-012 first:mx-0 last:mx-0"
-                        width={24}
-                        height={24}
-                        viewBox="0 0 24 24"
-                      >
+                      <svg className="-mx-012 first:mx-0 last:mx-0" width={24} height={24} viewBox="0 0 24 24">
                         <use xlinkHref="#star" fill="var(--col-special-400)" />
                       </svg>
-                      <svg
-                        className="-mx-012 first:mx-0 last:mx-0"
-                        width={24}
-                        height={24}
-                        viewBox="0 0 24 24"
-                      >
+                      <svg className="-mx-012 first:mx-0 last:mx-0" width={24} height={24} viewBox="0 0 24 24">
                         <use xlinkHref="#star" fill="var(--col-special-400)" />
                       </svg>
-                      <svg
-                        className="-mx-012 first:mx-0 last:mx-0"
-                        width={24}
-                        height={24}
-                        viewBox="0 0 24 24"
-                      >
+                      <svg className="-mx-012 first:mx-0 last:mx-0" width={24} height={24} viewBox="0 0 24 24">
                         <use xlinkHref="#star" fill="var(--col-special-400)" />
                       </svg>
-                      <svg
-                        className="-mx-012 first:mx-0 last:mx-0"
-                        width={24}
-                        height={24}
-                        viewBox="0 0 24 24"
-                      >
+                      <svg className="-mx-012 first:mx-0 last:mx-0" width={24} height={24} viewBox="0 0 24 24">
                         <use xlinkHref="#star" fill="var(--col-neutral-200)" />
                       </svg>
                       <span className="max-w-full text-size-56 uppercase leading-75 tracking-wider inline-block text-nowrap text-color-tertiary">
@@ -115,12 +78,7 @@ export default function Index() {
                       title="According to the users, the staff has an approval rating of 91%"
                     >
                       <span className="shrink-0 text-icon-color-primary">
-                        <svg
-                          fill="none"
-                          height={16}
-                          width={16}
-                          aria-hidden="true"
-                        >
+                        <svg fill="none" height={16} width={16} aria-hidden="true">
                           <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Attendant/sm.svg#root"></use>
                         </svg>
                       </span>
@@ -140,12 +98,7 @@ export default function Index() {
                       title="According to the users, the timeliness has an approval rating of 84%"
                     >
                       <span className="shrink-0 text-icon-color-primary">
-                        <svg
-                          fill="none"
-                          height={16}
-                          width={16}
-                          aria-hidden="true"
-                        >
+                        <svg fill="none" height={16} width={16} aria-hidden="true">
                           <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Clock/sm.svg#root" />
                         </svg>
                       </span>
@@ -165,12 +118,7 @@ export default function Index() {
                       title="According to the users, the cleanliness has an approval rating of 95%"
                     >
                       <span className="shrink-0 text-icon-color-primary">
-                        <svg
-                          fill="none"
-                          height={16}
-                          width={16}
-                          aria-hidden="true"
-                        >
+                        <svg fill="none" height={16} width={16} aria-hidden="true">
                           <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Check/sm.svg#root" />
                         </svg>
                       </span>
@@ -190,12 +138,7 @@ export default function Index() {
                       title="According to the users, the wifi has an approval rating of 48%"
                     >
                       <span className="shrink-0 text-icon-color-primary">
-                        <svg
-                          fill="none"
-                          height={16}
-                          width={16}
-                          aria-hidden="true"
-                        >
+                        <svg fill="none" height={16} width={16} aria-hidden="true">
                           <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Wifi/default/sm.svg#root"></use>
                         </svg>
                       </span>
@@ -245,41 +188,23 @@ export default function Index() {
                 <div className="group-[.size-sm]/card:pt-200 group-[.size-sm]/card:pb-250 group-[.size-sm]/card:px-250 group-[.size-md]/card:pt-300 group-[.size-md]/card:pb-350 group-[.size-md]/card:px-300">
                   <div className="flex flex-col gap-300">
                     <p className="text-size-100 leading-150">
-                      According to customer reviews, the service was
-                      satisfactory overall. However, there were consistent
-                      complaints about significant delays on both ends of the
-                      journey. On a positive note, customers appreciated the
-                      pleasant demeanor of the driver and had a great ride
-                      experience.
+                      According to customer reviews, the service was satisfactory overall. However, there were
+                      consistent complaints about significant delays on both ends of the journey. On a positive note,
+                      customers appreciated the pleasant demeanor of the driver and had a great ride experience.
                     </p>
                     <h3 className="font-family-display-html text-size-125 font-weight-bolder leading-150 tracking-tight lg:font-family-display-html lg:text-size-150 lg:font-weight-bolder lg:leading-175 lg:tracking-tight">
-                      Adirondack Trailways Albany Binghamton recent customer
-                      reviews
+                      Adirondack Trailways Albany Binghamton recent customer reviews
                     </h3>
                     <div className="grid grid-cols-1 gap-300 sm:grid-cols-2 md:grid-cols-3">
                       <div className="flex flex-1 flex-col gap-200 border-b-width-sm border-b-color-primary pb-300 last:border-none md:border-none">
-                        <p className="text-size-87 leading-125 line-clamp-[13] flex-1 overflow-ellipsis">
-                          Good driver
-                        </p>
+                        <p className="text-size-87 leading-125 line-clamp-[13] flex-1 overflow-ellipsis">Good driver</p>
                         <div className="flex flex-col gap-050">
                           <p className="sr-only">5 out of 5 stars</p>
                           <svg className="sr-only">
                             <defs>
-                              <linearGradient
-                                id="half_gradient"
-                                x1={0}
-                                x2="100%"
-                                y1={0}
-                                y2={0}
-                              >
-                                <stop
-                                  offset="50%"
-                                  stopColor="var(--col-special-400)"
-                                />
-                                <stop
-                                  offset="50%"
-                                  stopColor="var(--col-neutral-200)"
-                                />
+                              <linearGradient id="half_gradient" x1={0} x2="100%" y1={0} y2={0}>
+                                <stop offset="50%" stopColor="var(--col-special-400)" />
+                                <stop offset="50%" stopColor="var(--col-neutral-200)" />
                               </linearGradient>
                               <symbol viewBox="0 0 24 24" id="star">
                                 <path d="m20.34 9.06-4.07-.59a2.8 2.8 0 0 1-1.87-1.34l-1.82-3.65C12.42 3.16 12.22 3 12 3c-.22 0-.42.16-.58.48L9.6 7.13a2.8 2.8 0 0 1-1.87 1.34l-4.07.6c-.71.1-.87.59-.36 1.08L6.24 13c.55.59.81 1.38.72 2.18l-.7 4.01c-.08.51.11.81.47.81.17 0 .32-.05.47-.13l3.63-1.9a2.82 2.82 0 0 1 2.32 0l3.65 1.9c.15.08.3.12.48.13.35 0 .55-.3.46-.8l-.7-4.02c-.1-.8.17-1.6.72-2.19l2.94-2.84c.51-.5.35-.98-.36-1.09Z"></path>
@@ -287,69 +212,25 @@ export default function Index() {
                             </defs>
                           </svg>
                           <div className="flex flex-nowrap items-center">
-                            <svg
-                              className="-mx-012 first:mx-0 last:mx-0"
-                              width={16}
-                              height={16}
-                              viewBox="0 0 16 16"
-                            >
-                              <use
-                                xlinkHref="#star"
-                                fill="var(--col-special-400)"
-                              />
+                            <svg className="-mx-012 first:mx-0 last:mx-0" width={16} height={16} viewBox="0 0 16 16">
+                              <use xlinkHref="#star" fill="var(--col-special-400)" />
                             </svg>
-                            <svg
-                              className="-mx-012 first:mx-0 last:mx-0"
-                              width={16}
-                              height={16}
-                              viewBox="0 0 16 16"
-                            >
-                              <use
-                                xlinkHref="#star"
-                                fill="var(--col-special-400)"
-                              />
+                            <svg className="-mx-012 first:mx-0 last:mx-0" width={16} height={16} viewBox="0 0 16 16">
+                              <use xlinkHref="#star" fill="var(--col-special-400)" />
                             </svg>
-                            <svg
-                              className="-mx-012 first:mx-0 last:mx-0"
-                              width={16}
-                              height={16}
-                              viewBox="0 0 16 16"
-                            >
-                              <use
-                                xlinkHref="#star"
-                                fill="var(--col-special-400)"
-                              />
+                            <svg className="-mx-012 first:mx-0 last:mx-0" width={16} height={16} viewBox="0 0 16 16">
+                              <use xlinkHref="#star" fill="var(--col-special-400)" />
                             </svg>
-                            <svg
-                              className="-mx-012 first:mx-0 last:mx-0"
-                              width={16}
-                              height={16}
-                              viewBox="0 0 16 16"
-                            >
-                              <use
-                                xlinkHref="#star"
-                                fill="var(--col-special-400)"
-                              />
+                            <svg className="-mx-012 first:mx-0 last:mx-0" width={16} height={16} viewBox="0 0 16 16">
+                              <use xlinkHref="#star" fill="var(--col-special-400)" />
                             </svg>
-                            <svg
-                              className="-mx-012 first:mx-0 last:mx-0"
-                              width={16}
-                              height={16}
-                              viewBox="0 0 16 16"
-                            >
-                              <use
-                                xlinkHref="#star"
-                                fill="var(--col-special-400)"
-                              />
+                            <svg className="-mx-012 first:mx-0 last:mx-0" width={16} height={16} viewBox="0 0 16 16">
+                              <use xlinkHref="#star" fill="var(--col-special-400)" />
                             </svg>
                           </div>
                           <div className="flex flex-col">
-                            <p className="max-w-full font-weight-bold text-size-87 leading-100 inline-block">
-                              Anne M.
-                            </p>
-                            <time className="max-w-full text-size-75 leading-100 inline-block">
-                              March 3, 2024
-                            </time>
+                            <p className="max-w-full font-weight-bold text-size-87 leading-100 inline-block">Anne M.</p>
+                            <time className="max-w-full text-size-75 leading-100 inline-block">March 3, 2024</time>
                           </div>
                         </div>
                       </div>
@@ -361,21 +242,9 @@ export default function Index() {
                           <p className="sr-only">5 out of 5 stars</p>
                           <svg className="sr-only">
                             <defs>
-                              <linearGradient
-                                id="half_gradient"
-                                x1={0}
-                                x2="100%"
-                                y1={0}
-                                y2={0}
-                              >
-                                <stop
-                                  offset="50%"
-                                  stopColor="var(--col-special-400)"
-                                />
-                                <stop
-                                  offset="50%"
-                                  stopColor="var(--col-neutral-200)"
-                                />
+                              <linearGradient id="half_gradient" x1={0} x2="100%" y1={0} y2={0}>
+                                <stop offset="50%" stopColor="var(--col-special-400)" />
+                                <stop offset="50%" stopColor="var(--col-neutral-200)" />
                               </linearGradient>
                               <symbol viewBox="0 0 24 24" id="star">
                                 <path d="m20.34 9.06-4.07-.59a2.8 2.8 0 0 1-1.87-1.34l-1.82-3.65C12.42 3.16 12.22 3 12 3c-.22 0-.42.16-.58.48L9.6 7.13a2.8 2.8 0 0 1-1.87 1.34l-4.07.6c-.71.1-.87.59-.36 1.08L6.24 13c.55.59.81 1.38.72 2.18l-.7 4.01c-.08.51.11.81.47.81.17 0 .32-.05.47-.13l3.63-1.9a2.82 2.82 0 0 1 2.32 0l3.65 1.9c.15.08.3.12.48.13.35 0 .55-.3.46-.8l-.7-4.02c-.1-.8.17-1.6.72-2.19l2.94-2.84c.51-.5.35-.98-.36-1.09Z"></path>
@@ -383,96 +252,41 @@ export default function Index() {
                             </defs>
                           </svg>
                           <div className="flex flex-nowrap items-center">
-                            <svg
-                              className="-mx-012 first:mx-0 last:mx-0"
-                              width={16}
-                              height={16}
-                              viewBox="0 0 16 16"
-                            >
-                              <use
-                                xlinkHref="#star"
-                                fill="var(--col-special-400)"
-                              />
+                            <svg className="-mx-012 first:mx-0 last:mx-0" width={16} height={16} viewBox="0 0 16 16">
+                              <use xlinkHref="#star" fill="var(--col-special-400)" />
                             </svg>
-                            <svg
-                              className="-mx-012 first:mx-0 last:mx-0"
-                              width={16}
-                              height={16}
-                              viewBox="0 0 16 16"
-                            >
-                              <use
-                                xlinkHref="#star"
-                                fill="var(--col-special-400)"
-                              />
+                            <svg className="-mx-012 first:mx-0 last:mx-0" width={16} height={16} viewBox="0 0 16 16">
+                              <use xlinkHref="#star" fill="var(--col-special-400)" />
                             </svg>
-                            <svg
-                              className="-mx-012 first:mx-0 last:mx-0"
-                              width={16}
-                              height={16}
-                              viewBox="0 0 16 16"
-                            >
-                              <use
-                                xlinkHref="#star"
-                                fill="var(--col-special-400)"
-                              />
+                            <svg className="-mx-012 first:mx-0 last:mx-0" width={16} height={16} viewBox="0 0 16 16">
+                              <use xlinkHref="#star" fill="var(--col-special-400)" />
                             </svg>
-                            <svg
-                              className="-mx-012 first:mx-0 last:mx-0"
-                              width={16}
-                              height={16}
-                              viewBox="0 0 16 16"
-                            >
-                              <use
-                                xlinkHref="#star"
-                                fill="var(--col-special-400)"
-                              />
+                            <svg className="-mx-012 first:mx-0 last:mx-0" width={16} height={16} viewBox="0 0 16 16">
+                              <use xlinkHref="#star" fill="var(--col-special-400)" />
                             </svg>
-                            <svg
-                              className="-mx-012 first:mx-0 last:mx-0"
-                              width={16}
-                              height={16}
-                              viewBox="0 0 16 16"
-                            >
-                              <use
-                                xlinkHref="#star"
-                                fill="var(--col-special-400)"
-                              />
+                            <svg className="-mx-012 first:mx-0 last:mx-0" width={16} height={16} viewBox="0 0 16 16">
+                              <use xlinkHref="#star" fill="var(--col-special-400)" />
                             </svg>
                           </div>
                           <div className="flex flex-col">
                             <p className="max-w-full font-weight-bold text-size-87 leading-100 inline-block">
                               Dorolyn P.
                             </p>
-                            <time className="max-w-full text-size-75 leading-100 inline-block">
-                              June 10, 2023
-                            </time>
+                            <time className="max-w-full text-size-75 leading-100 inline-block">June 10, 2023</time>
                           </div>
                         </div>
                       </div>
                       <div className="flex flex-1 flex-col gap-200 border-b-width-sm border-b-color-primary pb-300 last:border-none md:border-none">
                         <p className="text-size-87 leading-125 line-clamp-[13] flex-1 overflow-ellipsis">
-                          The service was ok but the bus was very late on both
-                          ends of journey
+                          The service was ok but the bus was very late on both ends of journey
                         </p>
                         <div className="flex flex-col gap-050">
                           <p className="sr-only">2 out of 5 stars</p>
                           <svg className="sr-only">
                             <defs>
-                              <linearGradient
-                                id="half_gradient"
-                                x1={0}
-                                x2="100%"
-                                y1={0}
-                                y2={0}
-                              >
-                                <stop
-                                  offset="50%"
-                                  stopColor="var(--col-special-400)"
-                                />
-                                <stop
-                                  offset="50%"
-                                  stopColor="var(--col-neutral-200)"
-                                />
+                              <linearGradient id="half_gradient" x1={0} x2="100%" y1={0} y2={0}>
+                                <stop offset="50%" stopColor="var(--col-special-400)" />
+                                <stop offset="50%" stopColor="var(--col-neutral-200)" />
                               </linearGradient>
                               <symbol viewBox="0 0 24 24" id="star">
                                 <path d="m20.34 9.06-4.07-.59a2.8 2.8 0 0 1-1.87-1.34l-1.82-3.65C12.42 3.16 12.22 3 12 3c-.22 0-.42.16-.58.48L9.6 7.13a2.8 2.8 0 0 1-1.87 1.34l-4.07.6c-.71.1-.87.59-.36 1.08L6.24 13c.55.59.81 1.38.72 2.18l-.7 4.01c-.08.51.11.81.47.81.17 0 .32-.05.47-.13l3.63-1.9a2.82 2.82 0 0 1 2.32 0l3.65 1.9c.15.08.3.12.48.13.35 0 .55-.3.46-.8l-.7-4.02c-.1-.8.17-1.6.72-2.19l2.94-2.84c.51-.5.35-.98-.36-1.09Z"></path>
@@ -480,69 +294,27 @@ export default function Index() {
                             </defs>
                           </svg>
                           <div className="flex flex-nowrap items-center">
-                            <svg
-                              className="-mx-012 first:mx-0 last:mx-0"
-                              width={16}
-                              height={16}
-                              viewBox="0 0 16 16"
-                            >
-                              <use
-                                xlinkHref="#star"
-                                fill="var(--col-special-400)"
-                              />
+                            <svg className="-mx-012 first:mx-0 last:mx-0" width={16} height={16} viewBox="0 0 16 16">
+                              <use xlinkHref="#star" fill="var(--col-special-400)" />
                             </svg>
-                            <svg
-                              className="-mx-012 first:mx-0 last:mx-0"
-                              width={16}
-                              height={16}
-                              viewBox="0 0 16 16"
-                            >
-                              <use
-                                xlinkHref="#star"
-                                fill="var(--col-special-400)"
-                              />
+                            <svg className="-mx-012 first:mx-0 last:mx-0" width={16} height={16} viewBox="0 0 16 16">
+                              <use xlinkHref="#star" fill="var(--col-special-400)" />
                             </svg>
-                            <svg
-                              className="-mx-012 first:mx-0 last:mx-0"
-                              width={16}
-                              height={16}
-                              viewBox="0 0 16 16"
-                            >
-                              <use
-                                xlinkHref="#star"
-                                fill="var(--col-neutral-200)"
-                              />
+                            <svg className="-mx-012 first:mx-0 last:mx-0" width={16} height={16} viewBox="0 0 16 16">
+                              <use xlinkHref="#star" fill="var(--col-neutral-200)" />
                             </svg>
-                            <svg
-                              className="-mx-012 first:mx-0 last:mx-0"
-                              width={16}
-                              height={16}
-                              viewBox="0 0 16 16"
-                            >
-                              <use
-                                xlinkHref="#star"
-                                fill="var(--col-neutral-200)"
-                              />
+                            <svg className="-mx-012 first:mx-0 last:mx-0" width={16} height={16} viewBox="0 0 16 16">
+                              <use xlinkHref="#star" fill="var(--col-neutral-200)" />
                             </svg>
-                            <svg
-                              className="-mx-012 first:mx-0 last:mx-0"
-                              width={16}
-                              height={16}
-                              viewBox="0 0 16 16"
-                            >
-                              <use
-                                xlinkHref="#star"
-                                fill="var(--col-neutral-200)"
-                              />
+                            <svg className="-mx-012 first:mx-0 last:mx-0" width={16} height={16} viewBox="0 0 16 16">
+                              <use xlinkHref="#star" fill="var(--col-neutral-200)" />
                             </svg>
                           </div>
                           <div className="flex flex-col">
                             <p className="max-w-full font-weight-bold text-size-87 leading-100 inline-block">
                               Ashish S.
                             </p>
-                            <time className="max-w-full text-size-75 leading-100 inline-block">
-                              December 1, 2022
-                            </time>
+                            <time className="max-w-full text-size-75 leading-100 inline-block">December 1, 2022</time>
                           </div>
                         </div>
                       </div>
@@ -579,21 +351,9 @@ export default function Index() {
                     </div>
                     <svg className="sr-only">
                       <defs>
-                        <linearGradient
-                          id="half_gradient"
-                          x1={0}
-                          x2="100%"
-                          y1={0}
-                          y2={0}
-                        >
-                          <stop
-                            offset="50%"
-                            stopColor="var(--col-special-400)"
-                          />
-                          <stop
-                            offset="50%"
-                            stopColor="var(--col-neutral-200)"
-                          />
+                        <linearGradient id="half_gradient" x1={0} x2="100%" y1={0} y2={0}>
+                          <stop offset="50%" stopColor="var(--col-special-400)" />
+                          <stop offset="50%" stopColor="var(--col-neutral-200)" />
                         </linearGradient>
                         <symbol viewBox="0 0 24 24" id="star">
                           <path d="m20.34 9.06-4.07-.59a2.8 2.8 0 0 1-1.87-1.34l-1.82-3.65C12.42 3.16 12.22 3 12 3c-.22 0-.42.16-.58.48L9.6 7.13a2.8 2.8 0 0 1-1.87 1.34l-4.07.6c-.71.1-.87.59-.36 1.08L6.24 13c.55.59.81 1.38.72 2.18l-.7 4.01c-.08.51.11.81.47.81.17 0 .32-.05.47-.13l3.63-1.9a2.82 2.82 0 0 1 2.32 0l3.65 1.9c.15.08.3.12.48.13.35 0 .55-.3.46-.8l-.7-4.02c-.1-.8.17-1.6.72-2.19l2.94-2.84c.51-.5.35-.98-.36-1.09Z"></path>
@@ -601,44 +361,19 @@ export default function Index() {
                       </defs>
                     </svg>
                     <div className="flex flex-nowrap items-center">
-                      <svg
-                        className="-mx-012 first:mx-0 last:mx-0"
-                        width={24}
-                        height={24}
-                        viewBox="0 0 24 24"
-                      >
+                      <svg className="-mx-012 first:mx-0 last:mx-0" width={24} height={24} viewBox="0 0 24 24">
                         <use xlinkHref="#star" fill="var(--col-special-400)" />
                       </svg>
-                      <svg
-                        className="-mx-012 first:mx-0 last:mx-0"
-                        width={24}
-                        height={24}
-                        viewBox="0 0 24 24"
-                      >
+                      <svg className="-mx-012 first:mx-0 last:mx-0" width={24} height={24} viewBox="0 0 24 24">
                         <use xlinkHref="#star" fill="var(--col-special-400)" />
                       </svg>
-                      <svg
-                        className="-mx-012 first:mx-0 last:mx-0"
-                        width={24}
-                        height={24}
-                        viewBox="0 0 24 24"
-                      >
+                      <svg className="-mx-012 first:mx-0 last:mx-0" width={24} height={24} viewBox="0 0 24 24">
                         <use xlinkHref="#star" fill="var(--col-special-400)" />
                       </svg>
-                      <svg
-                        className="-mx-012 first:mx-0 last:mx-0"
-                        width={24}
-                        height={24}
-                        viewBox="0 0 24 24"
-                      >
+                      <svg className="-mx-012 first:mx-0 last:mx-0" width={24} height={24} viewBox="0 0 24 24">
                         <use xlinkHref="#star" fill="url(#half_gradient)" />
                       </svg>
-                      <svg
-                        className="-mx-012 first:mx-0 last:mx-0"
-                        width={24}
-                        height={24}
-                        viewBox="0 0 24 24"
-                      >
+                      <svg className="-mx-012 first:mx-0 last:mx-0" width={24} height={24} viewBox="0 0 24 24">
                         <use xlinkHref="#star" fill="var(--col-neutral-200)" />
                       </svg>
                       <span className="max-w-full text-size-56 uppercase leading-75 tracking-wider inline-block text-nowrap text-color-tertiary">
@@ -652,12 +387,7 @@ export default function Index() {
                       title="According to the users, the staff has an approval rating of 70%"
                     >
                       <span className="shrink-0 text-icon-color-primary">
-                        <svg
-                          fill="none"
-                          height={16}
-                          width={16}
-                          aria-hidden="true"
-                        >
+                        <svg fill="none" height={16} width={16} aria-hidden="true">
                           <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Attendant/sm.svg#root"></use>
                         </svg>
                       </span>
@@ -677,12 +407,7 @@ export default function Index() {
                       title="According to the users, the timeliness has an approval rating of 49%"
                     >
                       <span className="shrink-0 text-icon-color-primary">
-                        <svg
-                          fill="none"
-                          height={16}
-                          width={16}
-                          aria-hidden="true"
-                        >
+                        <svg fill="none" height={16} width={16} aria-hidden="true">
                           <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Clock/sm.svg#root" />
                         </svg>
                       </span>
@@ -702,12 +427,7 @@ export default function Index() {
                       title="According to the users, the cleanliness has an approval rating of 65%"
                     >
                       <span className="shrink-0 text-icon-color-primary">
-                        <svg
-                          fill="none"
-                          height={16}
-                          width={16}
-                          aria-hidden="true"
-                        >
+                        <svg fill="none" height={16} width={16} aria-hidden="true">
                           <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Check/sm.svg#root" />
                         </svg>
                       </span>
@@ -727,12 +447,7 @@ export default function Index() {
                       title="According to the users, the wifi has an approval rating of 45%"
                     >
                       <span className="shrink-0 text-icon-color-primary">
-                        <svg
-                          fill="none"
-                          height={16}
-                          width={16}
-                          aria-hidden="true"
-                        >
+                        <svg fill="none" height={16} width={16} aria-hidden="true">
                           <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Wifi/default/sm.svg#root"></use>
                         </svg>
                       </span>
@@ -783,17 +498,13 @@ export default function Index() {
                   <div className="flex flex-col gap-300">
                     <div className="last:*:mb-0 [&>a]:text-color-scheme-interactive-link-600 [&>a]:visited:text-color-scheme-literal-purple-600 [&>a]:hover:text-color-scheme-interactive-link-500 [&>a]:focus-visible:outline-none [&>a]:focus-visible:ring [&>a]:active:text-color-scheme-interactive-link-600 [&>a]:aria-disabled:cursor-default">
                       <p className="text-size-87 leading-125 sm:text-size-100 sm:leading-150 mb-300">
-                        Greyhound Lines offers the most comprehensive intercity
-                        bus services in the United States. They operate a
-                        modern, environmentally friendly fleet that serves more
-                        than 2400 destinations and carries nearly 16 million
-                        passengers annually. When traveling with them, you can
-                        expect free WiFi, onboard entertainment, bathrooms,
-                        power outlets and decent legroom. One of the great perks
-                        of Greyhound is that they connect big cities and smaller
-                        towns in the US, where you usually can&apos;t get to by
-                        train or plane. If you&apos;re looking for safe and
-                        affordable transportation, Greyhound is a great choice.{" "}
+                        Greyhound Lines offers the most comprehensive intercity bus services in the United States. They
+                        operate a modern, environmentally friendly fleet that serves more than 2400 destinations and
+                        carries nearly 16 million passengers annually. When traveling with them, you can expect free
+                        WiFi, onboard entertainment, bathrooms, power outlets and decent legroom. One of the great perks
+                        of Greyhound is that they connect big cities and smaller towns in the US, where you usually
+                        can&apos;t get to by train or plane. If you&apos;re looking for safe and affordable
+                        transportation, Greyhound is a great choice.{" "}
                       </p>
                     </div>
                   </div>
@@ -803,9 +514,7 @@ export default function Index() {
           </div>
         </div>
         <div className="flex flex-col sm:flex-row sm:gap-800 md:gap-1000">
-          <span className="max-w-full font-weight-bold text-size-87 leading-100 inline-block">
-            US bus companies:{" "}
-          </span>
+          <span className="max-w-full font-weight-bold text-size-87 leading-100 inline-block">US bus companies: </span>
           <span className="max-w-full text-size-87 leading-100 inline-block flex-wrap">
             <a
               className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default text-color-scheme-interactive-link-600 hover:text-color-scheme-interactive-link-500 active:text-color-scheme-interactive-link-600 underline visited:text-color-scheme-literal-purple-600"
