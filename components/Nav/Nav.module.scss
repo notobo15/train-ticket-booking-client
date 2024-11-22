@@ -1,0 +1,63 @@
+.wrapper {
+  grid-area: hero;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 0;
+}
+.bgImage {
+  align-items: center;
+  background: center 27% / cover #132968;
+  display: flex;
+  height: 256px;
+  position: relative;
+}
+
+.bgImage {
+  background-image: url(https://www.omio.com/gcs-proxy/static_content_repo/web/content/rest/hero/front_page-dw.jpg);
+}
+
+.bgImageInner {
+  margin: 0 auto;
+  max-width: 1168px;
+  min-width: 280px;
+  padding: 0 16px;
+  width: 100%;
+}
+.headline {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28px;
+  margin: 0;
+  text-shadow: 0 0 24px rgba(19, 41, 104, 0.6);
+}
+.subHeadline {
+  color: #fff;
+  font-size: 18px;
+  line-height: 24px;
+  margin: 0;
+  text-shadow: 0 0 24px rgba(19, 41, 104, 0.6);
+}
+
+@media screen and (min-width: 1024px) {
+  .bgImage {
+    background-position: center 39%;
+    height: 351px;
+  }
+  .bgImageInner {
+    bottom: 0;
+    margin-top: -29px;
+  }
+  .headline {
+    font-size: 40px;
+    line-height: 48px;
+  }
+  .subHeadline {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 34px;
+  }
+}
