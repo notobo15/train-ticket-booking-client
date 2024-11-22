@@ -1,12 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
 import searchSlice from "./features/searchSlice";
+import { provincesApi } from "@/services/provinceApi";
+import { trainsApi } from "@/services/trainsApi";
+import { carriageApi } from "@/services/carriageApi";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       search: searchSlice,
+      [provincesApi.reducerPath]: provincesApi.reducer,
+      [trainsApi.reducerPath]: trainsApi.reducer,
+      [carriageApi.reducerPath]: carriageApi.reducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(provincesApi.middleware, trainsApi.middleware, carriageApi.middleware),
   });
 };
 

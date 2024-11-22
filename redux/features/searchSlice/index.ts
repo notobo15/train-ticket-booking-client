@@ -1,28 +1,29 @@
 import { RootState } from "@/redux/store";
 import { formatDateToYMD } from "@/utils/formatDate";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+export interface ISearchState {
+  isOpenModalFilter: boolean;
 
-// Define a type for the slice state
-export interface IState {
-  // adults: number;
-  // children: number;
-  // students: number;
-  // seniors: number;
   date: string | null;
   returnDate: string | null;
   destination: string;
   origin: string;
   carriageId: number;
   passagers: IPassager[];
-  carriageType: string;
+  carriageType: number;
   seats: number[];
+  filters: {
+    nighttime: boolean;
+    early: boolean;
+    midday: boolean;
+    late: boolean;
+  };
+  sortingOptions: SortingOption[];
+  resultCount: number;
 }
 
-const initialState: IState = {
-  // adults: 1,
-  // children: 0,
-  // students: 0,
-  // seniors: 0,
+const initialState: ISearchState = {
+  isOpenModalFilter: false,
   date: formatDateToYMD(new Date()),
   returnDate: null,
   destination: "",
@@ -54,8 +55,23 @@ const initialState: IState = {
       description: "60+ years",
     },
   ],
-  carriageType: "",
+  carriageType: 0,
   seats: [],
+  filters: {
+    nighttime: false,
+    early: false,
+    midday: false,
+    late: false,
+  },
+  sortingOptions: [
+    { label: "Recommended", isSelected: true },
+    { label: "Cheapest", isSelected: false },
+    { label: "Highest", isSelected: false },
+    { label: "Fastest", isSelected: false },
+    { label: "Earliest", isSelected: false },
+    { label: "Latest", isSelected: false },
+  ],
+  resultCount: 0,
 };
 
 export const counterSlice = createSlice({
@@ -92,7 +108,7 @@ export const counterSlice = createSlice({
     setPassegers: (state, action: PayloadAction<IPassager[]>) => {
       state.passagers = action.payload;
     },
-    setCarriageType: (state, action: PayloadAction<string>) => {
+    setCarriageType: (state, action: PayloadAction<number>) => {
       state.carriageType = action.payload;
     },
     addSeat: (state, action: PayloadAction<number>) => {
@@ -105,6 +121,29 @@ export const counterSlice = createSlice({
     },
     clearSeat: (state) => {
       state.seats = [];
+    },
+
+    setFilters(state, action: PayloadAction<ISearchState["filters"]>) {
+      state.filters = action.payload;
+    },
+
+    updateFilter(state, action: PayloadAction<{ key: string; value: boolean }>) {
+      const { key, value } = action.payload;
+      if (key in state.filters) {
+        state.filters[key as keyof ISearchState["filters"]] = value;
+      }
+    },
+    /* Sorting */
+    setSortingOption(state, action: PayloadAction<string>) {
+      state.sortingOptions = state.sortingOptions.map((option) =>
+        option.label === action.payload ? { ...option, isSelected: true } : { ...option, isSelected: false }
+      );
+    },
+    setResultCount(state, action: PayloadAction<number>) {
+      state.resultCount = action.payload;
+    },
+    setIsOpenModalFilter(state, action: PayloadAction<boolean>) {
+      state.isOpenModalFilter = action.payload;
     },
   },
 });
@@ -123,6 +162,11 @@ export const {
   setCarriageType,
   addSeat,
   clearSeat,
+  setFilters,
+  updateFilter,
+  setSortingOption,
+  setResultCount,
+  setIsOpenModalFilter,
 } = counterSlice.actions;
 
 export default counterSlice.reducer;
