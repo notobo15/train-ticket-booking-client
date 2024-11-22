@@ -13,13 +13,7 @@ export default function Index() {
       <div className="mt-500 flex flex-col">
         <div className="flex min-h-800 items-center gap-100 *:last-of-type:border-none">
           <div className="p-100">
-            <svg
-              fill="none"
-              height={32}
-              width={32}
-              aria-hidden="true"
-              className="text-icon-color-primary-inverse"
-            >
+            <svg fill="none" height={32} width={32} aria-hidden="true" className="text-icon-color-primary-inverse">
               <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Tickets/lg.svg#root" />
             </svg>
           </div>
@@ -34,13 +28,7 @@ export default function Index() {
         </div>
         <div className="flex min-h-800 items-center gap-100 *:last-of-type:border-none">
           <div className="p-100">
-            <svg
-              fill="none"
-              height={32}
-              width={32}
-              aria-hidden="true"
-              className="text-icon-color-primary-inverse"
-            >
+            <svg fill="none" height={32} width={32} aria-hidden="true" className="text-icon-color-primary-inverse">
               <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Clock/lg.svg#root" />
             </svg>
           </div>
@@ -54,17 +42,7 @@ export default function Index() {
           </div>
         </div>
         <div className="flex min-h-800 items-center gap-100 *:last-of-type:border-none">
-          <div className="p-100">
-            <svg
-              fill="none"
-              height={32}
-              width={32}
-              aria-hidden="true"
-              className="text-icon-color-primary-inverse"
-            >
-              <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/TransportationMode/bus/lg.svg#root"></use>
-            </svg>
-          </div>
+          <div className="p-100">{/*  */}</div>
           <div className="flex w-full items-center border-b-width-sm border-b-color-primary-inverse py-150 md:py-250">
             <span className="max-w-full text-size-75 leading-100 md:text-size-112 md:leading-125 inline-block md:inline-block w-full font-weight-bold text-color-primary-inverse md:w-12/24 md:font-weight-bolder">
               Number of daily buses
@@ -76,13 +54,7 @@ export default function Index() {
         </div>
         <div className="flex min-h-800 items-center gap-100 *:last-of-type:border-none">
           <div className="p-100">
-            <svg
-              fill="none"
-              height={32}
-              width={32}
-              aria-hidden="true"
-              className="text-icon-color-primary-inverse"
-            >
+            <svg fill="none" height={32} width={32} aria-hidden="true" className="text-icon-color-primary-inverse">
               <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Sun/lg.svg#root" />
             </svg>
           </div>
@@ -97,13 +69,7 @@ export default function Index() {
         </div>
         <div className="flex min-h-800 items-center gap-100 *:last-of-type:border-none">
           <div className="p-100">
-            <svg
-              fill="none"
-              height={32}
-              width={32}
-              aria-hidden="true"
-              className="text-icon-color-primary-inverse"
-            >
+            <svg fill="none" height={32} width={32} aria-hidden="true" className="text-icon-color-primary-inverse">
               <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/ArrowBiDirectional/horizontal/lg.svg#root"></use>
             </svg>
           </div>
@@ -118,13 +84,7 @@ export default function Index() {
         </div>
         <div className="flex min-h-800 items-center gap-100 *:last-of-type:border-none">
           <div className="p-100">
-            <svg
-              fill="none"
-              height={32}
-              width={32}
-              aria-hidden="true"
-              className="text-icon-color-primary-inverse"
-            >
+            <svg fill="none" height={32} width={32} aria-hidden="true" className="text-icon-color-primary-inverse">
               <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Moon/lg.svg#root" />
             </svg>
           </div>

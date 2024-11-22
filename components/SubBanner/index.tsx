@@ -12,7 +12,7 @@ export default function SubBanner() {
           width={48}
         />
         <span className="max-w-full font-weight-bold text-size-87 leading-100 inline-block text-balance">
-          Trusted by 75M+ travelers every year looking for bus and train tickets
+          Trusted by 1M+ travelers every year looking for train tickets
         </span>
       </div>
       <div className="flex flex-1 items-start">
@@ -24,7 +24,7 @@ export default function SubBanner() {
           width={48}
         />
         <span className="max-w-full font-weight-bold text-size-87 leading-100 inline-block text-balance">
-          Serving 2M+ bus and train routes in more than 85 countries
+          Serving more than 2 million train routes in all provinces and cities.
         </span>
       </div>
       <div className="flex flex-1 items-start">
@@ -36,7 +36,7 @@ export default function SubBanner() {
           width={48}
         />
         <span className="max-w-full font-weight-bold text-size-87 leading-100 inline-block text-balance">
-          Dedicated customer service from booking to travel
+          Dedicated customer service from booking to travel.
         </span>
       </div>
     </div>

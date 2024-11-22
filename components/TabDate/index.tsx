@@ -12,9 +12,7 @@ export default function Index() {
             data-href="/en/bus-schedules-results/dred9s/dr6p2r?outbound_date=2024-10-15&adults=1"
           >
             <div className="flex flex-col items-center">
-              <span className="max-w-full font-weight-bold text-size-75 leading-100 inline-block">
-                Today
-              </span>
+              <span className="max-w-full font-weight-bold text-size-75 leading-100 inline-block">Today</span>
               <span className="max-w-full font-weight-bold text-size-87 leading-100 sm:text-size-100 sm:leading-125 inline-block sm:inline-block">
                 29 Tue
               </span>
@@ -36,9 +34,7 @@ export default function Index() {
             data-href="/en/bus-schedules-results/dred9s/dr6p2r?outbound_date=2024-10-16&adults=1"
           >
             <div className="flex flex-col items-center">
-              <span className="max-w-full font-weight-bold text-size-75 leading-100 inline-block">
-                Tomorrow
-              </span>
+              <span className="max-w-full font-weight-bold text-size-75 leading-100 inline-block">Tomorrow</span>
               <span className="max-w-full font-weight-bold text-size-87 leading-100 sm:text-size-100 sm:leading-125 inline-block sm:inline-block">
                 Oct 16
               </span>
@@ -63,9 +59,7 @@ export default function Index() {
             data-href="/en/bus-schedules-results/dred9s/dr6p2r?outbound_date=2024-10-17&adults=1"
           >
             <div className="flex flex-col items-center">
-              <span className="max-w-full font-weight-bold text-size-75 leading-100 inline-block">
-                Thu
-              </span>
+              <span className="max-w-full font-weight-bold text-size-75 leading-100 inline-block">Thu</span>
               <span className="max-w-full font-weight-bold text-size-87 leading-100 sm:text-size-100 sm:leading-125 inline-block sm:inline-block">
                 Oct 17
               </span>
@@ -87,9 +81,7 @@ export default function Index() {
             data-href="/en/bus-schedules-results/dred9s/dr6p2r?outbound_date=2024-10-18&adults=1"
           >
             <div className="flex flex-col items-center">
-              <span className="max-w-full font-weight-bold text-size-75 leading-100 inline-block">
-                Fri
-              </span>
+              <span className="max-w-full font-weight-bold text-size-75 leading-100 inline-block">Fri</span>
               <span className="max-w-full font-weight-bold text-size-87 leading-100 sm:text-size-100 sm:leading-125 inline-block sm:inline-block">
                 Oct 18
               </span>
@@ -114,9 +106,7 @@ export default function Index() {
             data-href="/en/bus-schedules-results/dred9s/dr6p2r?outbound_date=2024-10-19&adults=1"
           >
             <div className="flex flex-col items-center">
-              <span className="max-w-full font-weight-bold text-size-75 leading-100 inline-block">
-                Sat
-              </span>
+              <span className="max-w-full font-weight-bold text-size-75 leading-100 inline-block">Sat</span>
               <span className="max-w-full font-weight-bold text-size-87 leading-100 sm:text-size-100 sm:leading-125 inline-block sm:inline-block">
                 Oct 19
               </span>
@@ -141,9 +131,7 @@ export default function Index() {
             data-href="/en/bus-schedules-results/dred9s/dr6p2r?outbound_date=2024-10-20&adults=1"
           >
             <div className="flex flex-col items-center">
-              <span className="max-w-full font-weight-bold text-size-75 leading-100 inline-block">
-                Sun
-              </span>
+              <span className="max-w-full font-weight-bold text-size-75 leading-100 inline-block">Sun</span>
               <span className="max-w-full font-weight-bold text-size-87 leading-100 sm:text-size-100 sm:leading-125 inline-block sm:inline-block">
                 Oct 20
               </span>
@@ -168,9 +156,7 @@ export default function Index() {
             data-href="/en/bus-schedules-results/dred9s/dr6p2r?outbound_date=2024-10-21&adults=1"
           >
             <div className="flex flex-col items-center">
-              <span className="max-w-full font-weight-bold text-size-75 leading-100 inline-block">
-                Mon
-              </span>
+              <span className="max-w-full font-weight-bold text-size-75 leading-100 inline-block">Mon</span>
               <span className="max-w-full font-weight-bold text-size-87 leading-100 sm:text-size-100 sm:leading-125 inline-block sm:inline-block">
                 Oct 21
               </span>
@@ -192,9 +178,7 @@ export default function Index() {
             data-href="/en/bus-schedules-results/dred9s/dr6p2r?outbound_date=2024-10-22&adults=1"
           >
             <div className="flex flex-col items-center">
-              <span className="max-w-full font-weight-bold text-size-75 leading-100 inline-block">
-                Tue
-              </span>
+              <span className="max-w-full font-weight-bold text-size-75 leading-100 inline-block">Tue</span>
               <span className="max-w-full font-weight-bold text-size-87 leading-100 sm:text-size-100 sm:leading-125 inline-block sm:inline-block">
                 Oct 22
               </span>

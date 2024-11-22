@@ -43,7 +43,8 @@
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 1px 1px 0px hsla(206, 48%, 24%, 0.1),
+  box-shadow:
+    0px 1px 1px 0px hsla(206, 48%, 24%, 0.1),
     0px 2px 4px 0px hsla(206, 48%, 24%, 0.1);
   position: relative;
   height: 80px;
@@ -55,7 +56,14 @@
   padding-left: 16px;
   padding-right: 16px;
 }
-
+.active {
+  background-color: hsl(0, 0%, 100%);
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+  color: hsl(207, 98%, 40%);
+  justify-content: center;
+  cursor: default;
+}
 @media (min-width: 360px) {
   .wrapper {
     padding-left: 24px;

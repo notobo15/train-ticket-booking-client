@@ -1,7 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./TabFilterSearch.module.scss";
 import clsx from "clsx";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { selectSearchState, setSortingOption } from "@/redux/features/searchSlice";
+
 export default function Index() {
+  // const [sortingOptions, setSortingOptions] = useState([
+  //   { label: "Recommended", isSelected: true },
+  //   { label: "Cheapest", isSelected: false },
+  //   { label: "Fastest", isSelected: false },
+  //   { label: "Earliest", isSelected: false },
+  //   { label: "Latest", isSelected: false },
+  // ]);
+
+  // const handleClick = (selectedLabel: string) => {
+  //   setSortingOptions((prevOptions) =>
+  //     prevOptions.map((option) =>
+  //       option.label === selectedLabel
+  //         ? { ...option, isSelected: true }
+  //         : { ...option, isSelected: false }
+  //     )
+  //   );
+  // };
+
+  const dispatch = useAppDispatch();
+  const earchState = useAppSelector(selectSearchState);
+  const sortingOptions = earchState.sortingOptions;
+  const resultCount = earchState.resultCount;
+
+  const handleClick = (selectedLabel: string) => {
+    dispatch(setSortingOption(selectedLabel));
+  };
+
   return (
     <div className={styles.wrapper}>
       <div>
@@ -12,10 +42,8 @@ export default function Index() {
                 <div className={styles.loadingDone}>
                   <div className={styles.labelLoading}>Searching</div>
                   <div className={styles.containerResult}>
-                    <span className={styles.labelHeading}>
-                      Select your trip
-                    </span>
-                    <span className={styles.result}>41 results</span>
+                    <span className={styles.labelHeading}>Select your trip</span>
+                    <span className={styles.result}>{resultCount} results</span>
                   </div>
                 </div>
               </div>
@@ -23,18 +51,15 @@ export default function Index() {
                 <div className={styles.actionWrapper}>
                   <span className={styles.actionLabel}>Sort By</span>
                   <div className={styles.sortingContainer}>
-                    <span
-                      className={clsx(
-                        styles.sortingItem,
-                        styles.sortingItemSelected
-                      )}
-                    >
-                      Recommended
-                    </span>
-                    <div className={styles.sortingItem}>Cheapest</div>
-                    <div className={styles.sortingItem}>Fastest</div>
-                    <div className={styles.sortingItem}>Earliest</div>
-                    <div className={styles.sortingItem}>Latest</div>
+                    {sortingOptions.map((option) => (
+                      <div
+                        key={option.label}
+                        className={clsx(styles.sortingItem, option.isSelected && styles.sortingItemSelected)}
+                        onClick={() => handleClick(option.label)}
+                      >
+                        {option.label}
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>

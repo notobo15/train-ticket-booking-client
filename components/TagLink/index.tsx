@@ -12,36 +12,28 @@ export default function Index() {
           href="#journey-overview"
           data-access-menu-link="true"
         >
-          <span className="font-weight-bold ps-050 pe-050 py-000 text-size-87 leading-125">
-            Journey Overview
-          </span>
+          <span className="font-weight-bold ps-050 pe-050 py-000 text-size-87 leading-125">Journey Overview</span>
         </a>
         <a
           className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-100 pe-100 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-literal-blue-100 text-color-scheme-literal-blue-800 hover:text-color-scheme-literal-blue-600 active:bg-color-scheme-literal-blue-200 active:text-color-scheme-literal-blue-800"
           href="#route-featured-profiles"
           data-access-menu-link="true"
         >
-          <span className="font-weight-bold ps-050 pe-050 py-000 text-size-87 leading-125">
-            Compare bus companies
-          </span>
+          <span className="font-weight-bold ps-050 pe-050 py-000 text-size-87 leading-125">Compare bus companies</span>
         </a>
         <a
           className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-100 pe-100 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-literal-blue-100 text-color-scheme-literal-blue-800 hover:text-color-scheme-literal-blue-600 active:bg-color-scheme-literal-blue-200 active:text-color-scheme-literal-blue-800"
           href="#about-this-route"
           data-access-menu-link="true"
         >
-          <span className="font-weight-bold ps-050 pe-050 py-000 text-size-87 leading-125">
-            City Guide
-          </span>
+          <span className="font-weight-bold ps-050 pe-050 py-000 text-size-87 leading-125">City Guide</span>
         </a>
         <a
           className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-100 pe-100 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-literal-blue-100 text-color-scheme-literal-blue-800 hover:text-color-scheme-literal-blue-600 active:bg-color-scheme-literal-blue-200 active:text-color-scheme-literal-blue-800"
           href="#popular-stations"
           data-access-menu-link="true"
         >
-          <span className="font-weight-bold ps-050 pe-050 py-000 text-size-87 leading-125">
-            Popular bus stations
-          </span>
+          <span className="font-weight-bold ps-050 pe-050 py-000 text-size-87 leading-125">Popular bus stations</span>
         </a>
         <a
           className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-100 pe-100 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-literal-blue-100 text-color-scheme-literal-blue-800 hover:text-color-scheme-literal-blue-600 active:bg-color-scheme-literal-blue-200 active:text-color-scheme-literal-blue-800"
@@ -66,9 +58,7 @@ export default function Index() {
           href="#about-travel"
           data-access-menu-link="true"
         >
-          <span className="font-weight-bold ps-050 pe-050 py-000 text-size-87 leading-125">
-            About Bus Travel
-          </span>
+          <span className="font-weight-bold ps-050 pe-050 py-000 text-size-87 leading-125">About Bus Travel</span>
         </a>
         <a
           className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-100 pe-100 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-literal-blue-100 text-color-scheme-literal-blue-800 hover:text-color-scheme-literal-blue-600 active:bg-color-scheme-literal-blue-200 active:text-color-scheme-literal-blue-800"
@@ -84,9 +74,7 @@ export default function Index() {
           href="#about-busbud"
           data-access-menu-link="true"
         >
-          <span className="font-weight-bold ps-050 pe-050 py-000 text-size-87 leading-125">
-            Why choose Busbud?
-          </span>
+          <span className="font-weight-bold ps-050 pe-050 py-000 text-size-87 leading-125">Why choose Busbud?</span>
         </a>
         <a
           className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex max-w-full items-center gap-x-025 rounded-pill ps-100 pe-100 py-100 hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-literal-blue-100 text-color-scheme-literal-blue-800 hover:text-color-scheme-literal-blue-600 active:bg-color-scheme-literal-blue-200 active:text-color-scheme-literal-blue-800"

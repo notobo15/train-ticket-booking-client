@@ -43,9 +43,7 @@
   overflow: hidden;
   margin-left: 8px;
 
-  --cta-label-height: calc(
-    calc(1.125em * 1.111111111 * 2) + calc(0.625em * 1.2 * 1) + 4px
-  );
+  --cta-label-height: calc(calc(1.125em * 1.111111111 * 2) + calc(0.625em * 1.2 * 1) + 4px);
 
   & > :not(:last-child) {
     margin-right: 8px;
@@ -197,6 +195,21 @@
   padding: 7px 15px;
   padding-left: 11px;
 }
+
+@media (min-width: 360px) {
+  .wrapper {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 480px) {
+  .wrapper {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+
 @media (min-width: 600px) {
   .labelResult {
     margin-left: 16px;
@@ -208,18 +221,7 @@
     padding-right: 6.25%;
   }
 }
-@media (min-width: 480px) {
-  .wrapper {
-    padding-left: 5%;
-    padding-right: 5%;
-  }
-}
-@media (min-width: 360px) {
-  .wrapper {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-}
+
 @media (min-width: 992px) {
   .mainInner {
     grid-column: 2 / -2;
