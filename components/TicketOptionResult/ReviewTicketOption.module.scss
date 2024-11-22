@@ -1,0 +1,132 @@
+.wrapper {
+  // padding-bottom: 6px;
+  padding-top: 6px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+.wrapper {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.wrapper {
+  position: relative;
+  // border-bottom: 0.0625rem solid rgb(229, 236, 240);
+  // transition: border-color 0.5s;
+}
+
+.wrapper {
+  padding-top: 6px;
+}
+
+.main {
+  display: flex;
+  flex-flow: wrap;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+  margin-left: 16px;
+}
+.label {
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.mainRight {
+  display: flex;
+  flex-flow: row;
+  -webkit-box-pack: end;
+  justify-content: flex-end;
+  -webkit-box-align: center;
+  align-items: center;
+  margin-right: 4px;
+  margin-left: auto;
+}
+.price {
+  display: flex;
+  flex-flow: column;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  align-items: flex-end;
+  margin-right: 24px;
+}
+.priceWrapper {
+  display: flex;
+  flex-flow: row;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: stretch;
+  align-items: stretch;
+  span {
+    font-size: 1.5em;
+    line-height: 1.16667;
+    letter-spacing: -0.02em;
+    text-transform: none;
+    font-weight: 500;
+    text-align: right;
+    color: rgb(32, 65, 91);
+    margin-right: 4px;
+  }
+}
+
+.priceLabel {
+  font-size: 0.625em;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 500;
+  white-space: nowrap;
+  color: rgb(105, 140, 165);
+}
+@media (min-width: 0px) {
+  .label {
+    font-size: 1.125em;
+    line-height: 1.11111;
+    text-transform: none;
+    font-weight: 600;
+  }
+  .wrapper {
+    margin-bottom: 16px;
+    margin-bottom: 16px;
+  }
+}
+@media (min-width: 360px) {
+  .wrapper {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 480px) {
+  .wrapper {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+
+@media (min-width: 600px) {
+  .labelResult {
+    margin-left: 16px;
+  }
+}
+@media (min-width: 768px) {
+  .wrapper {
+    padding-left: 6.25%;
+    padding-right: 6.25%;
+  }
+  .label {
+    font-size: 1.5em;
+    line-height: 1.16667;
+    letter-spacing: -0.02em;
+    text-transform: none;
+    font-weight: 600;
+  }
+}
+
+@media (min-width: 992px) {
+  .wrapper {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    padding-top: 0px;
+  }
+}
