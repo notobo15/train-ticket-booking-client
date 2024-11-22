@@ -519,8 +519,27 @@ body {
   --tw-contain-size: ;
   --tw-contain-layout: ;
   --tw-contain-paint: ;
-  --tw-contain-style:          
+  --tw-contain-style:                      
     ;
+}
+
+@keyframes load {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: -135% 0%;
+  }
+}
+
+.skeleton {
+  animation-timeline: auto;
+  animation-range-start: normal;
+  animation-range-end: normal;
+  border-radius: 4px;
+  background: linear-gradient(-90deg, rgb(235, 235, 240) 0%, rgb(255, 255, 255) 50%, rgb(235, 235, 240) 100%) 0% 0% /
+    400% 400%;
+  animation: 1.5s ease-in-out 0s infinite normal none running load;
 }
 
 @layer utilities {
