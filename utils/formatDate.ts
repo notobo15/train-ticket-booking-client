@@ -36,3 +36,7 @@ export function formatPriceK(amount: number): string {
   if (amount < 1000) return `${amount}`;
   return `${Math.floor(amount / 1000)}K`;
 }
+export const parseDuration = (duration: string): number => {
+  const [hours, minutes] = duration.split(":").map(Number);
+  return hours * 60 + minutes;
+};
