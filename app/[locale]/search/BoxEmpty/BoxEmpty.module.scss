@@ -1,0 +1,15 @@
+/* Box.module.scss */
+.box {
+  border: 1px solid rgba($color: #000000, $alpha: 0.2);
+  border-radius: 8px;
+  text-align: center;
+  margin-right: 5px;
+  height: 3rem;
+  width: 3rem;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
