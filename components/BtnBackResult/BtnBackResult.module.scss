@@ -1,0 +1,102 @@
+.main {
+}
+.mainInner {
+  display: grid;
+  grid-template-columns: repeat(24, 1fr);
+  overflow-y: hidden;
+}
+
+.wrapper {
+  padding-left: 16px;
+  padding-right: 16px;
+  padding: 20px 0px;
+}
+.btn {
+  --chip-background: hsla(203, 100%, 59%, 0.1);
+  --chip-border-color: transparent;
+  --chip-color: hsl(206, 48%, 24%);
+  --chip-icon-color: hsl(206, 100%, 51%);
+  --chip-hover-background: hsla(203, 100%, 59%, 0.1);
+  --chip-hover-border-color: transparent;
+  --chip-hover-color: hsl(207, 98%, 40%);
+  --chip-hover-icon-color: hsl(206, 100%, 51%);
+  --chip-active-background: hsla(203, 100%, 59%, 0.2);
+  --chip-active-border-color: transparent;
+  --chip-active-color: hsl(206, 48%, 24%);
+  --chip-active-icon-color: hsl(206, 100%, 51%);
+
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  vertical-align: middle;
+  appearance: none;
+  font-size: 100%;
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  color: var(--chip-color);
+  min-height: 32px;
+  user-select: none;
+  cursor: pointer;
+  border-image: initial;
+  margin: 0px;
+  border-style: solid;
+  border-width: 0.0625rem;
+  border-radius: 999px;
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  outline: 0px;
+  background: var(--chip-background);
+  border-color: var(--chip-border-color);
+  padding: 7px 15px 7px 11px;
+  text-decoration: none;
+}
+
+.label {
+  font-size: 0.875em;
+  line-height: 1.14286;
+  text-transform: none;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@media (min-width: 360px) {
+  .wrapper {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 480px) {
+  .wrapper {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+
+@media (min-width: 600px) {
+  .tabLabel {
+    font-size: 0.875em;
+    line-height: 1.142857143;
+    text-transform: none;
+    font-weight: 400;
+  }
+}
+@media (min-width: 768px) {
+  .wrapper {
+    padding-left: 6.25%;
+    padding-right: 6.25%;
+  }
+  .tabLabel {
+    font-size: 1em;
+    line-height: 1.25;
+    text-transform: none;
+  }
+}
+
+@media (min-width: 992px) {
+  .tabs {
+    grid-column: 2 / -2;
+  }
+}
