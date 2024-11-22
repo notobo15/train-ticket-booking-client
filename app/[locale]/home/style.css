@@ -1,0 +1,44 @@
+.placeholder-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  display: none;
+}
+
+.placeholder-modal-show {
+  display: block;
+}
+
+.placeholder-modal-content {
+  background-color: hsla(201, 28%, 92%, 0.7);
+  --webkit-tap-highlight-color: transparent;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.placeholder-modal-spinner {
+  border: 4px solid hsla(206, 32%, 39%, 0.1);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border-left-color: #0592ff;
+  animation: spin 1s ease infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
