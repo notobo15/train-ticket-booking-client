@@ -1,0 +1,143 @@
+.carriageContainer {
+  // display: flex;
+  // align-items: center;
+  // margin: 10px 0;
+  // gap: 4px;
+  position: relative;
+  :global(.swiper) {
+    margin: 0 36px;
+    padding: 10px 0;
+  }
+}
+
+.engine {
+  font-size: 30px;
+  margin: 0 10px;
+}
+
+.leftEngine {
+  transform: rotate(180deg);
+}
+
+.rightEngine {
+  transform: none;
+}
+
+.carriage {
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+}
+
+.infoContainer {
+  text-align: center;
+}
+
+.carriageNumber {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.carriageType {
+  margin-top: 5px;
+}
+
+.seatCount {
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+/* Màu sắc cho các loại toa */
+.bg-blue-200 {
+  background-color: #bfdbfe;
+}
+
+.bg-yellow-200 {
+  background-color: #fef08a;
+}
+
+.bg-green-200 {
+  background-color: #bbf7d0;
+}
+// .trainHead {
+//   width: 80px; /* Điều chỉnh kích thước đầu tàu */
+//   height: 60px; /* Điều chỉnh chiều cao đầu tàu */
+//   background-color: #e0d9d9; /* Màu của đầu tàu */
+//   border-radius: 0% 100% 20% 80% / 99% 76% 24% 1%; /* Bo tròn theo yêu cầu */
+// }
+
+.trainHead {
+  width: 80px; /* Độ rộng của đầu tàu */
+  height: 60px; /* Chiều cao của đầu tàu */
+  background-color: #333; /* Màu của đầu tàu */
+  border-radius: 100% 0% 80% 20% / 99% 76% 24% 1%; /* Bo tròn theo hướng bên trái */
+  position: relative; /* Dùng để định vị các phần tử con */
+  margin-right: 10px; /* Khoảng cách từ đầu tàu đến các toa tàu */
+}
+
+/* Cửa sổ của tàu */
+.trainHead::before {
+  content: "";
+  position: absolute;
+  top: 35%;
+  left: 10%;
+  width: 15px; /* Kích thước cửa sổ nhỏ hơn */
+  height: 15px; /* Kích thước cửa sổ nhỏ hơn */
+  background-color: white; /* Màu cửa sổ */
+  border-radius: 50%;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5); /* Tạo hiệu ứng đổ bóng cho cửa sổ */
+}
+
+/* Ống khói của tàu */
+.smokeStack {
+  position: absolute;
+  top: -15px;
+  right: 5px;
+  width: 10px;
+  height: 20px;
+  background-color: #555;
+  border-radius: 50%;
+}
+
+/* Bánh xe của tàu */
+.wheel {
+  position: absolute;
+  bottom: -7px;
+  right: 10px;
+  width: 10px; /* Bánh xe nhỏ hơn */
+  height: 10px; /* Bánh xe nhỏ hơn */
+  background-color: #444;
+  border-radius: 50%;
+  box-shadow:
+    -5px 0 0 #444,
+    -15px 0 0 #444; /* Tạo thêm bánh xe thứ 2 và 3 nhỏ hơn */
+}
+
+.btnPrev {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  padding: 16px 2px;
+  cursor: pointer;
+  border-radius: 6px;
+  color: #fff;
+  background-color: rgba(46, 175, 255, 0.8);
+}
+.btnNext {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  padding: 16px 2px;
+  cursor: pointer;
+  border-radius: 6px;
+  color: #fff;
+  background-color: rgba(46, 175, 255, 0.8);
+}
