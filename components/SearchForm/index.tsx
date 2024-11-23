@@ -4,10 +4,31 @@ import SelectStation from "@/components/SelectStation";
 import Passager from "@/components/Passager/Passager";
 import { IoSearch } from "react-icons/io5";
 import { useRouter } from "../Navigation";
+import { useEffect, useState } from "react";
+import { selectSearchState } from "@/redux/features/searchSlice";
+import { useAppSelector } from "@/redux/hooks";
 export default function Index({ btnSubmit = "Search" }: { btnSubmit?: string }) {
   const router = useRouter();
+  const { origin, destination } = useAppSelector(selectSearchState);
+  const [errorStations, setErrorStations] = useState({ origin: false, destination: false });
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const hasError = {
+      origin: origin === "",
+      destination: destination === "",
+    };
+
+    setErrorStations((prev) => ({
+      ...prev,
+      ...hasError,
+    }));
+
+    if (hasError.origin || hasError.destination) {
+      return;
+    }
+
     console.log("queryParams");
     const formData = new FormData(e.target as HTMLFormElement);
     const queryParams = new URLSearchParams();
@@ -16,10 +37,25 @@ export default function Index({ btnSubmit = "Search" }: { btnSubmit?: string }) 
       queryParams.append(key, value.toString());
     });
 
-    // Điều chỉnh URL để xử lý ngôn ngữ hoặc tham số theo ngữ cảnh i18n
     router.push(`/search?${queryParams.toString()}`);
   };
+  useEffect(() => {
+    if (origin) {
+      setErrorStations((prev) => ({
+        ...prev,
+        origin: false,
+      }));
+    }
+  }, [origin]);
 
+  useEffect(() => {
+    if (destination) {
+      setErrorStations((prev) => ({
+        ...prev,
+        destination: false,
+      }));
+    }
+  }, [destination]);
   return (
     <form
       // action="/search"
@@ -27,7 +63,7 @@ export default function Index({ btnSubmit = "Search" }: { btnSubmit?: string }) 
       className="group flex flex-wrap lg:rounded-md lg:bg-color-canvas-primary lg:shadow-md"
     >
       <div className="w-full lg:w-10/24 relative flex flex-wrap max-lg:mb-100 max-lg:rounded-md max-lg:bg-color-canvas-primary max-lg:shadow-md lg:flex-nowrap lg:border-r-width-sm lg:border-r-color-primary">
-        <SelectStation />
+        <SelectStation errors={errorStations} />
       </div>
       <div className="w-full lg:w-14/24 relative flex flex-wrap sm:max-lg:rounded-md sm:max-lg:bg-color-canvas-primary sm:max-lg:shadow-md md:flex-nowrap">
         <div className="w-full sm:w-21/24 md:w-19/24 lg:w-18/24 xl:w-18/24 flex flex-wrap sm:flex-nowrap">

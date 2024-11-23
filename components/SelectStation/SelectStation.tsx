@@ -6,6 +6,7 @@ import OptionList from "./OptionList";
 import Empty from "./Empty";
 import Loading from "./Loading";
 import { normalizeVietnameseText } from "@/utils/textUtils";
+import clsx from "clsx";
 
 interface OptionType {
   label: string;
@@ -26,6 +27,7 @@ interface CustomSelectProps {
   value: string;
   isFetching: boolean;
   onSelect: (value: string) => void; // Callback to get selected option value
+  error: boolean;
 }
 
 const CustomSelect: React.FC<CustomSelectProps> = ({
@@ -37,6 +39,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
   value,
   onSelect,
   isFetching,
+  error,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<OptionType | null>(null);
@@ -108,7 +111,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
         <label htmlFor="customSelect" className={styles.label}>
           {label}
         </label>
-        <div className={styles.selectBox} onClick={toggleDropdown}>
+        <div className={clsx(styles.selectBox, { [styles.error]: error })} onClick={toggleDropdown}>
           <div className={styles.selected}>
             {isOpen ? (
               <>

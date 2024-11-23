@@ -7,7 +7,7 @@ import { selectSearchState, setDestination, setOrigin } from "@/redux/features/s
 import { useGetProvincesWithStationsQuery, useLazyGetProvincesWithStationsQuery } from "@/services/provinceApi";
 import { formatOptions } from "@/utils/formatOptions";
 
-export default function Index() {
+export default function Index({ errors }: { errors: { origin: boolean; destination: boolean } }) {
   const dispatch = useAppDispatch();
   const { origin, destination } = useAppSelector(selectSearchState);
   // const options = [
@@ -56,6 +56,7 @@ export default function Index() {
           options={options}
           value={origin}
           onSelect={(value) => dispatch(setOrigin(value))}
+          error={errors.origin}
         />
       </div>
       <div className="sm:w-2/24 absolute bottom-0 right-0 top-0 z-[2] flex items-center justify-center pl-400 pr-300 sm:static sm:self-center sm:p-0">
@@ -78,6 +79,7 @@ export default function Index() {
           options={options}
           value={destination}
           onSelect={(value) => dispatch(setDestination(value))}
+          error={errors.destination}
         />
       </div>
     </>
