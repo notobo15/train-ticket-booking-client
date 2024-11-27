@@ -5,7 +5,8 @@ import React from "react";
 import { FaCartShopping } from "react-icons/fa6";
 import Cart from "./Cart";
 import { useTranslations } from "next-intl";
-import { Link } from "../Navigation";
+import { Link } from "@/i18n/routing";
+import { useSession } from "next-auth/react";
 const cartItems = [
   {
     id: 1,
@@ -31,8 +32,8 @@ const cartItems = [
   },
 ];
 
-const authentication = true;
 const HeaderMenu: React.FC = () => {
+  const { data: session, status } = useSession();
   const t = useTranslations("Header");
 
   return (
@@ -49,11 +50,21 @@ const HeaderMenu: React.FC = () => {
       {/* <li className="hidden sm:block">
         <Item label={t("help")} url="/help" />
       </li> */}
-
-      <li className="hidden sm:block">{authentication ? <Item label={t("signin")} url="/signin" /> : <Account />}</li>
-      <li className="hidden sm:block">
-        <Cart icon={<FaCartShopping size={24} />} count={cartItems.length} cartItems={cartItems} />
-      </li>
+      {status === "authenticated" && (
+        <li className="hidden sm:block">
+          <Item label={t("signin")} url="/sign-in" />
+        </li>
+      )}
+      {status === "unauthenticated" && (
+        <>
+          <li className="hidden sm:block">
+            <Account />
+          </li>
+          <li className="hidden sm:block">
+            <Cart icon={<FaCartShopping size={24} />} count={cartItems.length} cartItems={cartItems} />
+          </li>
+        </>
+      )}
     </ul>
   );
 };

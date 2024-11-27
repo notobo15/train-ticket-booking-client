@@ -1,7 +1,7 @@
 {
   "LocaleSwitcher": {
-    "label": "",
-    "Locale": "{locale, select, en {Tiếng Anh} vi {Tiếng Việt} other {Unknown}}"
+    "label": "Ngôn ngữ",
+    "locale": "{locale, select, vi {Tiếng Việt} en {Tiếng Anh} other {Unknown}}"
   },
   "Header": {
     "policy": "Chính sách",
@@ -21,5 +21,26 @@
   },
   "Footer": {
     "copyright": "© 2024 Aplikasi Anda. Hak cipta dilindungi."
+  },
+  "About": {
+    "about_travel_title": "Về Du Lịch Tàu Hỏa",
+    "train_travel_tips": "Mẹo Du Lịch Tàu Hỏa",
+    "train_travel_tip_1": "Nếu bạn đi du lịch ở Việt Nam, học một số cụm từ cơ bản bằng tiếng Việt sẽ rất hữu ích. Điều này không chỉ giúp bạn dễ dàng di chuyển tại các ga tàu mà người dân cũng sẽ đánh giá cao sự cố gắng của bạn.",
+    "train_travel_tip_2": "Hãy bắt đầu tận hưởng cảnh đẹp ngay khi lên tàu. Nếu bạn đi tàu đêm, hãy thư giãn và tận hưởng chuyến đi qua những cảnh quan tuyệt đẹp của Việt Nam.",
+    "train_travel_tip_3": "Đi tàu là một phương thức di chuyển thân thiện với môi trường. Tàu hỏa mang đến cơ hội để bạn chiêm ngưỡng vẻ đẹp thiên nhiên của Việt Nam, những cảnh sắc mà máy bay không thể mang lại.",
+    "train_travel_tip_4": "Hãy nhớ mang theo đồ ăn nhẹ và nước uống, đặc biệt là khi đi tàu dài ngày. Các ga tàu ở Việt Nam thường có các món ăn đặc sản địa phương, đừng bỏ lỡ cơ hội thưởng thức những món ăn ngon trên đường đi!",
+    "did_you_know": "Bạn có biết?",
+    "train_origin": "Tàu hỏa đầu tiên tại Việt Nam được người Pháp đưa vào sử dụng vào cuối thế kỷ 19. Tuyến đường sắt đầu tiên nối Hà Nội với Hải Phòng.",
+    "daily_train_departures": "Mỗi ngày có hàng trăm chuyến tàu khởi hành trên khắp Việt Nam, nối liền các thành phố lớn với những vùng miền xa xôi.",
+    "supertrain": "Việt Nam nổi tiếng với các chuyến tàu giường nằm, cung cấp một cách di chuyển thoải mái cho những chuyến đi dài qua đêm. Tuy nhiên, khác với các tàu cao tốc, tàu giường nằm không phải là phương tiện di chuyển nhanh nhất."
+  },
+  "TopTravel": {
+    "top_travel_routes": "Các Tuyến Tàu Phổ Biến",
+    "from_hanoi_to_sai_gon": "Tàu từ Hà Nội đến Sài Gòn",
+    "from_hanoi_to_haiphong": "Tàu từ Hà Nội đến Hải Phòng",
+    "from_hcm_to_nhatrang": "Tàu từ TP.HCM đến Nha Trang",
+    "from_hcm_to_danang": "Tàu từ TP.HCM đến Đà Nẵng",
+    "from_hanoi_to_hue": "Tàu từ  Hà Nội đến Huế",
+    "from_hanoi_to_vinh": "Tàu từ  Hà Nội đến Vinh"
   }
 }

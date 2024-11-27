@@ -5,6 +5,8 @@ import styles from "./Header.module.scss";
 import clsx from "clsx";
 import { GiReturnArrow } from "react-icons/gi";
 import { IoSettingsSharp, IoTicket } from "react-icons/io5";
+import { signOut } from "next-auth/react";
+import { Link } from "@/i18n/routing";
 
 export default function Account() {
   const [isShow, setIsShow] = useState(false);
@@ -68,11 +70,16 @@ export default function Account() {
           <ul className="overflow-y-auto max-h-max w-[12.5rem]">
             {sidebarItems.map((item, index) => (
               <li key={index}>
-                <a href={item.href} className={styles.languageItem}>
+                <Link href={item.href} className={styles.languageItem}>
                   {item.text}
-                </a>
+                </Link>
               </li>
             ))}
+            <li>
+              <span className={styles.languageItem} onClick={() => signOut({ callbackUrl: "/en/home" })}>
+                Log Out
+              </span>
+            </li>
           </ul>
         </div>
       </div>

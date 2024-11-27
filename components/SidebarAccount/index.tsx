@@ -7,7 +7,8 @@ import { FaUserAlt } from "react-icons/fa";
 import { GiReturnArrow } from "react-icons/gi";
 import { LuLogOut } from "react-icons/lu";
 import { usePathname } from "next/navigation";
-import { Link } from "../Navigation";
+import { Link } from "@/i18n/routing";
+import { signOut } from "next-auth/react";
 
 export default function Index() {
   const pathname = usePathname();
@@ -41,7 +42,7 @@ export default function Index() {
               <span className={styles.itemText}>{item.text}</span>
             </Link>
           ))}
-          <div className={styles.sidebarItem}>
+          <div className={styles.sidebarItem} onClick={() => signOut({ callbackUrl: "/en/home" })}>
             <LuLogOut size={24} />
             <span className={styles.itemText}>Sign out</span>
           </div>

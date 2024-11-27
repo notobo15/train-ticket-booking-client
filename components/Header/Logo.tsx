@@ -1,5 +1,5 @@
+import { Link } from "@/i18n/routing";
 import React from "react";
-import { Link } from "@/components/Navigation";
 
 export default function Logo() {
   return (

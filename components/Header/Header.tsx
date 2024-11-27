@@ -4,11 +4,12 @@ import { IoIosMenu } from "react-icons/io";
 import AccountMenu from "./AccountMenu";
 import LanguagePicker from "./LanguagePicker";
 import { IoClose } from "react-icons/io5";
+import { useSession } from "next-auth/react";
 
 export default function Header() {
-  const [isAuthenticated, setIsAuthenticated] = useState(true); // Giả lập trạng thái đăng nhập
   const [isShowMenuMobile, setIsShowMenuMobile] = useState(false);
-
+  const { data: session, status } = useSession();
+  const isAuthenticated = status === "authenticated";
   return (
     <nav className="relative">
       <div className="flex justify-between items-center py-4">

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import "@/styles/styles.css";
 import Header from "@/components/Header";
@@ -10,9 +11,11 @@ import PopularRoute from "@/components/PopularRoute";
 import About from "@/components/About";
 import TopTravel from "@/components/TopTravel";
 import PopularTrain from "@/components/PopularTrain";
+import GoogleOneTap from "@/components/GoogleOneTap";
 export default function Index() {
   return (
     <>
+      <GoogleOneTap />
       <header className="[background:var(--header-gradient)]">
         <div className="grid grid-cols-[minmax(0,80rem)] justify-center pe-[5vw] ps-[5vw] md:pe-[6.25vw] md:ps-[6.25vw] relative overflow-x-clip pb-500 md:pb-600 lg:pb-800 md:bg-[1.5rem_0%_center]">
           <Header />
@@ -31,12 +34,12 @@ export default function Index() {
           tabIndex={-1}
         >
           {/* <TabDate /> */}
-          <TagLink />
+          {/* <TagLink /> */}
 
           <About />
           <TopTravel />
           <PopularTrain />
-          <PopularRoute />
+          {/* <PopularRoute /> */}
         </main>
         <Footer />
       </>

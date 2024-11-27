@@ -1,6 +1,7 @@
 import React from "react";
 import { FaAngleDown, FaUser } from "react-icons/fa";
 import styles from "./Header.module.scss";
+import { Link } from "@/i18n/routing";
 
 interface AccountMenuProps {
   isAuthenticated: boolean;
@@ -43,9 +44,9 @@ export default function AccountMenu({ isAuthenticated }: AccountMenuProps) {
       </div>
     </div>
   ) : (
-    <a href="/signin" className="inline-flex items-center gap-x-025 hover:underline">
+    <Link href="/sign-in" className="inline-flex items-center gap-x-025 hover:underline">
       <FaUser size={20} />
       <span>Sign in</span>
-    </a>
+    </Link>
   );
 }

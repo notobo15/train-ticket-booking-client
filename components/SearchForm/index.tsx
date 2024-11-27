@@ -3,10 +3,10 @@ import DatePicker from "@/components/DatePicker";
 import SelectStation from "@/components/SelectStation";
 import Passager from "@/components/Passager/Passager";
 import { IoSearch } from "react-icons/io5";
-import { useRouter } from "../Navigation";
 import { useEffect, useState } from "react";
 import { selectSearchState } from "@/redux/features/searchSlice";
 import { useAppSelector } from "@/redux/hooks";
+import { useRouter } from "@/i18n/routing";
 export default function Index({ btnSubmit = "Search" }: { btnSubmit?: string }) {
   const router = useRouter();
   const { origin, destination } = useAppSelector(selectSearchState);

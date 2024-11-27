@@ -1,4 +1,3 @@
-import { useOutsideClick } from "@/hook/useOutsideClick";
 import { useRef } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import styles from "../Header.module.scss";
@@ -10,7 +9,7 @@ interface DropdownProps {
 
 const Dropdown: React.FC<DropdownProps> = ({ isOpen, toggleDropdown }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
-  useOutsideClick(dropdownRef, toggleDropdown);
+  // useOutsideClick(dropdownRef, toggleDropdown);
 
   return (
     <div ref={dropdownRef} className="relative">

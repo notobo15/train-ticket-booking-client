@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./DialogForm.module.scss";
 import { IoClose } from "react-icons/io5";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 
 export default function Index({ children }: { children: React.ReactNode }) {
   return (
@@ -10,7 +10,7 @@ export default function Index({ children }: { children: React.ReactNode }) {
       <div className={styles.container}>
         <div className={styles.modal}>
           <div className={styles.headingCloseable}>
-            <Link href="/" className={styles.btnClose}>
+            <Link href="/home" className={styles.btnClose}>
               <IoClose size={24} />
             </Link>
           </div>

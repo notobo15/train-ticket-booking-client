@@ -17,19 +17,19 @@ export default function Center() {
       <li className="relative">
         <DropdownMenu
           icon={<FaTrainSubway size={20} className="text-color-scheme-literal-blue-400" />}
-          title="Trains"
+          title="Popular Routes"
           items={listTrains}
           className="bg-color-scheme-literal-blue-100 text-color-scheme-literal-blue-800 hover:text-color-scheme-literal-blue-600 active:bg-color-scheme-literal-blue-200 active:text-color-scheme-literal-blue-800"
         />
       </li>
-      <li className="relative before:absolute before:inset-y-100 before:z-[1] before:w-012 before:border-r-width-hairline before:border-r-color-primary">
+      {/* <li className="relative before:absolute before:inset-y-100 before:z-[1] before:w-012 before:border-r-width-hairline before:border-r-color-primary">
         <DropdownMenu
           icon={<FaMapLocationDot size={20} className="text-color-scheme-literal-yellow-400" />}
           title="Provinces"
           items={listTrains}
           className="bg-color-scheme-literal-yellow-100 text-color-scheme-literal-yellow-800"
         />
-      </li>
+      </li> */}
       {/* <li className="relative before:absolute before:inset-y-100 before:z-[1] before:w-012 before:border-r-width-hairline before:border-r-color-primary">
         <DropdownMenu
           icon={<FaCalendarAlt size={20} className="text-color-scheme-literal-green-400" />}

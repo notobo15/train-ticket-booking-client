@@ -1,32 +1,49 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
-import { FaAngleDown } from "react-icons/fa";
+import "/node_modules/flag-icons/css/flag-icons.min.css";
+import React, { useState, useEffect, useRef, startTransition, useTransition } from "react";
+import { FaAngleDown, FaCheck } from "react-icons/fa";
 import styles from "./Header.module.scss";
 import clsx from "clsx";
-import { useLocale } from "next-intl";
-import { useRouter, usePathname } from "next/navigation";
-import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl"; // Import useTranslations
+import { routing, usePathname } from "@/i18n/routing";
+import { useRouter } from "next/navigation";
+import { IoCheckmarkOutline } from "react-icons/io5";
 
 export default function Account() {
   const [isShow, setIsShow] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const [languages] = useState([
-    {
-      title: "English",
-      url: "en",
-    },
-    {
-      title: "Việt Nam",
-      url: "vi",
-    },
-  ]);
   const localActive = useLocale();
   const pathname = usePathname();
+  const t = useTranslations("LocaleSwitcher"); // Use useTranslations for localization
 
+  // Mapping of languages to flags
+  const languages = [
+    {
+      title: t("locale", { locale: "en" }), // Using locale placeholder to get translated title for English
+      url: "en",
+      flag: "fi-gb", // English flag
+    },
+    {
+      title: t("locale", { locale: "vi" }), // Using locale placeholder to get translated title for Vietnamese
+      url: "vi",
+      flag: "fi-vn", // Vietnamese flag
+    },
+  ];
+
+  // Close the dropdown when clicked outside
   const handleClickOutside = (event: MouseEvent) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
       setIsShow(false);
     }
+  };
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+  const handleLanguageSwitch = (nextLocale: string) => {
+    startTransition(() => {
+      const newPath = `/${nextLocale}${pathname}`;
+      router.replace(newPath);
+      router.refresh();
+    });
   };
 
   useEffect(() => {
@@ -46,13 +63,17 @@ export default function Account() {
             onClick={() => setIsShow(!isShow)}
           >
             <span className="ps-050 pe-050 py-000 font-weight-bold leading-100 text-size-87">
-              {languages.find((lang) => lang.url === localActive)?.title || "Language"}
+              {/* Show the current language's flag and name */}
+              <span className={`fi ${languages.find((lang) => lang.url === localActive)?.flag} mr-2`} />
+              {languages.find((lang) => lang.url === localActive)?.title || t("label")}
             </span>
             <span className="shrink-0 text-icon-color-primary">
               <FaAngleDown size={16} />
             </span>
           </button>
         </div>
+
+        {/* Dropdown Menu */}
         <div
           className={clsx(
             "bb-dropdown js-header-dropdown absolute overflow-y-hidden max-h-screen mt-100 bg-color-canvas-primary rounded-md shadow-lg origin-top-left duration-100 ease-in-out transition-all",
@@ -65,17 +86,22 @@ export default function Account() {
           style={{ zIndex: 1300 }}
         >
           <ul className="overflow-y-auto max-h-[13.5rem] w-[12.5rem]">
+            {/* Loop through the languages to display them in the dropdown */}
             {languages.map((item, index) => (
               <li key={index}>
-                <Link
+                <span
                   className={clsx(styles.languageItem, {
-                    [styles.selected]: item.url === localActive,
+                    [styles.selected]: item.url === localActive, // Highlight selected language
                   })}
-                  tabIndex={0}
-                  href={`/${item.url}${pathname.replace(/^\/[a-z]{2,}(-[A-Za-z]{2,})?/, "")}`}
+                  onClick={() => handleLanguageSwitch(item.url)}
                 >
-                  {item.title}
-                </Link>
+                  <span>
+                    <span className={`fi ${item.flag} mr-2`} />
+                    {item.title}
+                  </span>
+
+                  {item.url === localActive && <FaCheck />}
+                </span>
               </li>
             ))}
           </ul>
