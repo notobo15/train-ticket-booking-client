@@ -3,12 +3,12 @@ import React from "react";
 import styles from "./forgotPassword.module.scss";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Link } from "@/components/Navigation";
 import FloatingLabelInput from "@/components/FloatingLabelInput";
 import DialogForm from "@/components/DialogForm";
 import ButtonAccount from "@/components/ButtonAccount";
 import ErrorMessage from "@/components/ErrorMessage";
 import SuccessMessage from "@/components/SuccessMessage";
+import { Link } from "@/i18n/routing";
 export default function Index() {
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid email address").required("Email is required"),
@@ -54,8 +54,8 @@ export default function Index() {
         <div className={styles.hr}></div>
         <div className={styles.footer}>
           <div className={styles.footerInner}>
-            <Link href="/signin">Sign In</Link>
-            <Link href="/signup">Sign up</Link>
+            <Link href="/sign-in">Sign In</Link>
+            <Link href="/sign-up">Sign up</Link>
           </div>
         </div>
       </div>
