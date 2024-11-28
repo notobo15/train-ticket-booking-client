@@ -43,12 +43,14 @@ export default function PasswordInput({
         placeholder=" "
       />
       {icon && <div className="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">{icon}</div>}
-      <div
-        className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-icon-color-primary"
-        onClick={togglePasswordVisibility}
-      >
-        {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
-      </div>
+      {value && (
+        <div
+          className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-icon-color-primary"
+          onClick={togglePasswordVisibility}
+        >
+          {!showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+        </div>
+      )}
       <label
         htmlFor={id}
         className={`absolute text-sm ${

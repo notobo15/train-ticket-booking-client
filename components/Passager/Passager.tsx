@@ -7,11 +7,12 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 import clsx from "clsx";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { selectSearchState, setPassegers } from "@/redux/features/searchSlice";
+import { useTranslations } from "next-intl";
 
 export default function Index() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
-
+  const t = useTranslations("SearchForm");
   // const [passengers, setPassengers] = useState<IPassager[]>();
   const passengers = useAppSelector(selectSearchState).passagers;
   const dispatch = useAppDispatch();
@@ -85,11 +86,11 @@ export default function Index() {
 
       <div className={styles.input} onClick={toggleDropdown}>
         <label htmlFor="customSelect" className={styles.label}>
-          Passengers
+          {t("passengers")}
         </label>
         <div className={styles.main}>
           <div className={styles.mainLabel}>
-            <span>{`${totalPassengers} passengers`}</span>
+            <span>{`${totalPassengers} ${t("passengers")}`}</span>
           </div>
         </div>
       </div>

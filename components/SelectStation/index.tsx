@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { selectSearchState, setDestination, setOrigin } from "@/redux/features/searchSlice";
 import { useGetProvincesWithStationsQuery, useLazyGetProvincesWithStationsQuery } from "@/services/provinceApi";
 import { formatOptions } from "@/utils/formatOptions";
+import { useTranslations } from "next-intl";
 
 export default function Index({ errors }: { errors: { origin: boolean; destination: boolean } }) {
   const dispatch = useAppDispatch();
@@ -26,7 +27,7 @@ export default function Index({ errors }: { errors: { origin: boolean; destinati
   //     ],
   //   },
   // ];
-
+  const t = useTranslations("SearchForm");
   const [fetchProvincesWithStations, { data, error, isFetching }] = useLazyGetProvincesWithStationsQuery();
 
   // if (isLoading) return <div>Loading...</div>;
@@ -50,8 +51,8 @@ export default function Index({ errors }: { errors: { origin: boolean; destinati
       >
         <SelectStation
           name="origin"
-          placeholder="Leaving from..."
-          label="Origin"
+          placeholder={t("origin_placeholder")}
+          label={t("origin")}
           isFetching={isFetching}
           options={options}
           value={origin}
@@ -74,8 +75,8 @@ export default function Index({ errors }: { errors: { origin: boolean; destinati
         <SelectStation
           isFetching={isFetching}
           name="destination"
-          placeholder="Going to..."
-          label="Destination"
+          placeholder={t("destination_placeholder")}
+          label={t("destination")}
           options={options}
           value={destination}
           onSelect={(value) => dispatch(setDestination(value))}

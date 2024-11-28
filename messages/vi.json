@@ -42,5 +42,22 @@
     "from_hcm_to_danang": "Tàu từ TP.HCM đến Đà Nẵng",
     "from_hanoi_to_hue": "Tàu từ  Hà Nội đến Huế",
     "from_hanoi_to_vinh": "Tàu từ  Hà Nội đến Vinh"
+  },
+  "SubBanner": {
+    "trusted_by": "Được tin cậy bởi hơn 1 triệu du khách mỗi năm tìm kiếm vé tàu",
+    "coverage": "Phục vụ hơn 2 triệu tuyến tàu ở tất cả các tỉnh và thành phố.",
+    "support": "Dịch vụ khách hàng tận tâm từ khi đặt vé đến khi đi du lịch."
+  },
+  "SearchForm": {
+    "origin": "NƠI KHỞI HÀNH",
+    "origin_placeholder": "Điểm đi...",
+    "destination": "ĐIỂM ĐẾN",
+    "destination_placeholder": "Điểm đến...",
+    "date": "NGÀY ĐI",
+    "return_date": "NGÀY TRỞ VỀ",
+    "return_date_placeholder": "Không bắt buộc",
+    "passengers": "Hành khách",
+    "submit_button": "Tìm kiếm",
+    "update_submit_button": "Cập nhật"
   }
 }

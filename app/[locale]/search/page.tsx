@@ -26,6 +26,7 @@ import {
 import { formatDateToYMD } from "@/utils/formatDate";
 import TabFilterSearch from "@/components/TabFilterSearch";
 import FilterModal from "@/components/ResultTrains/SeatWrapper/FilterModal";
+import { useTranslations } from "next-intl";
 
 type StepProps = {
   onNext: () => void;
@@ -40,7 +41,7 @@ export default function BookingPage() {
   const dispatch = useAppDispatch();
   const router = useRouter(); // Dùng để điều hướng
   const searchParams = useSearchParams(); // Dùng để lấy query params từ URL
-
+  const t = useTranslations("SearchForm");
   const searchState = useAppSelector(selectSearchState);
 
   // Effect để khởi tạo bước dựa trên URL params
@@ -114,7 +115,7 @@ export default function BookingPage() {
         <header className={styles.header}>
           <div className="relative">
             <Header isShowCenter={false} className="py-150 md:py-150" />
-            {<SearchForm btnSubmit="Update" />}
+            {<SearchForm btnSubmit={t("update_submit_button")} />}
           </div>
         </header>
       </div>

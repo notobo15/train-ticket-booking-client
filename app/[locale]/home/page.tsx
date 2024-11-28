@@ -11,18 +11,18 @@ import PopularRoute from "@/components/PopularRoute";
 import About from "@/components/About";
 import TopTravel from "@/components/TopTravel";
 import PopularTrain from "@/components/PopularTrain";
-import GoogleOneTap from "@/components/GoogleOneTap";
+import { useTranslations } from "next-intl";
 export default function Index() {
+  const t = useTranslations("SearchForm");
   return (
     <>
-      <GoogleOneTap />
       <header className="[background:var(--header-gradient)]">
         <div className="grid grid-cols-[minmax(0,80rem)] justify-center pe-[5vw] ps-[5vw] md:pe-[6.25vw] md:ps-[6.25vw] relative overflow-x-clip pb-500 md:pb-600 lg:pb-800 md:bg-[1.5rem_0%_center]">
           <Header />
           <div></div>
           <Banner />
           <div className="relative flex flex-col gap-150 py-300">
-            <SearchForm />
+            <SearchForm btnSubmit={t("submit_button")} />
           </div>
           <SubBanner />
         </div>
@@ -38,7 +38,7 @@ export default function Index() {
 
           <About />
           <TopTravel />
-          <PopularTrain />
+          {/* <PopularTrain /> */}
           {/* <PopularRoute /> */}
         </main>
         <Footer />

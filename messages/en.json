@@ -43,5 +43,22 @@
     "from_hcm_to_danang": "Trains from HCM to Danang",
     "from_hanoi_to_hue": "Trains from Hanoi to Hue",
     "from_hanoi_to_vinh": "Trains from Hanoi to Vinh"
+  },
+  "SubBanner": {
+    "trusted_by": "Trusted by 1M+ travelers every year looking for train tickets",
+    "coverage": "Serving more than 2 million train routes in all provinces and cities.",
+    "support": "Dedicated customer service from booking to travel."
+  },
+  "SearchForm": {
+    "origin": "ORIGIN",
+    "origin_placeholder": "Leaving from...",
+    "destination": "DESTINATION",
+    "destination_placeholder": "Going to...",
+    "date": "DATE",
+    "return_date": "RETURN DATE",
+    "return_date_placeholder": "Optional",
+    "passengers": "Passengers",
+    "submit_button": "Search",
+    "update_submit_button": "Update"
   }
 }
