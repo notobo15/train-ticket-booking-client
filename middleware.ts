@@ -3,7 +3,7 @@ import createMiddleware from "next-intl/middleware";
 import { NextRequest } from "next/server";
 import { routing } from "./i18n/routing";
 
-const publicPages = ["/", "/home", "/sign-in", "/forgot-password", "/sign-up"];
+const publicPages = ["/", "/home", "/sign-in", "/sign-up", "/forgot-password", "/reset-password"];
 
 const handleI18nRouting = createMiddleware(routing);
 

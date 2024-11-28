@@ -16,6 +16,9 @@ import { toast } from "react-toastify";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { useAppDispatch } from "@/redux/hooks";
 import { setIsLoading } from "@/redux/slices/rootSlice";
+import GoogleOneTapLogin from "@/components/GoogleOneTapLogin";
+import { useGoogleOneTapLogin } from "@react-oauth/google";
+import axios from "axios";
 
 export default function Index() {
   const [isShowFormSignIn, setIsShowFormSignIn] = useState(false);
@@ -70,63 +73,90 @@ export default function Index() {
     }
   }, [status, router]);
 
-  return (
-    <DialogForm>
-      <div className={styles.contentInner}>
-        <div className={styles.contentHeading}>
-          <h2>Welcome back!</h2>
-        </div>
-        <div className={styles.main}>
-          <FacebookAuthButton />
-          <GoogleAuthButton />
-          <div className={styles.labelTextOr}>
-            <span>OR</span>
-          </div>
-          {!isShowFormSignIn ? (
-            <ButtonAccount
-              bgColor="rgba(46, 175, 255, 0.1)"
-              color="rgb(5, 147, 255)"
-              label="Continue with Email"
-              onClick={() => setIsShowFormSignIn(true)}
-            />
-          ) : (
-            <form onSubmit={formik.handleSubmit} className={styles.form}>
-              <FloatingLabelInput
-                ref={usernameRef}
-                id="username"
-                label="Username Address"
-                type="text"
-                value={formik.values.username}
-                onChange={formik.handleChange}
-                className="my-4"
-                error={formik.touched.username && formik.errors.username}
-              />
-              {formik.touched.username && formik.errors.username && <ErrorMessage message={formik.errors.username} />}
-              <PasswordInput
-                id="password"
-                label="Password"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                className="my-4"
-                error={formik.touched.password && formik.errors.password && !formik.isSubmitting}
-              />
-              {formik.touched.password && formik.errors.password && <ErrorMessage message={formik.errors.password} />}
-              <ButtonAccount type="submit" label="Sign In with Email" className="mt-4" />
-            </form>
-          )}
+  const handleGoogleLogin = useGoogleOneTapLogin({
+    onSuccess: async (credentialResponse) => {
+      try {
+        const res = await axios.post("http://localhost:8080/api/auth/login-with-google", {
+          token: credentialResponse.credential, // Google token from the response
+        });
+        localStorage.setItem("jwtToken", res.data.token); // Save JWT to local storage
+        // Handle successful login here, e.g., redirect to home page
+        console.log(res);
 
-          <Link href="/forgot-password" className={styles.forgotPassword}>
-            Forgot your password?
-          </Link>
-        </div>
-        <div className={styles.hr}></div>
-        <div className={styles.footer}>
-          <div className={styles.footerInner}>
-            New to Busbud? &nbsp;
-            <Link href="/signup">Sign up</Link>
+        if (res) {
+          toast.success("Signed in with Google successfully!", { autoClose: 1000 });
+        } else {
+          toast.error("Failed to sign in with Google.");
+        }
+      } catch (error) {
+        console.error("Google login failed:", error);
+        toast.error("An error occurred while logging in with Google.");
+      }
+    },
+    onError: () => {
+      toast.error("Google login failed.");
+    },
+  });
+  return (
+    <>
+      <DialogForm>
+        {/* <GoogleOneTapLogin /> */}
+        <div className={styles.contentInner}>
+          <div className={styles.contentHeading}>
+            <h2>Welcome back!</h2>
+          </div>
+          <div className={styles.main}>
+            <FacebookAuthButton />
+            <GoogleAuthButton />
+            <div className={styles.labelTextOr}>
+              <span>OR</span>
+            </div>
+            {!isShowFormSignIn ? (
+              <ButtonAccount
+                bgColor="rgba(46, 175, 255, 0.1)"
+                color="rgb(5, 147, 255)"
+                label="Continue with Email"
+                onClick={() => setIsShowFormSignIn(true)}
+              />
+            ) : (
+              <form onSubmit={formik.handleSubmit} className={styles.form}>
+                <FloatingLabelInput
+                  ref={usernameRef}
+                  id="username"
+                  label="Username Address"
+                  type="text"
+                  value={formik.values.username}
+                  onChange={formik.handleChange}
+                  className="my-4"
+                  error={formik.touched.username && formik.errors.username}
+                />
+                {formik.touched.username && formik.errors.username && <ErrorMessage message={formik.errors.username} />}
+                <PasswordInput
+                  id="password"
+                  label="Password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  className="my-4"
+                  error={formik.touched.password && formik.errors.password && !formik.isSubmitting}
+                />
+                {formik.touched.password && formik.errors.password && <ErrorMessage message={formik.errors.password} />}
+                <ButtonAccount type="submit" label="Sign In with Email" className="mt-4" />
+              </form>
+            )}
+
+            <Link href="/forgot-password" className={styles.forgotPassword}>
+              Forgot your password?
+            </Link>
+          </div>
+          <div className={styles.hr}></div>
+          <div className={styles.footer}>
+            <div className={styles.footerInner}>
+              New to Busbud? &nbsp;
+              <Link href="/sign-up">Sign up</Link>
+            </div>
           </div>
         </div>
-      </div>
-    </DialogForm>
+      </DialogForm>
+    </>
   );
 }
