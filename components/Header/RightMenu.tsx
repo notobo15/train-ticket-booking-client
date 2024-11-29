@@ -50,12 +50,7 @@ const HeaderMenu: React.FC = () => {
       {/* <li className="hidden sm:block">
         <Item label={t("help")} url="/help" />
       </li> */}
-      {status === "authenticated" && (
-        <li className="hidden sm:block">
-          <Item label={t("signin")} url="/sign-in" />
-        </li>
-      )}
-      {status === "unauthenticated" && (
+      {status === "authenticated" ? (
         <>
           <li className="hidden sm:block">
             <Account />
@@ -64,6 +59,10 @@ const HeaderMenu: React.FC = () => {
             <Cart icon={<FaCartShopping size={24} />} count={cartItems.length} cartItems={cartItems} />
           </li>
         </>
+      ) : (
+        <li className="hidden sm:block">
+          <Item label={t("signin")} url="/sign-in" />
+        </li>
       )}
     </ul>
   );

@@ -21,7 +21,7 @@ export default function Index({ className, isShowCenter = true }: { className?: 
         data-testid="busbud-header-with-menu"
       >
         <Logo />
-        {isShowCenter && <Center />}
+        {/* {isShowCenter && <Center />} */}
         {/* <ul className="hidden items-center gap-100 lg:flex">
           <li className="hidden sm:block">
             <div id="language-picker" className="header-dropdown relative">

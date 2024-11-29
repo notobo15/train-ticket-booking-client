@@ -16,7 +16,6 @@ import { toast } from "react-toastify";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { useAppDispatch } from "@/redux/hooks";
 import { setIsLoading } from "@/redux/slices/rootSlice";
-import GoogleOneTapLogin from "@/components/GoogleOneTapLogin";
 import { useGoogleOneTapLogin } from "@react-oauth/google";
 import axios from "axios";
 
