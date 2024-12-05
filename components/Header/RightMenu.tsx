@@ -6,7 +6,9 @@ import { FaCartShopping } from "react-icons/fa6";
 import Cart from "./Cart";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
+import { selectAuthState } from "@/redux/slices/authSlice";
+import { useAppSelector } from "@/redux/hooks";
 const cartItems = [
   {
     id: 1,
@@ -33,7 +35,8 @@ const cartItems = [
 ];
 
 const HeaderMenu: React.FC = () => {
-  const { data: session, status } = useSession();
+  // const { data: session, status } = useSession();
+  const { isAuthenticated } = useAppSelector(selectAuthState);
   const t = useTranslations("Header");
 
   return (
@@ -50,7 +53,7 @@ const HeaderMenu: React.FC = () => {
       {/* <li className="hidden sm:block">
         <Item label={t("help")} url="/help" />
       </li> */}
-      {status === "authenticated" ? (
+      {isAuthenticated ? (
         <>
           <li className="hidden sm:block">
             <Account />

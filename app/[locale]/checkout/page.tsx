@@ -11,6 +11,9 @@ import ErrorMessage from "@/components/ErrorMessage";
 import FloatingLabelInput from "@/components/FloatingLabelInput";
 import TripSelection from "@/components/ReviewTicketOptionResult/TripSelection";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { useAppSelector } from "@/redux/hooks";
+import { selectSearchState } from "@/redux/features/searchSlice";
+import { formatCurrencyVND } from "@/utils/formatDate";
 
 const validationSchema = Yup.object({
   email: Yup.string().required("Email is required"),
@@ -33,29 +36,12 @@ const validationSchema = Yup.object({
 });
 
 const Index: React.FC = () => {
+  const { train, passagers, price } = useAppSelector(selectSearchState);
   const formik = useFormik({
     initialValues: {
       email: "",
       phoneNumber: "",
       passengers: [
-        {
-          fullname: "",
-          identityNumber: "",
-          seatNumber: "",
-          passengerType: "",
-        },
-        {
-          fullname: "",
-          identityNumber: "",
-          seatNumber: "",
-          passengerType: "",
-        },
-        {
-          fullname: "",
-          identityNumber: "",
-          seatNumber: "",
-          passengerType: "",
-        },
         {
           fullname: "",
           identityNumber: "",
@@ -201,10 +187,10 @@ const Index: React.FC = () => {
                       <div className={styles.rightContainer}>
                         <TripSelection isShowHeader={true} className="!p-0" />
                       </div>
-                      <hr className={styles.hr} />
+                      {/* <hr className={styles.hr} />
                       <div className={styles.itemContent}>
                         <TripSelection isShowHeader={true} />
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                   <div className={styles.sidebarWrapper}>
@@ -214,8 +200,8 @@ const Index: React.FC = () => {
                           <span>Trip fare summary</span>
                         </div>
                       </div>
-                      <hr className={styles.hr} />
-                      <div className="space-y-200 px-250 py-200 sm:px-350 sm:py-300 lg:px-250 lg:py-200">
+                      {/* <hr className={styles.hr} /> */}
+                      {/* <div className="space-y-200 px-250 py-200 sm:px-350 sm:py-300 lg:px-250 lg:py-200">
                         <Ticket />
                         <hr className={styles.hr} />
                         <Ticket />
@@ -230,7 +216,7 @@ const Index: React.FC = () => {
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                     <hr className={styles.hr} />
 
@@ -239,7 +225,7 @@ const Index: React.FC = () => {
                         <span className={styles.footerLeftLabel}>Total</span>
                         <span className={styles.footerLeftText}>Taxes & fees included</span>
                       </div>
-                      <div className={styles.footerRight}>$123.72</div>
+                      <div className={styles.footerRight}>{formatCurrencyVND(price)}</div>
                     </div>
                   </div>
                 </div>

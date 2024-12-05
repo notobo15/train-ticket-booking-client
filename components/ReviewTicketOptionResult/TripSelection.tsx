@@ -5,8 +5,11 @@ import { FiExternalLink } from "react-icons/fi";
 import { MdOutlineAccessTime } from "react-icons/md";
 import Link from "next/link";
 import clsx from "clsx";
+import { useAppSelector } from "@/redux/hooks";
+import { selectSearchState } from "@/redux/features/searchSlice";
 
 export default function TripSelection({ className, isShowHeader }: { className?: string; isShowHeader?: boolean }) {
+  const { train } = useAppSelector(selectSearchState);
   return (
     <>
       {isShowHeader && (
@@ -24,7 +27,8 @@ export default function TripSelection({ className, isShowHeader }: { className?:
         <div className={styles.item}>
           <div className={styles.slotStart}>
             <div className={styles.starttime}>
-              <span>1:45pm</span>
+              <span>{train?.departureTime}</span>
+              <span style={{ fontSize: "13px" }}> {train?.departureDate}</span>
             </div>
           </div>
           <div className={styles.slotMiddle}>
@@ -47,8 +51,8 @@ export default function TripSelection({ className, isShowHeader }: { className?:
           <div className={styles.slotEnd}>
             <div className={styles.endContent}>
               <div>
-                <div className={styles.provinceLabelXs}>Ho Chi Minh City</div>
-                <div className={styles.provinceLabelg}>Ho Chi Minh Office</div>
+                <div className={styles.provinceLabelXs}>{train?.startProvinceName}</div>
+                <div className={styles.provinceLabelg}>{train?.startProvinceName}</div>
                 <Link
                   href={"https://www.google.com/maps/search/?api=1&query=10.767647,106.691065"}
                   className={styles.ggmapLink}
@@ -58,7 +62,7 @@ export default function TripSelection({ className, isShowHeader }: { className?:
                 </Link>
               </div>
               <div className={styles.trainName}>
-                <span className="max-w-full text-size-87 leading-100 inline-block">Airbus</span>
+                <span className="max-w-full text-size-87 leading-100 inline-block">Train</span>
               </div>
             </div>
           </div>
@@ -83,14 +87,15 @@ export default function TripSelection({ className, isShowHeader }: { className?:
             </div>
           </div>
           <div className={styles.slotEnd}>
-            <div className={styles.timeDutation}>5 hours 15 minutes</div>
+            <div className={styles.timeDutation}>{train?.totalDuration}</div>
           </div>
         </div>
 
         <div className={styles.item}>
           <div className={styles.slotStart}>
             <div className={styles.starttime}>
-              <span>1:45pm</span>
+              <span>{train?.arrivalTime}</span>
+              <span style={{ fontSize: "13px" }}> {train?.arrivalDate}</span>
             </div>
           </div>
           <div className={styles.slotMiddle}>
@@ -101,8 +106,8 @@ export default function TripSelection({ className, isShowHeader }: { className?:
           <div className={styles.slotEnd}>
             <div className={styles.endContent}>
               <div>
-                <div className={styles.provinceLabelXs}>Ho Chi Minh City</div>
-                <div className={styles.provinceLabelg}>Ho Chi Minh Office</div>
+                <div className={styles.provinceLabelXs}>{train?.endStationName}</div>
+                <div className={styles.provinceLabelg}>{train?.endStationName}</div>
                 <Link
                   href={"https://www.google.com/maps/search/?api=1&query=10.767647,106.691065"}
                   className={styles.ggmapLink}

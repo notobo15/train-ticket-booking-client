@@ -9,6 +9,7 @@ interface Option {
 interface GroupedOption {
   label: string;
   options: Option[];
+  provinceId: number;
 }
 
 /**
@@ -26,6 +27,7 @@ export const formatOptions = (data: Province[]): GroupedOption[] => {
       groupedOptions[region] = {
         label: region,
         options: [],
+        provinceId: province.provinceId,
       };
     }
 

@@ -7,6 +7,8 @@ import Empty from "./Empty";
 import Loading from "./Loading";
 import { normalizeVietnameseText } from "@/utils/textUtils";
 import clsx from "clsx";
+import { useAppDispatch } from "@/redux/hooks";
+import { setArrivalStationId } from "@/redux/features/searchSlice";
 
 interface OptionType {
   label: string;
@@ -26,7 +28,7 @@ interface CustomSelectProps {
   name: string;
   value: string;
   isFetching: boolean;
-  onSelect: (value: string) => void; // Callback to get selected option value
+  onSelect: (value: any) => void; // Callback to get selected option value
   error: boolean;
 }
 
@@ -48,7 +50,6 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
   const [filteredOptions, setFilteredOptions] = useState<GroupType[]>(options);
   const selectRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
-
   const handleSelectOption = (option: OptionType) => {
     setSelectedOption(option);
     setSearchQuery("");

@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef } from "react";
-import Carriage from "../Carrriage";
+import Carriage from "../Carriage";
 import styles from "./CarriageList.module.scss";
 
 import { Swiper, SwiperSlide } from "swiper/react";

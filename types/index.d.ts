@@ -77,3 +77,10 @@ interface Price {
   description: string;
   totalPrice: number;
 }
+
+interface APIResponse<T> {
+  code: number;
+  result: T;
+  success: boolean;
+  message: string;
+}

@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import styles from "./ResultTrains.module.scss";
 // import SeatList from "@/app/search/SeatList";
@@ -8,21 +9,28 @@ import Filter from "./Filter";
 import Card from "./Card";
 import { usePostSearchTrainsQuery } from "@/services/trainsApi";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { selectSearchState, setResultCount } from "@/redux/features/searchSlice";
+import {
+  selectSearchState,
+  setArrivalStationId,
+  setDepartureDate,
+  setDepartureStationId,
+  setResultCount,
+  setTrain,
+  setTrainId,
+} from "@/redux/features/searchSlice";
 import { parseDuration } from "@/utils/formatDate";
-import { useGetCarriagesByTrainIdQuery } from "@/services/carriageApi";
 import FilterSkeleton from "./FilterSkeleton";
 import CardSkeleton from "./CardSkeleton";
 // import Cart from "./Cart";
-export default function Index() {
+export default function Index({ onNext }: { onNext: any }) {
   // const [postSearchTrains, { isLoading, error, data }] = usePostSearchTrainsMutation();
   const dispatch = useAppDispatch();
   const searchState = useAppSelector(selectSearchState);
   const [currentTrainId, setCurentTrainId] = useState<number | null>(null);
 
-  const { data: carriagesData } = useGetCarriagesByTrainIdQuery(currentTrainId!, {
-    skip: currentTrainId === null, // Only call API if clickedTrainId is not null
-  });
+  // const { data: carriagesData } = useGetCarriagesByTrainIdQuery(currentTrainId!, {
+  //   skip: currentTrainId === null, // Only call API if clickedTrainId is not null
+  // });
 
   /* filters */
   const checkedItems = searchState.filters;
@@ -80,8 +88,6 @@ export default function Index() {
       })
     : data;
 
-  dispatch(setResultCount(filteredData?.length || 0));
-
   const sortedData = filteredData
     ? [...filteredData].sort((a, b) => {
         switch (selectedSortingOption) {
@@ -101,6 +107,9 @@ export default function Index() {
       })
     : filteredData;
 
+  useEffect(() => {
+    dispatch(setResultCount(filteredData?.length || 0));
+  }, [filteredData]);
   return (
     <div className={styles.wrapper}>
       <div className={styles.wrapperInner}>
@@ -116,7 +125,17 @@ export default function Index() {
                 {isFetching && <CardSkeleton />}
                 {sortedData &&
                   sortedData.map((item, index: number) => (
-                    <Card {...item} key={index} onClick={(trainId) => setCurentTrainId(trainId)} />
+                    <Card
+                      onNext={() => onNext()}
+                      {...item}
+                      key={index}
+                      onClick={(trainId) => {
+                        setCurentTrainId(trainId);
+                        dispatch(setTrainId(trainId));
+                        var t = sortedData.find((i) => i.trainId === trainId) || null;
+                        dispatch(setTrain(t));
+                      }}
+                    />
                   ))}
               </div>
             </div>

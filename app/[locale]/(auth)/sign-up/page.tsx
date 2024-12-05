@@ -11,16 +11,19 @@ import ErrorMessage from "@/components/ErrorMessage";
 import { Link, useRouter } from "@/i18n/routing";
 import FacebookAuthButton from "../_components/FacebookAuthButton";
 import GoogleAuthButton from "../_components/GoogleAuthButton";
-import axios from "axios";
 import { toast } from "react-toastify";
+import { useSignUpMutation } from "@/services/authApi"; // Import the signup mutation hook
 
 export default function Index() {
   const router = useRouter();
 
+  // Initialize the sign up mutation hook
+  const [signUp, { isLoading }] = useSignUpMutation();
+
   const validationSchema = Yup.object({
-    firstname: Yup.string().required("First name is required"),
-    lastname: Yup.string().required("Last name is required"),
-    email: Yup.string().email("Invalid email address").required("Email is required"),
+    username: Yup.string().required("Username is required"),
+    firstName: Yup.string().required("First name is required"),
+    lastName: Yup.string().required("Last name is required"),
     password: Yup.string().min(8, "Password must be at least 8 characters").required("Password is required"),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), undefined], "Passwords must match")
@@ -30,28 +33,31 @@ export default function Index() {
   // Formik form setup
   const formik = useFormik({
     initialValues: {
-      firstname: "",
-      lastname: "",
-      email: "",
+      username: "",
+      firstName: "",
+      lastName: "",
       password: "",
       confirmPassword: "",
     },
     validationSchema,
     onSubmit: async (values) => {
       const userData = {
-        username: `${values.firstname} ${values.lastname}`,
-        email: values.email,
+        username: values.username,
         password: values.password,
+        confirmPassword: values.confirmPassword,
+        firstName: values.firstName,
+        lastName: values.lastName,
       };
 
       try {
-        const response = await axios.post("http://localhost:8080/api/auth/signup", userData);
-
-        if (response.data) {
-          toast.success("Sign Up Successful!", { autoClose: 2000 });
+        const response = await signUp(userData).unwrap(); // Use RTK Query to sign up
+        if (response.code === 1000) {
+          toast.success(response.message, { autoClose: 2000 });
           router.push("/sign-in");
+        } else {
+          toast.error(`Sign Up Failed. ${response.message}`, { autoClose: 2000 });
         }
-      } catch (error) {
+      } catch (err) {
         toast.error("Sign Up Failed. Please try again.", { autoClose: 2000 });
       }
     },
@@ -81,35 +87,36 @@ export default function Index() {
           ) : (
             <form onSubmit={formik.handleSubmit} className={styles.form}>
               <FloatingLabelInput
-                id="firstname"
-                label="First Name"
-                value={formik.values.firstname}
+                id="username"
+                label="Username"
+                value={formik.values.username}
                 onChange={formik.handleChange}
                 className="my-4"
-                error={formik.touched.firstname && formik.errors.firstname}
+                error={formik.touched.username && formik.errors.username}
               />
-              {formik.touched.firstname && formik.errors.firstname && (
-                <ErrorMessage message={formik.errors.firstname} />
-              )}
-              <FloatingLabelInput
-                id="lastname"
-                label="Last Name"
-                value={formik.values.lastname}
-                onChange={formik.handleChange}
-                className="my-4"
-                error={formik.touched.lastname && formik.errors.lastname}
-              />
-              {formik.touched.lastname && formik.errors.lastname && <ErrorMessage message={formik.errors.lastname} />}
+              {formik.touched.username && formik.errors.username && <ErrorMessage message={formik.errors.username} />}
 
               <FloatingLabelInput
-                id="email"
-                label="Email Address"
-                value={formik.values.email}
+                id="firstName"
+                label="First Name"
+                value={formik.values.firstName}
                 onChange={formik.handleChange}
                 className="my-4"
-                error={formik.touched.email && formik.errors.email}
+                error={formik.touched.firstName && formik.errors.firstName}
               />
-              {formik.touched.email && formik.errors.email && <ErrorMessage message={formik.errors.email} />}
+              {formik.touched.firstName && formik.errors.firstName && (
+                <ErrorMessage message={formik.errors.firstName} />
+              )}
+
+              <FloatingLabelInput
+                id="lastName"
+                label="Last Name"
+                value={formik.values.lastName}
+                onChange={formik.handleChange}
+                className="my-4"
+                error={formik.touched.lastName && formik.errors.lastName}
+              />
+              {formik.touched.lastName && formik.errors.lastName && <ErrorMessage message={formik.errors.lastName} />}
 
               <PasswordInput
                 id="password"
@@ -132,7 +139,7 @@ export default function Index() {
               {formik.touched.confirmPassword && formik.errors.confirmPassword && (
                 <ErrorMessage message={formik.errors.confirmPassword} />
               )}
-              <ButtonAccount type="submit" label="Sign Up with Email" className="mt-4" />
+              <ButtonAccount type="submit" label="Sign Up with Email" className="mt-4" disabled={isLoading} />
             </form>
           )}
 

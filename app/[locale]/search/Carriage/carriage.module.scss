@@ -1,0 +1,52 @@
+.carriage {
+  // padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // width: 100px; /* Điều chỉnh độ rộng cho mỗi toa tàu */
+  height: 60px; /* Điều chỉnh chiều cao của mỗi toa tàu */
+}
+
+.head {
+  border-radius: 0% 100% 20% 80% / 99% 76% 24% 1%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px; /* Điều chỉnh độ rộng cho mỗi toa tàu */
+  height: 60px; /* Điều chỉnh chiều cao của mỗi toa tàu */
+}
+
+.infoContainer {
+  text-align: center;
+}
+
+.carriageNumber {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.carriageType {
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+.seatCount {
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+/* Màu sắc cho các loại toa */
+.bg-blue-200 {
+  background-color: #bfdbfe;
+}
+
+.bg-yellow-200 {
+  background-color: #fef08a;
+}
+
+.bg-green-200 {
+  background-color: #bbf7d0;
+}

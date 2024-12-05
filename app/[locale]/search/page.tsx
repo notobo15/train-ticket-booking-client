@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation"; // Import useRouter để điều hướng
 import { useSearchParams } from "next/navigation"; // Import useSearchParams để lấy query
 import styles from "./search.module.scss";
 import SearchForm from "@/components/SearchForm";
@@ -27,6 +26,9 @@ import { formatDateToYMD } from "@/utils/formatDate";
 import TabFilterSearch from "@/components/TabFilterSearch";
 import FilterModal from "@/components/ResultTrains/SeatWrapper/FilterModal";
 import { useTranslations } from "next-intl";
+import { setIsLoading } from "@/redux/slices/rootSlice";
+import { useRouter } from "@/i18n/routing";
+import { number } from "yup";
 
 type StepProps = {
   onNext: () => void;
@@ -53,6 +55,8 @@ export default function BookingPage() {
         setCurrentStep(step);
       }
     }
+    if (Number(stepParam) == 4) router.push(`/checkout`);
+    dispatch(setIsLoading(false));
   }, [searchParams]);
 
   // Effect để khởi tạo các tham số tìm kiếm
@@ -80,8 +84,7 @@ export default function BookingPage() {
       // Tạo một đối tượng mới để giữ nguyên các tham số cũ và thêm `view`
       const params = new URLSearchParams(searchParams.toString());
       params.set("view", nextStep.toString());
-
-      router.push(`?${params.toString()}`); // Cập nhật URL với query mới
+      if (nextStep === 5) router.push(`/checkout`); // Cập nhật URL với query mới
     }
   };
 
@@ -104,7 +107,7 @@ export default function BookingPage() {
     setCurrentStep(1);
     const params = new URLSearchParams(searchParams.toString());
     params.set("view", "1");
-    router.push(`?${params.toString()}`);
+    router.push(`/checkout`);
   };
 
   const isOpenModalFilter = useAppSelector(selectSearchState).isOpenModalFilter;
@@ -145,7 +148,7 @@ function Step1({ onNext, isReturnStep = false, isOutbound, onCallBack }: StepPro
       <TabDay date={searchState.date ? formatDateToYMD(new Date(searchState.date)) : null} />
       {searchState.returnDate && <TabRouteTrip isOutbound={isOutbound} onCallBack={onCallBack} />}
       <TabFilterSearch />
-      <ResultTrains />
+      <ResultTrains onNext={() => onNext} />
       <button onClick={onNext} className="btn-primary">
         {isReturnStep ? "Next to Review" : "Next"}
       </button>

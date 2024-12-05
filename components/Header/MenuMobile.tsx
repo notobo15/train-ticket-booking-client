@@ -240,17 +240,7 @@ export default function MenuMobile() {
                   aria-controls="accordion-train-route"
                   type="button"
                   data-hz-collapse-target="#accordion-train-route"
-                >
-                  <svg
-                    fill="none"
-                    height={24}
-                    width={24}
-                    aria-hidden="true"
-                    className="transition group-aria-expanded/button:rotate-180"
-                  >
-                    <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Caret/down/md.svg#root"></use>
-                  </svg>
-                </button>
+                ></button>
               </div>
               <div
                 aria-hidden="true"
@@ -388,11 +378,7 @@ export default function MenuMobile() {
             <div className="pe-200 ps-100">
               <div className="flex items-center justify-between gap-100 p-200 pe-050">
                 <span className="max-w-full font-weight-bold text-size-100 leading-125 inline-flex items-center gap-x-025 w-full">
-                  <span className="shrink-0">
-                    <svg fill="none" height={24} width={24} aria-hidden="true" className="text-icon-color-primary">
-                      <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Map/md.svg#root"></use>
-                    </svg>
-                  </span>
+                  <span className="shrink-0"></span>
                   <span className="">
                     <a
                       className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default hover:underline"
@@ -408,17 +394,7 @@ export default function MenuMobile() {
                   aria-controls="accordion-point-of-interest-route"
                   type="button"
                   data-hz-collapse-target="#accordion-point-of-interest-route"
-                >
-                  <svg
-                    fill="none"
-                    height={24}
-                    width={24}
-                    aria-hidden="true"
-                    className="transition group-aria-expanded/button:rotate-180"
-                  >
-                    <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Caret/down/md.svg#root"></use>
-                  </svg>
-                </button>
+                ></button>
               </div>
               <div
                 aria-hidden="true"

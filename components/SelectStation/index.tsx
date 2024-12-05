@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import SelectStation from "./SelectStation";
 import { FaExchangeAlt } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { selectSearchState, setDestination, setOrigin } from "@/redux/features/searchSlice";
+import { selectSearchState, setArrivalStationId, setDestination, setOrigin } from "@/redux/features/searchSlice";
 import { useGetProvincesWithStationsQuery, useLazyGetProvincesWithStationsQuery } from "@/services/provinceApi";
 import { formatOptions } from "@/utils/formatOptions";
 import { useTranslations } from "next-intl";
@@ -35,14 +35,14 @@ export default function Index({ errors }: { errors: { origin: boolean; destinati
 
   useEffect(() => {
     if (origin || destination) {
-      fetchProvincesWithStations(1);
+      fetchProvincesWithStations();
     }
   }, [origin, destination]);
 
   const handleFetchData = () => {
-    fetchProvincesWithStations(1);
+    fetchProvincesWithStations();
   };
-  const options = data ? formatOptions(data) : [];
+  const options = data ? formatOptions(data.result) : [];
   return (
     <>
       <div
@@ -56,7 +56,9 @@ export default function Index({ errors }: { errors: { origin: boolean; destinati
           isFetching={isFetching}
           options={options}
           value={origin}
-          onSelect={(value) => dispatch(setOrigin(value))}
+          onSelect={(value) => {
+            dispatch(setOrigin(value));
+          }}
           error={errors.origin}
         />
       </div>

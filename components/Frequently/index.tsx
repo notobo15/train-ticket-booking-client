@@ -29,17 +29,7 @@ export default function Index() {
                   aria-controls="how_to_get:0"
                   aria-expanded="false"
                   type="button"
-                >
-                  <svg
-                    fill="none"
-                    height={24}
-                    width={24}
-                    aria-hidden="true"
-                    className="transition group-aria-expanded/button:rotate-180"
-                  >
-                    <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Caret/down/md.svg#root" />
-                  </svg>
-                </button>
+                ></button>
               </div>
             </div>
             <div
@@ -78,17 +68,7 @@ export default function Index() {
                   aria-controls="duration:1"
                   aria-expanded="false"
                   type="button"
-                >
-                  <svg
-                    fill="none"
-                    height={24}
-                    width={24}
-                    aria-hidden="true"
-                    className="transition group-aria-expanded/button:rotate-180"
-                  >
-                    <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Caret/down/md.svg#root" />
-                  </svg>
-                </button>
+                ></button>
               </div>
             </div>
             <div
@@ -127,17 +107,7 @@ export default function Index() {
                   aria-controls="how_far:2"
                   aria-expanded="false"
                   type="button"
-                >
-                  <svg
-                    fill="none"
-                    height={24}
-                    width={24}
-                    aria-hidden="true"
-                    className="transition group-aria-expanded/button:rotate-180"
-                  >
-                    <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Caret/down/md.svg#root" />
-                  </svg>
-                </button>
+                ></button>
               </div>
             </div>
             <div
@@ -172,17 +142,7 @@ export default function Index() {
                   aria-controls="daily_departures:3"
                   aria-expanded="false"
                   type="button"
-                >
-                  <svg
-                    fill="none"
-                    height={24}
-                    width={24}
-                    aria-hidden="true"
-                    className="transition group-aria-expanded/button:rotate-180"
-                  >
-                    <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Caret/down/md.svg#root" />
-                  </svg>
-                </button>
+                ></button>
               </div>
             </div>
             <div
@@ -222,17 +182,7 @@ export default function Index() {
                   aria-controls="departure_time:4"
                   aria-expanded="false"
                   type="button"
-                >
-                  <svg
-                    fill="none"
-                    height={24}
-                    width={24}
-                    aria-hidden="true"
-                    className="transition group-aria-expanded/button:rotate-180"
-                  >
-                    <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Caret/down/md.svg#root" />
-                  </svg>
-                </button>
+                ></button>
               </div>
             </div>
             <div
@@ -269,17 +219,7 @@ export default function Index() {
                   aria-controls="origin_stations:5"
                   aria-expanded="false"
                   type="button"
-                >
-                  <svg
-                    fill="none"
-                    height={24}
-                    width={24}
-                    aria-hidden="true"
-                    className="transition group-aria-expanded/button:rotate-180"
-                  >
-                    <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Caret/down/md.svg#root" />
-                  </svg>
-                </button>
+                ></button>
               </div>
             </div>
             <div
@@ -318,17 +258,7 @@ export default function Index() {
                   aria-controls="cheapest_vehicle:6"
                   aria-expanded="false"
                   type="button"
-                >
-                  <svg
-                    fill="none"
-                    height={24}
-                    width={24}
-                    aria-hidden="true"
-                    className="transition group-aria-expanded/button:rotate-180"
-                  >
-                    <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Caret/down/md.svg#root" />
-                  </svg>
-                </button>
+                ></button>
               </div>
             </div>
             <div
@@ -366,17 +296,7 @@ export default function Index() {
                   aria-controls="ticket_price:7"
                   aria-expanded="false"
                   type="button"
-                >
-                  <svg
-                    fill="none"
-                    height={24}
-                    width={24}
-                    aria-hidden="true"
-                    className="transition group-aria-expanded/button:rotate-180"
-                  >
-                    <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Caret/down/md.svg#root" />
-                  </svg>
-                </button>
+                ></button>
               </div>
             </div>
             <div

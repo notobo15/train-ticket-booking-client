@@ -5,13 +5,14 @@ import Passager from "@/components/Passager/Passager";
 import { IoSearch } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { selectSearchState } from "@/redux/features/searchSlice";
-import { useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useRouter } from "@/i18n/routing";
+import { setIsLoading } from "@/redux/slices/rootSlice";
 export default function Index({ btnSubmit = "Search" }: { btnSubmit?: string }) {
   const router = useRouter();
   const { origin, destination } = useAppSelector(selectSearchState);
   const [errorStations, setErrorStations] = useState({ origin: false, destination: false });
-
+  const dispatch = useAppDispatch();
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -29,7 +30,6 @@ export default function Index({ btnSubmit = "Search" }: { btnSubmit?: string }) 
       return;
     }
 
-    console.log("queryParams");
     const formData = new FormData(e.target as HTMLFormElement);
     const queryParams = new URLSearchParams();
 
@@ -38,6 +38,8 @@ export default function Index({ btnSubmit = "Search" }: { btnSubmit?: string }) 
     });
 
     router.push(`/search?${queryParams.toString()}`);
+
+    dispatch(setIsLoading(true));
   };
   useEffect(() => {
     if (origin) {

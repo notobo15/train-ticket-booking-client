@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import NextTopLoader from "nextjs-toploader";
 import Script from "next/script";
+// import PersistGateWrapper from "@/redux/PersistGateWrapper";
 // import { notFound } from 'next/navigation';
 // const codecPro = localFont({
 //   src: "./fonts/CodecPro-Regular.ttf",
@@ -40,14 +41,16 @@ export default async function RootLayout({ children, params }: Props) {
   const messages = await getMessages({ locale });
   return (
     <html lang={locale} suppressHydrationWarning={true}>
-      <body>
+      <body suppressHydrationWarning={true}>
         <NextTopLoader showSpinner={false} />
         <Script src="https://accounts.google.com/gsi/client" strategy="beforeInteractive" />
         <SessionWrapper>
           <NextIntlClientProvider messages={messages}>
             <StoreProvider>
+              {/* <PersistGateWrapper> */}
               <ToastContainer />
               {children}
+              {/* </PersistGateWrapper> */}
             </StoreProvider>
           </NextIntlClientProvider>
         </SessionWrapper>

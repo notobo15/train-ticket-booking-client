@@ -9,12 +9,14 @@ export default function SeatWrapper({
   carriageNumber,
   carriageClass,
   seats,
+  onNext,
 }: {
   carriageType?: number;
   prices: Price[];
   carriageNumber?: string;
   carriageClass?: string;
   seats?: Seat[];
+  onNext: any;
 }) {
   const seatList32 = [
     { id: 1, number: 1, type: "AnLT1", status: "available" },
@@ -181,7 +183,13 @@ export default function SeatWrapper({
       price: prices.find((price) => price.seatType === seat.seatType)?.totalPrice || 0,
     })) || [];
   return (
-    <SeatListWrapper carriageClass={carriageClass} carriageNumber={carriageNumber}>
+    <SeatListWrapper
+      onNext={() => {
+        onNext();
+      }}
+      carriageClass={carriageClass}
+      carriageNumber={carriageNumber}
+    >
       {carriageType === 1 && <HardSeatCarriage seatList={results} />}
       {carriageType === 2 && <SleepingCarriage6 seatList={results} />}
       {carriageType === 3 && <SleepingCarriage4 seatList={results} />}

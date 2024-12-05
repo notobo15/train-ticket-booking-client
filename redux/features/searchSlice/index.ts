@@ -3,15 +3,21 @@ import { formatDateToYMD } from "@/utils/formatDate";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface ISearchState {
   isOpenModalFilter: boolean;
-
+  train: Train | null;
   date: string | null;
   returnDate: string | null;
   destination: string;
+  trainId: number;
+  departureStationId: number;
+  arrivalStationId: number;
+  departureDate: string;
   origin: string;
   carriageId: number;
   passagers: IPassager[];
   carriageType: number;
   seats: number[];
+  currentSeats: Seat[];
+  seatId: number;
   filters: {
     nighttime: boolean;
     early: boolean;
@@ -20,15 +26,25 @@ export interface ISearchState {
   };
   sortingOptions: SortingOption[];
   resultCount: number;
+  carriage: Carriage | null | undefined;
+  price: number;
 }
 
 const initialState: ISearchState = {
   isOpenModalFilter: false,
+  price: 0,
+  currentSeats: [],
   date: formatDateToYMD(new Date()),
   returnDate: null,
   destination: "",
+  train: null,
   origin: "",
   carriageId: 0,
+  trainId: 0,
+  carriage: null,
+  departureStationId: 0,
+  arrivalStationId: 0,
+  departureDate: "string",
   passagers: [
     {
       id: 1,
@@ -57,6 +73,7 @@ const initialState: ISearchState = {
   ],
   carriageType: 0,
   seats: [],
+  seatId: 0,
   filters: {
     nighttime: false,
     early: false,
@@ -111,13 +128,8 @@ export const counterSlice = createSlice({
     setCarriageType: (state, action: PayloadAction<number>) => {
       state.carriageType = action.payload;
     },
-    addSeat: (state, action: PayloadAction<number>) => {
-      const seatId = action.payload;
-      if (state.seats.includes(seatId)) {
-        state.seats = state.seats.filter((id) => id !== seatId);
-      } else {
-        state.seats = [...state.seats, seatId];
-      }
+    setSeatId: (state, action: PayloadAction<number>) => {
+      state.seatId = action.payload;
     },
     clearSeat: (state) => {
       state.seats = [];
@@ -145,6 +157,42 @@ export const counterSlice = createSlice({
     setIsOpenModalFilter(state, action: PayloadAction<boolean>) {
       state.isOpenModalFilter = action.payload;
     },
+    setTrainId(state, action: PayloadAction<number>) {
+      state.trainId = action.payload;
+    },
+    setArrivalStationId(state, action: PayloadAction<number>) {
+      state.arrivalStationId = action.payload;
+    },
+    setDepartureStationId(state, action: PayloadAction<number>) {
+      state.departureStationId = action.payload;
+    },
+    setDepartureDate(state, action: PayloadAction<string>) {
+      state.departureDate = action.payload;
+    },
+    addSeat: (state, action: PayloadAction<Seat>) => {
+      state.currentSeats.push(action.payload);
+    },
+    setTrain: (state, action: PayloadAction<Train | null>) => {
+      state.train = action.payload;
+    },
+    // Xóa ghế theo seatId
+    removeSeatById: (state, action: PayloadAction<number>) => {
+      state.currentSeats = state.currentSeats.filter((seat) => seat.seatId !== action.payload);
+    },
+
+    // Cập nhật trạng thái của một ghế
+    updateSeatStatus: (state, action: PayloadAction<{ seatId: number; status: any }>) => {
+      const seat = state.currentSeats.find((seat) => seat.seatId === action.payload.seatId);
+      if (seat) {
+        seat.status = action.payload.status;
+      }
+    },
+    setCarriage: (state, action: PayloadAction<Carriage | null | undefined>) => {
+      state.carriage = action.payload;
+    },
+    setPrice: (state, action: PayloadAction<number>) => {
+      state.price = action.payload;
+    },
   },
 });
 
@@ -160,13 +208,23 @@ export const {
   setCarriageId,
   setPassegers,
   setCarriageType,
-  addSeat,
+  setSeatId,
   clearSeat,
   setFilters,
   updateFilter,
   setSortingOption,
   setResultCount,
   setIsOpenModalFilter,
+  setArrivalStationId,
+  setDepartureDate,
+  setDepartureStationId,
+  setTrainId,
+  addSeat,
+  removeSeatById,
+  updateSeatStatus,
+  setTrain,
+  setCarriage,
+  setPrice,
 } = counterSlice.actions;
 
 export default counterSlice.reducer;

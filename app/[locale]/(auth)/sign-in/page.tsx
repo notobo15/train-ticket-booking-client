@@ -3,7 +3,6 @@ import { useState, useEffect, startTransition, useRef } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import styles from "./signin.module.scss";
-import { signIn, useSession } from "next-auth/react";
 import FloatingLabelInput from "@/components/FloatingLabelInput";
 import PasswordInput from "@/components/PasswordInput";
 import DialogForm from "@/components/DialogForm";
@@ -18,13 +17,18 @@ import { useAppDispatch } from "@/redux/hooks";
 import { setIsLoading } from "@/redux/slices/rootSlice";
 import { useGoogleOneTapLogin } from "@react-oauth/google";
 import axios from "axios";
+import { useLoginMutation } from "@/services/authApi"; // Import the login mutation
+import { setToken, setUser } from "@/redux/slices/authSlice";
 
+import { getCookie, getCookies, setCookie, deleteCookie, hasCookie } from "cookies-next";
 export default function Index() {
   const [isShowFormSignIn, setIsShowFormSignIn] = useState(false);
   const router = useRouter();
   const usernameRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
-  const { data: session, status } = useSession();
+
+  // Use login mutation
+  const [login, { isLoading, isError, error, data }] = useLoginMutation();
 
   const validationSchema = Yup.object({
     username: Yup.string().required("Username is required"),
@@ -41,14 +45,24 @@ export default function Index() {
     onSubmit: async (values) => {
       dispatch(setIsLoading(true));
       startTransition(() => {
-        signIn("credentials", {
+        login({
           username: values.username,
           password: values.password,
-          redirect: false,
         })
-          .then((response) => {
-            if (response?.ok) {
+          .unwrap()
+          .then(async (response) => {
+            if (response.result.authenticated) {
               toast.success("Signed In Successfully!", { autoClose: 1000 });
+              localStorage.setItem("jwtToken", response.result.token); // Save token to local storage
+              await setCookie("jwtToken", response.result.token);
+              dispatch(setToken(response.result.token));
+              dispatch(
+                setUser({
+                  username: values.username,
+                })
+              );
+              // Redirect to home page
+              router.push("/home");
             } else {
               formik.resetForm();
               if (usernameRef.current) {
@@ -66,40 +80,35 @@ export default function Index() {
     },
   });
 
-  useEffect(() => {
-    if (status === "authenticated") {
-      router.push("/home");
-    }
-  }, [status, router]);
+  // useEffect(() => {
+  //   if (data) {
+  //     // Automatically redirect if login successful
+  //     router.push("/home");
+  //   }
+  // }, [data, router]);
 
-  const handleGoogleLogin = useGoogleOneTapLogin({
-    onSuccess: async (credentialResponse) => {
-      try {
-        const res = await axios.post("http://localhost:8080/api/auth/login-with-google", {
-          token: credentialResponse.credential, // Google token from the response
-        });
-        localStorage.setItem("jwtToken", res.data.token); // Save JWT to local storage
-        // Handle successful login here, e.g., redirect to home page
-        console.log(res);
+  // const handleGoogleLogin = useGoogleOneTapLogin({
+  //   onSuccess: async (credentialResponse) => {
+  //     try {
+  //       const res = await axios.post("http://localhost:8080/api/auth/login-with-google", {
+  //         token: credentialResponse.credential, // Google token from the response
+  //       });
+  //       localStorage.setItem("jwtToken", res.data.token); // Save JWT to local storage
+  //       toast.success("Signed in with Google successfully!", { autoClose: 1000 });
+  //       router.push("/home"); // Redirect after successful login
+  //     } catch (error) {
+  //       console.error("Google login failed:", error);
+  //       toast.error("An error occurred while logging in with Google.");
+  //     }
+  //   },
+  //   onError: () => {
+  //     toast.error("Google login failed.");
+  //   },
+  // });
 
-        if (res) {
-          toast.success("Signed in with Google successfully!", { autoClose: 1000 });
-        } else {
-          toast.error("Failed to sign in with Google.");
-        }
-      } catch (error) {
-        console.error("Google login failed:", error);
-        toast.error("An error occurred while logging in with Google.");
-      }
-    },
-    onError: () => {
-      toast.error("Google login failed.");
-    },
-  });
   return (
     <>
       <DialogForm>
-        {/* <GoogleOneTapLogin /> */}
         <div className={styles.contentInner}>
           <div className={styles.contentHeading}>
             <h2>Welcome back!</h2>

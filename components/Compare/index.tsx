@@ -163,17 +163,7 @@ export default function Index() {
                   aria-controls="featured-operators-4148-accordion"
                   aria-expanded="false"
                   type="button"
-                >
-                  <svg
-                    fill="none"
-                    height={24}
-                    width={24}
-                    aria-hidden="true"
-                    className="transition group-aria-expanded/button:rotate-180"
-                  >
-                    <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Caret/down/md.svg#root" />
-                  </svg>
-                </button>
+                ></button>
               </div>
             </div>
             <div
@@ -472,17 +462,7 @@ export default function Index() {
                   aria-controls="featured-operators-580-accordion"
                   aria-expanded="false"
                   type="button"
-                >
-                  <svg
-                    fill="none"
-                    height={24}
-                    width={24}
-                    aria-hidden="true"
-                    className="transition group-aria-expanded/button:rotate-180"
-                  >
-                    <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Caret/down/md.svg#root" />
-                  </svg>
-                </button>
+                ></button>
               </div>
             </div>
             <div
