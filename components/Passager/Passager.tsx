@@ -6,7 +6,7 @@ import styles from "./Passager.module.scss";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import clsx from "clsx";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { selectSearchState, setPassegers } from "@/redux/features/searchSlice";
+import { selectSearchState, setPassegers } from "@/redux/slices/searchSlice";
 import { useTranslations } from "next-intl";
 
 export default function Index() {

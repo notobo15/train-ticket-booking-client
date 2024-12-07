@@ -3,16 +3,17 @@ import DatePicker from "@/components/DatePicker";
 import SelectStation from "@/components/SelectStation";
 import Passager from "@/components/Passager/Passager";
 import { IoSearch } from "react-icons/io5";
-import { useEffect, useState } from "react";
-import { selectSearchState } from "@/redux/features/searchSlice";
+import { useEffect, useState, useTransition } from "react";
+import { selectSearchState } from "@/redux/slices/searchSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useRouter } from "@/i18n/routing";
-import { setIsLoading } from "@/redux/slices/rootSlice";
+import { setIsLoading } from "@/redux/slices/homeSlice";
 export default function Index({ btnSubmit = "Search" }: { btnSubmit?: string }) {
   const router = useRouter();
   const { origin, destination } = useAppSelector(selectSearchState);
   const [errorStations, setErrorStations] = useState({ origin: false, destination: false });
   const dispatch = useAppDispatch();
+  const [isPending, startTransition] = useTransition();
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -36,10 +37,12 @@ export default function Index({ btnSubmit = "Search" }: { btnSubmit?: string }) 
     formData.forEach((value, key) => {
       queryParams.append(key, value.toString());
     });
+    startTransition(() => {
+      router.replace(`/search?${queryParams.toString()}`);
+    });
+    // router.push(`/search?${queryParams.toString()}`);
 
-    router.push(`/search?${queryParams.toString()}`);
-
-    dispatch(setIsLoading(true));
+    // dispatch(setIsLoading(true));
   };
   useEffect(() => {
     if (origin) {

@@ -222,6 +222,86 @@
   text-transform: none;
   color: hsl(206, 32%, 39%);
 }
+
+/* Payment */
+.payment {
+  align-items: center;
+  color: #00112c;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 1em;
+  font-weight: 400;
+  justify-content: space-between;
+  padding: 12px 16px 12px 44px;
+  position: relative;
+  transition: background 0.1s ease-out;
+  width: 100%;
+}
+.paymentButton {
+  align-items: center;
+  background: none;
+  border: none;
+  color: #00112c;
+  cursor: pointer;
+  display: flex;
+  flex-shrink: 0;
+  font-size: 1em;
+  font-weight: 400;
+  margin-right: 16px;
+  max-width: 100%;
+  padding: 4px;
+  gap: 10px;
+}
+.checkbox {
+  border: 1px solid #b9c4c9;
+  border-radius: 50%;
+  height: 16px;
+  left: 16px;
+  position: absolute;
+  transition:
+    border-color 0.2s ease-out,
+    box-shadow 0.2s ease-out;
+  width: 16px;
+  background-color: #fff;
+  height: 20px;
+  width: 20px;
+
+  &::after {
+    background-image: url("data:image/svg+xml;charset=utf8,<svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M13 5l-5.79 5.782a.745.745 0 0 1-1.052 0L3 7.628' stroke='%23fff' stroke-width='2' stroke-linejoin='round'></path></svg>");
+    background-position: 50%;
+    background-repeat: no-repeat;
+    height: 16px;
+    width: 16px;
+    background-color: transparent;
+    top: 2px;
+    transform: scale(0);
+  }
+}
+.checkboxSelected {
+  background-color: #0b95f5;
+  border: none;
+  box-shadow: none;
+}
+.paymentName {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 500;
+    color: #20415a;
+  }
+}
+.policy {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
 @media (min-width: 360px) {
   .main {
     padding-left: 24px;
@@ -252,6 +332,18 @@
   .rightContainer {
     padding: 24px 28px;
   }
+  .policy {
+    margin-left: 32px;
+    margin-right: 32px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+}
+.terms {
+  background-color: hsl(200, 28%, 96%);
+  padding: 16px 28px;
+  text-align: center;
+  border-radius: 0 0 0.75rem 0.75rem;
 }
 @media (min-width: 600px) {
   .itemHeading {

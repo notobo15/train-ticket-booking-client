@@ -1,7 +1,7 @@
 import React from "react";
 import { MdErrorOutline } from "react-icons/md";
 import styles from "./ErrrorMessage.module.scss";
-export default function index({ message }: { message: string }) {
+export default function index({ message }: { message: string | undefined }) {
   return (
     <div className={styles.error}>
       <div className={styles.errorWrapper}>

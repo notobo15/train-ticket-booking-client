@@ -12,10 +12,13 @@ import About from "@/components/About";
 import TopTravel from "@/components/TopTravel";
 import PopularTrain from "@/components/PopularTrain";
 import { useTranslations } from "next-intl";
+import useSeatsSocket from "@/hooks/useSeatsSocket";
 // import { useSession } from "next-auth/react";
 export default function Index() {
   // const { data } = useSession();
   // console.log("data", data);
+  const { seats, toggleSeatStatus } = useSeatsSocket();
+  console.log("seats", seats);
   const t = useTranslations("SearchForm");
   return (
     <>

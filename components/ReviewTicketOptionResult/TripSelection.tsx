@@ -6,9 +6,19 @@ import { MdOutlineAccessTime } from "react-icons/md";
 import Link from "next/link";
 import clsx from "clsx";
 import { useAppSelector } from "@/redux/hooks";
-import { selectSearchState } from "@/redux/features/searchSlice";
+import { selectSearchState } from "@/redux/slices/searchSlice";
 
-export default function TripSelection({ className, isShowHeader }: { className?: string; isShowHeader?: boolean }) {
+export default function TripSelection({
+  className,
+  isShowHeader,
+  title,
+  date,
+}: {
+  className?: string;
+  isShowHeader?: boolean;
+  title?: string;
+  date?: string;
+}) {
   const { train } = useAppSelector(selectSearchState);
   return (
     <>
@@ -16,9 +26,9 @@ export default function TripSelection({ className, isShowHeader }: { className?:
         <div className="mb-200 flex items-center justify-between flex-row-reverse md:mb-300">
           <div className="inline-flex max-w-full items-center gap-x-025 rounded-pill ps-075 pe-075 py-050 backdrop-blur-lg bg-color-scheme-literal-blue-100 text-color-scheme-literal-blue-800">
             <span className="font-weight-bold ps-050 pe-050 py-000 text-size-75 leading-100">
-              <span className="max-w-full font-weight-bold text-size-75 leading-100 inline-block">Outbound</span>
+              <span className="max-w-full font-weight-bold text-size-75 leading-100 inline-block">{title}</span>
               <span className="t-x5afcv-DsLabel-root-DsLabel-sizeLg-dash">–</span>
-              <span className="text-nowrap">Fri, Nov 1</span>
+              <span className="text-nowrap">{date}</span>
             </span>
           </div>
         </div>

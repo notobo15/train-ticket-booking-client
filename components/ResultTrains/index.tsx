@@ -17,7 +17,7 @@ import {
   setResultCount,
   setTrain,
   setTrainId,
-} from "@/redux/features/searchSlice";
+} from "@/redux/slices/searchSlice";
 import { parseDuration } from "@/utils/formatDate";
 import FilterSkeleton from "./FilterSkeleton";
 import CardSkeleton from "./CardSkeleton";

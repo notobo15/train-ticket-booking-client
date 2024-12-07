@@ -5,7 +5,7 @@ import styles from "./SleepingCarriage4.module.scss";
 import Box from "../Box";
 import SeatListWrapper from "../SeatListWrapper";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { selectSearchState, setSeatId } from "@/redux/features/searchSlice";
+import { selectSearchState, setSeatId } from "@/redux/slices/searchSlice";
 import { useCreateSeatHoldMutation, useDeleteSeatHoldMutation } from "@/services/seatApi";
 import { RootState } from "@/redux/store";
 import { toast } from "react-toastify";

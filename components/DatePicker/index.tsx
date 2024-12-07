@@ -2,7 +2,7 @@
 import React from "react";
 import DatePickerInput from "./DatePickerInput";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { selectSearchState, setDate, setReturnDate } from "@/redux/features/searchSlice";
+import { selectSearchState, setDate, setReturnDate } from "@/redux/slices/searchSlice";
 import { formatDateToYMD } from "@/utils/formatDate";
 import { useTranslations } from "next-intl";
 

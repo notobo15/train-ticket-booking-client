@@ -1,44 +1,60 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import styles from "./checkout.module.scss";
 import Header from "@/components/Header";
-import { useFormik } from "formik";
-import * as Yup from "yup";
 import { FaArrowRight } from "react-icons/fa";
 import FloatingLabelSelect from "@/components/FloatingLabelSelect";
 import { IoIosArrowDown } from "react-icons/io";
 import ErrorMessage from "@/components/ErrorMessage";
 import FloatingLabelInput from "@/components/FloatingLabelInput";
 import TripSelection from "@/components/ReviewTicketOptionResult/TripSelection";
-import { FaArrowRightLong } from "react-icons/fa6";
+import { FaArrowRightLong, FaRegCircleCheck } from "react-icons/fa6";
 import { useAppSelector } from "@/redux/hooks";
-import { selectSearchState } from "@/redux/features/searchSlice";
+import { selectSearchState } from "@/redux/slices/searchSlice";
 import { formatCurrencyVND } from "@/utils/formatDate";
+import { Link } from "@/i18n/routing";
+import { GoCircle } from "react-icons/go";
+// Zod schema for validation
+const passengerSchema = z.object({
+  fullname: z.string().min(1, "Full name is required"),
+  identityNumber: z
+    .string()
+    .length(10, "Identity Number must be exactly 10 digits")
+    .regex(/^\d+$/, "Identity Number must contain only digits")
+    .min(1, "Identity Number is required"),
+  seatNumber: z.string().min(1, "Seat Number is required"),
+  passengerType: z.string().min(1, "Passenger Type is required"),
+});
 
-const validationSchema = Yup.object({
-  email: Yup.string().required("Email is required"),
-  phoneNumber: Yup.string()
-    .required("Phone Number is required")
-    .matches(
+const formSchema = z.object({
+  email: z.string().email("Invalid email address").min(1, "Email is required"),
+  phoneNumber: z
+    .string()
+    .min(1, "Phone Number is required")
+    .regex(
       /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
       "Phone number is not valid"
     ),
-  passengers: Yup.array().of(
-    Yup.object({
-      fullname: Yup.string().required("Fullname is required"),
-      seatNumber: Yup.string().required("Seat Number is required"),
-      passengerType: Yup.string().required("Passenger Type is required"),
-      identityNumber: Yup.string()
-        .matches(/^\d{10}$/, "Identity Number must be exactly 10 digits")
-        .required("Identity Number is required"),
-    })
-  ),
+  passengers: z.array(passengerSchema),
 });
 
+// Type for the form values
+type FormValues = z.infer<typeof formSchema>;
+
 const Index: React.FC = () => {
-  const { train, passagers, price } = useAppSelector(selectSearchState);
-  const formik = useFormik({
-    initialValues: {
+  const { train, passagers, price, returnDate, origin, destination } = useAppSelector(selectSearchState);
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, touchedFields },
+    watch,
+  } = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
       email: "",
       phoneNumber: "",
       passengers: [
@@ -48,13 +64,52 @@ const Index: React.FC = () => {
           seatNumber: "",
           passengerType: "",
         },
+        {
+          fullname: "",
+          identityNumber: "",
+          seatNumber: "",
+          passengerType: "",
+        },
+        {
+          fullname: "",
+          identityNumber: "",
+          seatNumber: "",
+          passengerType: "",
+        },
       ],
     },
-    validationSchema,
-    onSubmit: (values) => {
-      console.log("Form values:", values);
-    },
   });
+
+  const passengerOptions = passagers.map((item) => {
+    return {
+      label: item.title,
+      value: item.id,
+    };
+  });
+
+  const seatOptions = [
+    { label: "Không Chọn", value: "" },
+    { label: "A1", value: "1", price: 1000000 },
+    { label: "A2", value: "2", price: 1000000 },
+    { label: "A3", value: "3", price: 1000000 },
+  ];
+
+  // Watch the passengers field to get the selected seats
+  const selectedSeats = watch("passengers").map((passenger) => passenger.seatNumber);
+  const passengerOverviews = watch("passengers").map((passenger, index) => ({
+    price: seatOptions.find((s) => s.value === passenger.seatNumber)?.price || 0,
+    name:
+      passenger.fullname ||
+      `Passenger ${index + 1}: ${passagers.find((p) => p.id === Number(passenger.passengerType))?.title}`,
+    type: passenger.passengerType,
+  }));
+
+  const subSotal = formatCurrencyVND(passengerOverviews.reduce((acc, p) => acc + (p.price || 0), 0));
+  const total = formatCurrencyVND(passengerOverviews.reduce((acc, p) => acc + (p.price || 0), 0));
+
+  const onSubmit = (data: FormValues) => {
+    console.log("Form values:", data);
+  };
 
   return (
     <div>
@@ -70,93 +125,98 @@ const Index: React.FC = () => {
           <div>
             <div className={styles.content}>
               <div className={styles.sidebar}>
-                <form onSubmit={formik.handleSubmit}>
-                  {formik.values.passengers.map((_, index: any) => (
-                    <div key={index} className={styles.sidebarWrapper}>
-                      <div className={styles.sidebarItem}>
-                        <div className={styles.itemHeading}>
-                          <div className={styles.itemHeadingWrapper}>
-                            <span>Passenger</span>
-                            <span>{formik.values.passengers[index].passengerType || "Adult"}</span>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  {control._formValues.passengers?.map((_: any, index: number) => {
+                    const occupiedSeats = selectedSeats.filter((seat, seatIndex) => seat && seatIndex !== index);
+                    const availableSeatOptions = seatOptions.filter((option) => !occupiedSeats.includes(option.value));
+
+                    return (
+                      <div key={index} className={styles.sidebarWrapper}>
+                        <div className={styles.sidebarItem}>
+                          <div className={styles.itemHeading}>
+                            <div className={styles.itemHeadingWrapper}>
+                              <span>Passenger {index + 1}</span>
+                            </div>
+                          </div>
+                          <hr className={styles.hr} />
+                          <div className={styles.itemContent}>
+                            <Controller
+                              name={`passengers.${index}.fullname`}
+                              control={control}
+                              render={({ field }) => (
+                                <FloatingLabelInput
+                                  label="Full name"
+                                  value={field.value}
+                                  onChange={field.onChange}
+                                  className="my-4"
+                                  error={errors.passengers?.[index]?.fullname}
+                                />
+                              )}
+                            />
+                            {errors.passengers?.[index]?.fullname && (
+                              <ErrorMessage message={errors.passengers[index]?.fullname?.message} />
+                            )}
+
+                            <Controller
+                              name={`passengers.${index}.identityNumber`}
+                              control={control}
+                              render={({ field }) => (
+                                <FloatingLabelInput
+                                  label="Identity Number"
+                                  value={field.value}
+                                  onChange={field.onChange}
+                                  className="my-4"
+                                  error={errors.passengers?.[index]?.identityNumber}
+                                />
+                              )}
+                            />
+                            {errors.passengers?.[index]?.identityNumber && (
+                              <ErrorMessage message={errors.passengers[index]?.identityNumber?.message} />
+                            )}
+
+                            <Controller
+                              name={`passengers.${index}.seatNumber`}
+                              control={control}
+                              render={({ field }) => (
+                                <FloatingLabelSelect
+                                  label="Select a Seat"
+                                  value={field.value}
+                                  onChange={field.onChange}
+                                  options={availableSeatOptions}
+                                  className="my-4"
+                                  error={errors.passengers?.[index]?.seatNumber}
+                                  icon={<IoIosArrowDown size={24} />}
+                                />
+                              )}
+                            />
+                            {errors.passengers?.[index]?.seatNumber && (
+                              <ErrorMessage message={errors.passengers[index]?.seatNumber?.message} />
+                            )}
+
+                            <Controller
+                              name={`passengers.${index}.passengerType`}
+                              control={control}
+                              render={({ field }) => (
+                                <FloatingLabelSelect
+                                  label="Select your passenger type"
+                                  value={field.value}
+                                  onChange={field.onChange}
+                                  options={passengerOptions}
+                                  error={errors.passengers?.[index]?.passengerType}
+                                  icon={<IoIosArrowDown size={24} />}
+                                />
+                              )}
+                            />
+                            {errors.passengers?.[index]?.passengerType && (
+                              <ErrorMessage message={errors.passengers[index]?.passengerType?.message} />
+                            )}
                           </div>
                         </div>
                         <hr className={styles.hr} />
-                        <div className={styles.itemContent}>
-                          <FloatingLabelInput
-                            id={`passengers.${index}.fullname`}
-                            label="Full name"
-                            value={formik.values.passengers[index].fullname}
-                            onChange={formik.handleChange}
-                            className="my-4"
-                            error={
-                              formik.touched.passengers?.[index]?.fullname &&
-                              formik.errors.passengers?.[index]?.fullname
-                            }
-                          />
-                          {formik.touched.passengers?.[index]?.fullname &&
-                          formik.errors.passengers?.[index]?.fullname ? (
-                            <ErrorMessage message={formik.errors.passengers[index].fullname} />
-                          ) : null}
-
-                          <FloatingLabelInput
-                            id={`passengers.${index}.identityNumber`}
-                            label="Identity Number"
-                            value={formik.values.passengers[index].identityNumber}
-                            onChange={formik.handleChange}
-                            className="my-4"
-                            error={
-                              formik.touched.passengers?.[index]?.identityNumber &&
-                              formik.errors.passengers?.[index]?.identityNumber
-                            }
-                          />
-                          {formik.touched.passengers?.[index]?.identityNumber &&
-                          formik.errors.passengers?.[index]?.identityNumber ? (
-                            <ErrorMessage message={formik.errors.passengers[index].identityNumber} />
-                          ) : null}
-
-                          <FloatingLabelSelect
-                            id={`passengers.${index}.seatNumber`}
-                            label="Select a Seat"
-                            name={`passengers.${index}.seatNumber`}
-                            className="my-4"
-                            icon={<IoIosArrowDown size={24} />}
-                            value={formik.values.passengers[index].seatNumber}
-                            onChange={formik.handleChange}
-                            options={[
-                              { label: "Option 1", value: "1" },
-                              { label: "Option 2", value: "2" },
-                              { label: "Option 3", value: "3" },
-                            ]}
-                            error={
-                              formik.touched.passengers?.[index]?.seatNumber &&
-                              formik.errors.passengers?.[index]?.seatNumber
-                            }
-                          />
-
-                          <FloatingLabelSelect
-                            id={`passengers.${index}.passengerType`}
-                            label="Select your passenger type"
-                            name={`passengers.${index}.passengerType`}
-                            className="my-4"
-                            icon={<IoIosArrowDown size={24} />}
-                            value={formik.values.passengers[index].passengerType}
-                            onChange={formik.handleChange}
-                            options={[
-                              { label: "Adult", value: "Adult" },
-                              { label: "Child", value: "Child" },
-                              { label: "Senior", value: "Senior" },
-                            ]}
-                            error={
-                              formik.touched.passengers?.[index]?.passengerType &&
-                              formik.errors.passengers?.[index]?.passengerType
-                            }
-                          />
-                        </div>
                       </div>
-                      <hr className={styles.hr} />
-                    </div>
-                  ))}
-                  <ContactInfo formik={formik} />
+                    );
+                  })}
+                  <ContactInfo control={control} errors={errors} />
                   <div className={styles.btnSubmit}>
                     <button
                       className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default inline-flex items-center justify-center max-w-full ps-200 pe-200 py-150 rounded-md hover:-translate-y-006 active:translate-y-006 backdrop-blur-lg bg-color-scheme-brand-primary-500 shadow-sm hover:bg-color-scheme-brand-primary-400 hover:shadow-sm active:bg-color-scheme-brand-primary-600 [&amp;:not(:focus-visible)]:active:shadow-none text-color-primary-inverse hover:text-color-primary-inverse active:text-color-primary-inverse w-full"
@@ -173,6 +233,27 @@ const Index: React.FC = () => {
                     </button>
                   </div>
                 </form>
+                <PaymentMethod />
+                <div className={styles.sidebarWrapper}>
+                  <div className={styles.sidebarItem}>
+                    <div className={styles.policy}>
+                      <input
+                        id="bordered-checkbox-1"
+                        type="checkbox"
+                        value=""
+                        name="bordered-checkbox"
+                        className="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 mr-3"
+                      />
+                      <label htmlFor="bordered-checkbox-1" className="select-none">
+                        <p>
+                          I have read and agree to the terms and conditions, including the binding arbitration agreement
+                          and Amtrak’s baggage policy, which includes fees for excess or oversize baggage.{" "}
+                          <Link href="">Amtrak Terms and Conditions</Link>.
+                        </p>
+                      </label>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div className={styles.right}>
                 <div className={styles.rightWrapper}>
@@ -185,12 +266,16 @@ const Index: React.FC = () => {
                       </div>
                       <hr className={styles.hr} />
                       <div className={styles.rightContainer}>
-                        <TripSelection isShowHeader={true} className="!p-0" />
+                        <TripSelection title={"Outbound"} date={"Sat, Dec 7"} isShowHeader={true} className="!p-0" />
                       </div>
-                      {/* <hr className={styles.hr} />
-                      <div className={styles.itemContent}>
-                        <TripSelection isShowHeader={true} />
-                      </div> */}
+                      {returnDate !== null && (
+                        <>
+                          <hr className={styles.hr} />
+                          <div className={styles.itemContent}>
+                            <TripSelection title={"Return"} date={"Sat, Dec 7"} isShowHeader={true} />
+                          </div>
+                        </>
+                      )}
                     </div>
                   </div>
                   <div className={styles.sidebarWrapper}>
@@ -200,11 +285,16 @@ const Index: React.FC = () => {
                           <span>Trip fare summary</span>
                         </div>
                       </div>
-                      {/* <hr className={styles.hr} /> */}
-                      {/* <div className="space-y-200 px-250 py-200 sm:px-350 sm:py-300 lg:px-250 lg:py-200">
-                        <Ticket />
-                        <hr className={styles.hr} />
-                        <Ticket />
+                      <hr className={styles.hr} />
+                      <div className="space-y-200 px-250 py-200 sm:px-350 sm:py-300 lg:px-250 lg:py-200">
+                        <Ticket from={origin} to={destination} passengers={passengerOverviews} />
+                        {returnDate !== null && (
+                          <>
+                            <hr className={styles.hr} />
+                            <Ticket from={destination} to={origin} passengers={passengerOverviews} />
+                          </>
+                        )}
+
                         <hr className={styles.hr} />
                         <div className="flex flex-col gap-100">
                           <div className="row flex justify-between">
@@ -212,20 +302,19 @@ const Index: React.FC = () => {
                               Subtotal
                             </div>
                             <div className="max-w-full font-weight-bold text-size-100 leading-125 inline-block">
-                              $104.00
+                              {subSotal}
                             </div>
                           </div>
                         </div>
-                      </div> */}
+                      </div>
                     </div>
                     <hr className={styles.hr} />
-
                     <div className={styles.itemFooter}>
                       <div className={styles.footerLeft}>
                         <span className={styles.footerLeftLabel}>Total</span>
                         <span className={styles.footerLeftText}>Taxes & fees included</span>
                       </div>
-                      <div className={styles.footerRight}>{formatCurrencyVND(price)}</div>
+                      <div className={styles.footerRight}>{total}</div>
                     </div>
                   </div>
                 </div>
@@ -240,7 +329,86 @@ const Index: React.FC = () => {
 
 export default Index;
 
-function ContactInfo({ formik }: { formik: any }) {
+function PaymentMethod() {
+  const [method, setMethod] = useState([
+    {
+      name: "Google Pay",
+      checked: false,
+    },
+    {
+      name: "Google Pay",
+      checked: true,
+    },
+  ]);
+
+  const handlePaymentSelect = (index: number) => {
+    setMethod((prevMethods) =>
+      prevMethods.map((item, idx) => ({
+        ...item,
+        checked: idx === index, // Chỉ đặt "checked: true" cho item được click
+      }))
+    );
+  };
+
+  return (
+    <div className={styles.sidebarWrapper}>
+      <div className={styles.sidebarItem}>
+        <div className={styles.itemHeading}>
+          <div className={styles.itemHeadingWrapper}>
+            <span>Payment Method</span>
+          </div>
+        </div>
+        <hr className={styles.hr} />
+        <div className={styles.itemContent}>
+          {method.map((item, idx) => (
+            <div key={idx} className={styles.sidebarWrapper}>
+              <div className={styles.sidebarItem} onClick={() => handlePaymentSelect(idx)}>
+                <div className={styles.payment}>
+                  <div className={styles.paymentButton}>
+                    {/* <span className={styles.checkbox}></span> */}
+                    {item.checked ? (
+                      <FaRegCircleCheck size={20} className="text-[#0b95f5]" />
+                    ) : (
+                      <GoCircle size={20} className="text-[#20415a]" />
+                    )}
+                    <span className={styles.paymentName}>
+                      <span>{item.name}</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+
+          <hr className={styles.hr} />
+          <div className={styles.terms}>
+            <div className="last:*:mb-0 [&>a]:text-color-scheme-interactive-link-600 [&>a]:visited:text-color-scheme-literal-purple-600 [&>a]:hover:text-color-scheme-interactive-link-500 [&>a]:focus-visible:outline-none [&>a]:focus-visible:ring [&>a]:active:text-color-scheme-interactive-link-600 [&>a]:aria-disabled:cursor-default text-color-secondary">
+              <p className="text-size-75 leading-100 mb-300">
+                By completing this booking, I confirm that I have read and agree to Busbud's
+                <Link
+                  className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default text-color-scheme-interactive-link-600 hover:text-color-scheme-interactive-link-500 active:text-color-scheme-interactive-link-600 underline"
+                  href={""}
+                >
+                  Terms
+                </Link>
+                and
+                <Link
+                  href={""}
+                  className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default text-color-scheme-interactive-link-600 hover:text-color-scheme-interactive-link-500 active:text-color-scheme-interactive-link-600 underline"
+                >
+                  Privacy Policy
+                </Link>
+                .
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ContactInfo({ control, errors }: { control: any; errors: any }) {
   return (
     <div className={styles.sidebarWrapper}>
       <div className={styles.sidebarItem}>
@@ -251,31 +419,38 @@ function ContactInfo({ formik }: { formik: any }) {
         </div>
         <hr className={styles.hr} />
         <div className={styles.itemContent}>
-          <FloatingLabelInput
-            id={"phoneNumber"}
-            label="Phone Number"
-            value={formik.values.phoneNumber}
-            onChange={formik.handleChange}
-            className="mb-7"
-            description="OurBus requires your mobile number to notify you of any schedule changes."
-            error={formik.touched.phoneNumber && formik.errors.phoneNumber}
+          <Controller
+            name="phoneNumber"
+            control={control}
+            render={({ field }) => (
+              <FloatingLabelInput
+                label="Phone Number"
+                value={field.value}
+                onChange={field.onChange}
+                className="mb-7"
+                description="OurBus requires your mobile number to notify you of any schedule changes."
+                error={errors.phoneNumber}
+              />
+            )}
           />
+          {errors.phoneNumber && <ErrorMessage message={errors.phoneNumber?.message} />}
 
-          {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
-            <ErrorMessage message={formik.errors.phoneNumber} />
-          ) : null}
-
-          <FloatingLabelInput
-            id="email"
-            label="Email Address"
-            type="email"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            className="mb-7 mt-4"
-            description="  Your confirmation email will be sent to this email."
-            error={formik.touched.email && formik.errors.email}
+          <Controller
+            name="email"
+            control={control}
+            render={({ field }) => (
+              <FloatingLabelInput
+                label="Email Address"
+                type="email"
+                value={field.value}
+                onChange={field.onChange}
+                className="mb-7 mt-4"
+                description="Your confirmation email will be sent to this email."
+                error={errors.email}
+              />
+            )}
           />
-          {formik.touched.email && formik.errors.email ? <ErrorMessage message={formik.errors.email} /> : null}
+          {errors.email && <ErrorMessage message={errors.email?.message} />}
         </div>
       </div>
       <hr className={styles.hr} />
@@ -283,27 +458,25 @@ function ContactInfo({ formik }: { formik: any }) {
   );
 }
 
-function Ticket() {
+function Ticket({ from, to, passengers }: { from: string; to: string; passengers: { name: string; price: number }[] }) {
   return (
     <div className={styles.ticket}>
       <div className={styles.ticketHeading}>
         <span className={styles.stationLabel}>
-          <span>Boston</span>
+          <span>{from}</span>
         </span>
         <FaArrowRightLong size={16} />
         <span className={styles.stationLabel}>
-          <span>New York</span>
+          <span>{to}</span>
         </span>
       </div>
       <div className={styles.ticketCenter}>
-        <div className={styles.ticketPriceWrapper}>
-          <span className={styles.ticketPassengerName}>Bình</span>
-          <span className={styles.ticketPrice}>$33.00</span>
-        </div>
-        <div className={styles.ticketPriceWrapper}>
-          <span className={styles.ticketPassengerName}>Bình</span>
-          <span className={styles.ticketPrice}>$33.00</span>
-        </div>
+        {passengers.map((item, idx) => (
+          <div key={idx} className={styles.ticketPriceWrapper}>
+            <span className={styles.ticketPassengerName}>{item.name}</span>
+            <span className={styles.ticketPrice}>{formatCurrencyVND(item.price)}</span>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ const initialState: IInitialState = {
 };
 
 // Create slice
-export const rootSlice = createSlice({
+export const homeSlice = createSlice({
   name: "root",
   initialState,
   reducers: {
@@ -23,10 +23,10 @@ export const rootSlice = createSlice({
 });
 
 // Export actions
-export const { setIsLoading } = rootSlice.actions;
+export const { setIsLoading } = homeSlice.actions;
 
 // Export reducer
-export default rootSlice.reducer;
+export default homeSlice.reducer;
 
 // Export selector
-export const selectRootState = (state: RootState) => state.root;
+export const selectHomeState = (state: RootState) => state.home;

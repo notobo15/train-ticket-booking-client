@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import SelectStation from "./SelectStation";
 import { FaExchangeAlt } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { selectSearchState, setArrivalStationId, setDestination, setOrigin } from "@/redux/features/searchSlice";
+import { selectSearchState, setArrivalStationId, setDestination, setOrigin } from "@/redux/slices/searchSlice";
 import { useGetProvincesWithStationsQuery, useLazyGetProvincesWithStationsQuery } from "@/services/provinceApi";
 import { formatOptions } from "@/utils/formatOptions";
 import { useTranslations } from "next-intl";

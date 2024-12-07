@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 // import localFont from "next/font/local";
 import "../styles/globals.css";
 import "../styles/styles.css";
-import StoreProvider from "@/redux/StoreProvider";
+
 import { locales } from "@/i18n/i18n.config";
 import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import NextTopLoader from "nextjs-toploader";
 import Script from "next/script";
+import dynamic from "next/dynamic";
 // import PersistGateWrapper from "@/redux/PersistGateWrapper";
 // import { notFound } from 'next/navigation';
 // const codecPro = localFont({
@@ -36,6 +37,10 @@ export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
+const ReduxProvider = dynamic(() => import("@/redux/StoreProvider"), {
+  ssr: false,
+});
+
 export default async function RootLayout({ children, params }: Props) {
   const { locale } = await params;
   const messages = await getMessages({ locale });
@@ -46,12 +51,12 @@ export default async function RootLayout({ children, params }: Props) {
         <Script src="https://accounts.google.com/gsi/client" strategy="beforeInteractive" />
         <SessionWrapper>
           <NextIntlClientProvider messages={messages}>
-            <StoreProvider>
+            <ReduxProvider>
               {/* <PersistGateWrapper> */}
               <ToastContainer />
               {children}
               {/* </PersistGateWrapper> */}
-            </StoreProvider>
+            </ReduxProvider>
           </NextIntlClientProvider>
         </SessionWrapper>
       </body>

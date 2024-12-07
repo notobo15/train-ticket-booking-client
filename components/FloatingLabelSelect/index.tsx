@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from "react";
+import { FieldError } from "react-hook-form";
 
 export default function FloatingLabelSelect({
   id,
@@ -12,15 +13,15 @@ export default function FloatingLabelSelect({
   error,
   disabled,
 }: {
-  id: string;
+  id?: string;
   label: string;
   name?: string;
   value: string;
   onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
-  options: { label: string; value: string }[];
+  options: { label: string; value: string | number }[];
   className?: string;
   icon?: React.ReactNode;
-  error?: string | boolean;
+  error?: string | boolean | FieldError | undefined;
   disabled?: boolean;
 }) {
   return (

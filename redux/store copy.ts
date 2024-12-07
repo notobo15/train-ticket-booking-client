@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
-import searchSlice from "./features/searchSlice";
+import searchSlice from "./slices/searchSlice";
 import { provincesApi } from "@/services/provinceApi";
 import { trainsApi } from "@/services/trainsApi";
 import { carriageApi } from "@/services/carriageApi";

@@ -22,7 +22,7 @@ export default function Index() {
               id="username"
               label="Username"
               value={data.email}
-              onChange={(e) => setData({ ...data, email: e })}
+              onChange={(e) => setData({ ...data, email: e.target.value })}
               className="my-4"
             />
           </form>
@@ -40,7 +40,7 @@ export default function Index() {
               id="password"
               label="Password"
               value={password}
-              onChange={(value) => setPassword(value)}
+              onChange={(e) => setPassword(e.target.value)}
               className="my-4"
             />
           </form>

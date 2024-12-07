@@ -4,8 +4,10 @@ import styles from "./SeatListWrapper.module.scss";
 import Seat from "../Seat";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useAppSelector } from "@/redux/hooks";
-import { selectSearchState } from "@/redux/features/searchSlice";
+import { selectSearchState } from "@/redux/slices/searchSlice";
 import BoxEmpty from "../BoxEmpty";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "@/i18n/routing";
 
 export default function SeatList({
   children,
@@ -19,6 +21,8 @@ export default function SeatList({
   onNext: any;
 }) {
   const searchState = useAppSelector(selectSearchState);
+  const searchParams = useSearchParams();
+  const router = useRouter();
   return (
     <div className={styles.wrapper}>
       <div className={styles.seatList}>
@@ -63,7 +67,15 @@ export default function SeatList({
             type="button"
             className={styles.footerBtn}
             onClick={() => {
-              onNext();
+              const params = new URLSearchParams(searchParams.toString());
+              const step = searchParams.get("step") || "outbound";
+              params.set("view", "overview");
+              if (step == "outbound") {
+                params.set("step", step);
+              } else {
+                params.set("step", "return");
+              }
+              router.push(`?${params.toString()}`);
             }}
           >
             Tiếp tục

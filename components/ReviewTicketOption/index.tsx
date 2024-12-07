@@ -2,11 +2,31 @@ import React from "react";
 import styles from "./ReviewTicketOption.module.scss";
 import clsx from "clsx";
 import { FaArrowRight } from "react-icons/fa";
-import { Link } from "@/i18n/routing";
+import { Link, useRouter } from "@/i18n/routing";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { useSearchParams } from "next/navigation";
+import { selectSearchState } from "@/redux/slices/searchSlice";
 type ReviewTicketOptionProps = {
   onClick: () => void;
 };
 export default function Index({ onClick }: ReviewTicketOptionProps) {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const { returnDate } = useAppSelector(selectSearchState);
+  const handleView = () => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    const view = searchParams.get("step");
+    if (returnDate != null && view == "return") {
+      router.push("/checkout");
+    } else {
+      // params.set("view", "overview");
+      params.set("view", "result");
+      params.set("step", "return");
+      router.push(`?${params.toString()}`);
+    }
+  };
   return (
     <div className={styles.wrapper}>
       <div>
@@ -24,8 +44,8 @@ export default function Index({ onClick }: ReviewTicketOptionProps) {
               </div>
               <div className={styles.priceLabel}>1 adult, 1 senior, Essential</div>
             </div>
-            <Link
-              href={"/checkout"}
+            <div
+              onClick={handleView}
               // onClick={onClick}
               className={clsx(
                 styles.btnContinue,
@@ -36,7 +56,7 @@ export default function Index({ onClick }: ReviewTicketOptionProps) {
               <span className="shrink-0 text-icon-color-primary-inverse">
                 <FaArrowRight size={24} />
               </span>
-            </Link>
+            </div>
           </div>
         </div>
       </div>

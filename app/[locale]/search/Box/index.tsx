@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Box.module.scss";
 import { formatPriceK } from "@/utils/formatDate";
 import { useAppDispatch } from "@/redux/hooks";
-import { setPrice } from "@/redux/features/searchSlice";
+import { setPrice } from "@/redux/slices/searchSlice";
 
 type BoxProps = {
   id: number;

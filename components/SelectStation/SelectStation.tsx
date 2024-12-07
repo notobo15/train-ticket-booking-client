@@ -8,7 +8,7 @@ import Loading from "./Loading";
 import { normalizeVietnameseText } from "@/utils/textUtils";
 import clsx from "clsx";
 import { useAppDispatch } from "@/redux/hooks";
-import { setArrivalStationId } from "@/redux/features/searchSlice";
+import { setArrivalStationId } from "@/redux/slices/searchSlice";
 
 interface OptionType {
   label: string;

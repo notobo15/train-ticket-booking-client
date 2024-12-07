@@ -10,7 +10,7 @@ import SleepingCarriage4 from "@/app/[locale]/search/SleepingCarriage4";
 import HardSeatCarriage from "@/app/[locale]/search/HardSeatCarriage";
 import { BsCupHot } from "react-icons/bs";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { selectSearchState, setCarriage, setCarriageId } from "@/redux/features/searchSlice";
+import { selectSearchState, setCarriage, setCarriageId } from "@/redux/slices/searchSlice";
 import CarriageList from "@/app/[locale]/search/CarriageList";
 import { convertTo12HourFormat, getPriceRange } from "@/utils/formatDate";
 import { RiPinDistanceLine } from "react-icons/ri";

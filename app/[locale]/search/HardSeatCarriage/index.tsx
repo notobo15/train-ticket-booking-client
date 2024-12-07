@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Box from "../Box";
 import styles from "./HardSeatCarriage.module.scss";
 import SeatListWrapper from "../SeatListWrapper";
-import { selectSearchState, setPrice, setSeatId } from "@/redux/features/searchSlice";
+import { selectSearchState, setPrice, setSeatId } from "@/redux/slices/searchSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useCreateSeatHoldMutation, useDeleteSeatHoldMutation } from "@/services/seatApi";
 

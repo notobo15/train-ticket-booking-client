@@ -14,7 +14,7 @@ import FacebookAuthButton from "../_components/FacebookAuthButton";
 import { toast } from "react-toastify";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { useAppDispatch } from "@/redux/hooks";
-import { setIsLoading } from "@/redux/slices/rootSlice";
+import { setIsLoading } from "@/redux/slices/homeSlice";
 import { useGoogleOneTapLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useLoginMutation } from "@/services/authApi"; // Import the login mutation

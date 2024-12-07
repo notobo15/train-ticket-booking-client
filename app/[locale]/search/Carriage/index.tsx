@@ -4,7 +4,7 @@ import styles from "./Carriage.module.scss";
 import clsx from "clsx";
 // import SeatList from "../SeatList";
 import { useAppDispatch } from "@/redux/hooks";
-import { setCarriageId, setCarriageType } from "@/redux/features/searchSlice";
+import { setCarriageId, setCarriageType } from "@/redux/slices/searchSlice";
 
 const carriageTypes: Record<string, string> = {
   "1": "bg-blue-200",

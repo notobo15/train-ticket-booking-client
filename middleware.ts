@@ -18,6 +18,7 @@ const publicPages = [
   "/account/return-tickets",
   "/account/settings",
   "/checkout",
+  "/overview",
 ];
 
 const handleI18nRouting = createMiddleware(routing);
