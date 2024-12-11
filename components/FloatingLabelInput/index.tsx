@@ -1,8 +1,9 @@
 "use client";
 import React, { ChangeEvent, ForwardedRef, forwardRef } from "react";
+import { FieldError } from "react-hook-form";
 
 interface FloatingLabelInputProps {
-  id: string;
+  id?: string;
   label: string;
   type?: string;
   name?: string;
@@ -10,7 +11,7 @@ interface FloatingLabelInputProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   className?: string;
   icon?: React.ReactNode;
-  error?: string | boolean;
+  error?: string | boolean | FieldError | undefined;
   disabled?: boolean;
   description?: string;
 }

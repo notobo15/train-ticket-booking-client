@@ -6,7 +6,7 @@ import styles from "./Passager.module.scss";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import clsx from "clsx";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { selectSearchState, setPassegers } from "@/redux/features/searchSlice";
+import { selectSearchState, setPassegers } from "@/redux/slices/searchSlice";
 import { useTranslations } from "next-intl";
 
 export default function Index() {
@@ -67,7 +67,11 @@ export default function Index() {
       // setPassengers(newPassengers);
     }
   };
-
+  useEffect(() => {
+    if (passengers.length >= 10) {
+      toast.error("Số lượng vé không được vượt quá 10.");
+    }
+  }, [passengers]);
   return (
     <div className={styles.wrapper} ref={wrapperRef}>
       {passengers.map(

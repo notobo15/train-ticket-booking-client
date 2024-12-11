@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import styles from "./ResultTrains.module.scss";
 // import SeatList from "@/app/search/SeatList";
@@ -8,21 +9,30 @@ import Filter from "./Filter";
 import Card from "./Card";
 import { usePostSearchTrainsQuery } from "@/services/trainsApi";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { selectSearchState, setResultCount } from "@/redux/features/searchSlice";
+import {
+  selectSearchState,
+  setArrivalStationId,
+  setCurrentSeats,
+  setDepartureDate,
+  setDepartureStationId,
+  setResultCount,
+  setTrain,
+  setTrainId,
+  setTrainReturn,
+} from "@/redux/slices/searchSlice";
 import { parseDuration } from "@/utils/formatDate";
-import { useGetCarriagesByTrainIdQuery } from "@/services/carriageApi";
 import FilterSkeleton from "./FilterSkeleton";
 import CardSkeleton from "./CardSkeleton";
 // import Cart from "./Cart";
-export default function Index() {
+export default function Index({ onClickSeat, onClickCarriage }: { onClickSeat: any; onClickCarriage: any }) {
   // const [postSearchTrains, { isLoading, error, data }] = usePostSearchTrainsMutation();
   const dispatch = useAppDispatch();
   const searchState = useAppSelector(selectSearchState);
-  const [currentTrainId, setCurentTrainId] = useState<number | null>(null);
+  // const [currentTrainId, setCurentTrainId] = useState<number | null>(null);
 
-  const { data: carriagesData } = useGetCarriagesByTrainIdQuery(currentTrainId!, {
-    skip: currentTrainId === null, // Only call API if clickedTrainId is not null
-  });
+  // const { data: carriagesData } = useGetCarriagesByTrainIdQuery(currentTrainId!, {
+  //   skip: currentTrainId === null, // Only call API if clickedTrainId is not null
+  // });
 
   /* filters */
   const checkedItems = searchState.filters;
@@ -53,12 +63,14 @@ export default function Index() {
   //   ),
   //   roundTrip: !!searchState.returnDate,
   // };
+
+  const isReturnStep = searchState.step === "return";
   const params = {
-    departureDate: "2024-10-15",
-    startStationCode: "SG",
-    endStationCode: "HNO", //HNO,HCQ
+    startStationCode: isReturnStep ? searchState.destination : searchState.origin,
+    endStationCode: isReturnStep ? searchState.origin : searchState.destination,
+    departureDate: isReturnStep ? searchState.returnDate : searchState.date,
     passengerCount: searchState.passagers.reduce((total, passager) => total + passager.value, 0),
-    roundTrip: !!searchState.returnDate,
+    // roundTrip: !!searchState.returnDate,
   };
   // };
   const { isFetching, error, data } = usePostSearchTrainsQuery(params);
@@ -80,8 +92,6 @@ export default function Index() {
       })
     : data;
 
-  dispatch(setResultCount(filteredData?.length || 0));
-
   const sortedData = filteredData
     ? [...filteredData].sort((a, b) => {
         switch (selectedSortingOption) {
@@ -100,6 +110,9 @@ export default function Index() {
         }
       })
     : filteredData;
+  useEffect(() => {
+    dispatch(setResultCount(filteredData?.length || 0));
+  }, [filteredData]);
 
   return (
     <div className={styles.wrapper}>
@@ -116,7 +129,24 @@ export default function Index() {
                 {isFetching && <CardSkeleton />}
                 {sortedData &&
                   sortedData.map((item, index: number) => (
-                    <Card {...item} key={index} onClick={(trainId) => setCurentTrainId(trainId)} />
+                    <Card
+                      onClickCarriage={onClickCarriage}
+                      onClickSeat={onClickSeat}
+                      {...item}
+                      key={index}
+                      onClick={(trainId) => {
+                        // setCurentTrainId(trainId);
+                        dispatch(setTrainId(trainId));
+
+                        var t = sortedData.find((i) => i.trainId === trainId) || null;
+
+                        if (isReturnStep) {
+                          dispatch(setTrainReturn(t));
+                        } else {
+                          dispatch(setTrain(t));
+                        }
+                      }}
+                    />
                   ))}
               </div>
             </div>

@@ -3,7 +3,7 @@ import styles from "./FilterModal.module.scss";
 import clsx from "clsx";
 import { IoClose } from "react-icons/io5";
 import { useAppDispatch } from "@/redux/hooks";
-import { setIsOpenModalFilter } from "@/redux/features/searchSlice";
+import { setIsOpenModalFilter } from "@/redux/slices/searchSlice";
 import FilterTime from "../../FilterTime";
 export default function Index({ open }: { open: boolean }) {
   const dispatch = useAppDispatch();

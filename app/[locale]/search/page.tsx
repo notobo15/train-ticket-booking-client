@@ -1,7 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation"; // Import useRouter để điều hướng
-import { useSearchParams } from "next/navigation"; // Import useSearchParams để lấy query
+import React, { useEffect, useState, useCallback } from "react";
+import { useSearchParams } from "next/navigation";
 import styles from "./search.module.scss";
 import SearchForm from "@/components/SearchForm";
 import TabDay from "@/components/TabDay";
@@ -22,92 +21,148 @@ import {
   setStudents,
   setSeniors,
   selectSearchState,
-} from "@/redux/features/searchSlice";
+  setView,
+  setCurrentSeats,
+  setCurrentCarriage,
+  addSeatHold,
+  removeSeatHold,
+  setStep,
+  addSeatHoldReturn,
+  removeSeatHoldReturn,
+  clearSeatHold,
+  clearSeatHoldReturn,
+} from "@/redux/slices/searchSlice";
 import { formatDateToYMD } from "@/utils/formatDate";
 import TabFilterSearch from "@/components/TabFilterSearch";
 import FilterModal from "@/components/ResultTrains/SeatWrapper/FilterModal";
 import { useTranslations } from "next-intl";
+import { setIsLoading } from "@/redux/slices/homeSlice";
+import { useRouter } from "@/i18n/routing";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-type StepProps = {
-  onNext: () => void;
-  onBack?: () => void;
-  onCallBack?: () => void;
-  isReturnStep?: boolean;
-  isOutbound?: boolean;
+// API calls
+const fetchSeats = async ({
+  trainId,
+  departureStationCode,
+  arrivalStationCode,
+  departureDate,
+  carriageId,
+}: {
+  trainId: number;
+  departureStationCode: string;
+  arrivalStationCode: string;
+  departureDate: string | null;
+  carriageId: number;
+}) => {
+  try {
+    const response = await axios.get(`http://localhost:8080/api/carriages/${carriageId}/seats`, {
+      params: {
+        trainId,
+        departureStationCode,
+        arrivalStationCode,
+        departureDate,
+        carriageId,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching seats:", error);
+    return null;
+  }
 };
 
+const createSeatHold = async ({
+  seatId,
+  trainId,
+  departureStationCode,
+  arrivalStationCode,
+  departureDate,
+  carriageId,
+}: {
+  seatId: number;
+  trainId: number;
+  departureStationCode: string;
+  arrivalStationCode: string;
+  departureDate: string | null;
+  carriageId: number;
+}) => {
+  const params = {
+    trainId,
+    departureStationCode,
+    arrivalStationCode,
+    departureDate,
+    carriageId,
+    seatId,
+  };
+  try {
+    const response = await axios.post("http://localhost:8080/api/seatholds", params);
+    return response.data;
+  } catch (error) {
+    console.error("Error creating seat hold:", error);
+    return null;
+  }
+};
+
+const deleteSeatHold = async ({ seatholdId }: { seatholdId: number }) => {
+  try {
+    const response = await axios.delete(`http://localhost:8080/api/seatholds/${seatholdId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting seat hold:", error);
+    return null;
+  }
+};
+
+// BookingPage Component
 export default function BookingPage() {
   const [currentStep, setCurrentStep] = useState<number>(1);
   const dispatch = useAppDispatch();
-  const router = useRouter(); // Dùng để điều hướng
-  const searchParams = useSearchParams(); // Dùng để lấy query params từ URL
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const t = useTranslations("SearchForm");
-  const searchState = useAppSelector(selectSearchState);
-
-  // Effect để khởi tạo bước dựa trên URL params
-  useEffect(() => {
-    const stepParam = searchParams.get("view");
-    if (stepParam) {
-      const step = parseInt(stepParam, 10);
-      if (!isNaN(step) && step >= 1 && step <= 4) {
-        setCurrentStep(step);
-      }
-    }
-  }, [searchParams]);
-
-  // Effect để khởi tạo các tham số tìm kiếm
-  useEffect(() => {
-    dispatch(setOrigin(searchParams.get("origin") || ""));
-    dispatch(setDestination(searchParams.get("destination") || ""));
-    dispatch(setDate(searchParams.get("date") ? formatDateToYMD(new Date(searchParams.get("date") as string)) : null));
-    dispatch(
-      setReturnDate(
-        searchParams.get("return-date") ? formatDateToYMD(new Date(searchParams.get("return-date") as string)) : null
-      )
-    );
-    dispatch(setAdults(parseInt(searchParams.get("adults") || "0", 10)));
-    dispatch(setChildren(parseInt(searchParams.get("children") || "0", 10)));
-    dispatch(setStudents(parseInt(searchParams.get("students") || "0", 10)));
-    dispatch(setSeniors(parseInt(searchParams.get("seniors") || "0", 10)));
-  }, [searchParams, dispatch]);
-
-  // Function để chuyển sang bước tiếp theo và cập nhật URL giữ nguyên params cũ
-  const handleNextStep = () => {
-    const nextStep = currentStep + 1;
-    if (nextStep <= 4) {
-      setCurrentStep(nextStep);
-
-      // Tạo một đối tượng mới để giữ nguyên các tham số cũ và thêm `view`
-      const params = new URLSearchParams(searchParams.toString());
-      params.set("view", nextStep.toString());
-
-      router.push(`?${params.toString()}`); // Cập nhật URL với query mới
-    }
-  };
-
-  // Function để quay lại bước trước đó và cập nhật URL giữ nguyên params cũ
-  const handlePreviousStep = () => {
-    const prevStep = currentStep - 1;
-    if (prevStep >= 1) {
-      setCurrentStep(prevStep);
-
-      // Tạo một đối tượng mới để giữ nguyên các tham số cũ và thêm `view`
-      const params = new URLSearchParams(searchParams.toString());
-      params.set("view", prevStep.toString());
-
-      router.push(`?${params.toString()}`); // Cập nhật URL với query mới
-    }
-  };
-
-  // Function để reset về bước 1
-  const resetToStep1 = () => {
-    setCurrentStep(1);
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("view", "1");
-    router.push(`?${params.toString()}`);
-  };
+  const [isOverviewVisible, setIsOverviewVisible] = useState(false);
 
   const isOpenModalFilter = useAppSelector(selectSearchState).isOpenModalFilter;
+  const view = searchParams.get("view") || "outbound";
+  const step = searchParams.get("step") || "outbound";
+  const params = {
+    origin: searchParams.get("origin") || "",
+    destination: searchParams.get("destination") || "",
+    date: searchParams.get("date") ? formatDateToYMD(new Date(searchParams.get("date") as string)) : null,
+    returnDate: searchParams.get("return-date")
+      ? formatDateToYMD(new Date(searchParams.get("return-date") as string))
+      : null,
+    adults: parseInt(searchParams.get("adults") || "0", 10),
+    children: parseInt(searchParams.get("children") || "0", 10),
+    students: parseInt(searchParams.get("students") || "0", 10),
+    seniors: parseInt(searchParams.get("seniors") || "0", 10),
+  };
+
+  useEffect(() => {
+    dispatch(setOrigin(params.origin));
+    dispatch(setDestination(params.destination));
+    dispatch(setDate(params.date));
+    dispatch(setReturnDate(params.returnDate));
+    dispatch(setAdults(params.adults));
+    dispatch(setChildren(params.children));
+    dispatch(setStudents(params.students));
+    dispatch(setSeniors(params.seniors));
+    dispatch(setView(view));
+    dispatch(setStep(step));
+
+    if (step === "outbound" && searchParams.get("view") === "result") {
+      dispatch(clearSeatHold());
+      dispatch(clearSeatHoldReturn());
+    }
+  }, [searchParams, dispatch, view]);
+
+  useEffect(() => {
+    if (params.returnDate) {
+      setIsOverviewVisible(true);
+    }
+  }, [params.returnDate]);
+
   return (
     <div>
       {isOpenModalFilter && <FilterModal open={isOpenModalFilter} />}
@@ -115,53 +170,112 @@ export default function BookingPage() {
         <header className={styles.header}>
           <div className="relative">
             <Header isShowCenter={false} className="py-150 md:py-150" />
-            {<SearchForm btnSubmit={t("update_submit_button")} />}
+            <SearchForm btnSubmit={t("update_submit_button")} />
           </div>
         </header>
       </div>
       <div>
-        <div className={styles.main}>
-          {currentStep === 1 && <Step1 onNext={handleNextStep} isOutbound />}
-          {currentStep === 2 && <Step2 onBack={handlePreviousStep} onNext={handleNextStep} />}
-          {currentStep === 3 && (
-            <Step1
-              onNext={handleNextStep}
-              isReturnStep
-              isOutbound={false}
-              onCallBack={resetToStep1} // Truyền callback để reset bước
-            />
-          )}
-          {currentStep === 4 && <Step2 onBack={handlePreviousStep} onNext={handleNextStep} isReturnStep />}
-        </div>
+        <div className={styles.main}>{view !== "overview" ? <Result /> : <Overview />}</div>
       </div>
     </div>
   );
 }
 
-function Step1({ onNext, isReturnStep = false, isOutbound, onCallBack }: StepProps) {
-  const searchState = useAppSelector(selectSearchState);
+// Result Component
+function Result() {
+  const searchParams = useSearchParams();
+  const dispatch = useAppDispatch();
+  let { seathold, trainId, origin, destination, date, returnDate, currentCarriage, carriageId, step, seatholdReturn } =
+    useAppSelector(selectSearchState);
+  const isReturnStep = step === "return";
+
+  const handleClickCarriage = useCallback(
+    async (carriage: any) => {
+      const params = {
+        trainId,
+        departureStationCode: isReturnStep ? destination : origin,
+        arrivalStationCode: isReturnStep ? origin : destination,
+        departureDate: isReturnStep ? returnDate : date,
+        carriageId: carriageId,
+      };
+      const data = await fetchSeats(params);
+      dispatch(setCurrentSeats(data?.result?.seats));
+    },
+    [trainId, origin, destination, date, carriageId, dispatch]
+  );
+
+  const handleClickSeat = useCallback(
+    async (seat: Seat) => {
+      const params = {
+        trainId,
+        carriageId: carriageId,
+        seatId: seat.seatId,
+        departureStationCode: isReturnStep ? destination : origin,
+        arrivalStationCode: isReturnStep ? origin : destination,
+        departureDate: isReturnStep ? returnDate : date,
+      };
+
+      if (seat.status === "available") {
+        if (isReturnStep && seatholdReturn.length === seathold.length) {
+          toast.error("Không thể đặt nhiều số vé khi đi.");
+          return;
+        }
+
+        const createSeat = await createSeatHold(params);
+
+        if (createSeat.success) {
+          toast.success(createSeat.message, { autoClose: 1000 });
+          if (isReturnStep) {
+            dispatch(addSeatHoldReturn(createSeat.result)); // Lưu vào seatholdreturn
+          } else {
+            dispatch(addSeatHold(createSeat.result)); // Lưu vào seathold
+          }
+          const seats = await fetchSeats(params);
+          dispatch(setCurrentSeats(seats?.result?.seats));
+        } else {
+          toast.error(createSeat.message, { autoClose: 1000 });
+        }
+      } else if (seat.status === "booked") {
+        const seatholdId = isReturnStep
+          ? seatholdReturn.find((s) => s.seat?.seatId === seat.seatId)?.id || 0
+          : seathold.find((s) => s.seat?.seatId === seat.seatId)?.id || 0;
+
+        const deleteSeat = await deleteSeatHold({ seatholdId });
+
+        if (deleteSeat.success) {
+          toast.success(deleteSeat.message, { autoClose: 1000 });
+          const seats = await fetchSeats(params);
+          dispatch(setCurrentSeats(seats?.result?.seats));
+          if (isReturnStep) {
+            dispatch(removeSeatHoldReturn(seatholdId)); // Xóa khỏi seatholdreturn
+          } else {
+            dispatch(removeSeatHold(seatholdId)); // Xóa khỏi seathold
+          }
+        } else {
+          toast.error(deleteSeat.message, { autoClose: 1000 });
+        }
+      }
+    },
+    [trainId, origin, destination, date, carriageId, seathold, seatholdReturn, isReturnStep, dispatch]
+  );
+
   return (
     <div>
-      <TabDay date={searchState.date ? formatDateToYMD(new Date(searchState.date)) : null} />
-      {searchState.returnDate && <TabRouteTrip isOutbound={isOutbound} onCallBack={onCallBack} />}
+      <TabDay date={isReturnStep ? returnDate : date} />
+      {returnDate && <TabRouteTrip isOutbound={!isReturnStep} />}
       <TabFilterSearch />
-      <ResultTrains />
-      <button onClick={onNext} className="btn-primary">
-        {isReturnStep ? "Next to Review" : "Next"}
-      </button>
+      <ResultTrains onClickSeat={handleClickSeat} onClickCarriage={handleClickCarriage} />
     </div>
   );
 }
 
-function Step2({ onBack, onNext, isReturnStep = false }: StepProps) {
+// Overview Component
+function Overview() {
   return (
     <div>
-      <BtnBackResult onClick={onBack ? onBack : () => {}} />
-      <ReviewTicketOption onClick={onNext} />
+      <BtnBackResult />
+      <ReviewTicketOption />
       <ReviewTicketOptionResult />
-      <button onClick={onNext} className="btn-primary">
-        {isReturnStep ? "Proceed to Checkout" : "Next"}
-      </button>
     </div>
   );
 }

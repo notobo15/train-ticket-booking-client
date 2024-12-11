@@ -17,11 +17,7 @@ export default function Index() {
               data-tracking-action="click_link"
               data-tracking-details='{"link_target":"price_calendar_cheapest_button"}'
             >
-              <span className="shrink-0 text-color-scheme-literal-blue-400">
-                <svg fill="none" height={24} width={24} aria-hidden="true">
-                  <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/MagnifyingGlass/md.svg#root"></use>
-                </svg>
-              </span>
+              <span className="shrink-0 text-color-scheme-literal-blue-400"></span>
               <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">Cheapest trips</span>
             </button>
             <button
@@ -31,11 +27,7 @@ export default function Index() {
               data-tracking-action="click_link"
               data-tracking-details='{"link_target":"price_calendar_fastest_button"}'
             >
-              <span className="shrink-0 text-color-scheme-literal-blue-400">
-                <svg fill="none" height={24} width={24} aria-hidden="true">
-                  <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/MagnifyingGlass/md.svg#root"></use>
-                </svg>
-              </span>
+              <span className="shrink-0 text-color-scheme-literal-blue-400"></span>
               <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">Fastest trips</span>
             </button>
           </div>
@@ -479,11 +471,7 @@ export default function Index() {
               data-tracking-action="click_link"
               data-tracking-details='{"link_target":"price_calendar_cheapest_button"}'
             >
-              <span className="shrink-0 text-color-scheme-literal-blue-400">
-                <svg fill="none" height={24} width={24} aria-hidden="true">
-                  <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/MagnifyingGlass/md.svg#root"></use>
-                </svg>
-              </span>
+              <span className="shrink-0 text-color-scheme-literal-blue-400"></span>
               <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">Cheapest trips</span>
             </button>
             <button
@@ -493,11 +481,7 @@ export default function Index() {
               data-tracking-action="click_link"
               data-tracking-details='{"link_target":"price_calendar_fastest_button"}'
             >
-              <span className="shrink-0 text-color-scheme-literal-blue-400">
-                <svg fill="none" height={24} width={24} aria-hidden="true">
-                  <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/MagnifyingGlass/md.svg#root"></use>
-                </svg>
-              </span>
+              <span className="shrink-0 text-color-scheme-literal-blue-400"></span>
               <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">Fastest trips</span>
             </button>
           </div>
@@ -941,11 +925,7 @@ export default function Index() {
               data-tracking-action="click_link"
               data-tracking-details='{"link_target":"price_calendar_cheapest_button"}'
             >
-              <span className="shrink-0 text-color-scheme-literal-blue-400">
-                <svg fill="none" height={24} width={24} aria-hidden="true">
-                  <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/MagnifyingGlass/md.svg#root"></use>
-                </svg>
-              </span>
+              <span className="shrink-0 text-color-scheme-literal-blue-400"></span>
               <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">Cheapest trips</span>
             </button>
             <button
@@ -955,11 +935,7 @@ export default function Index() {
               data-tracking-action="click_link"
               data-tracking-details='{"link_target":"price_calendar_fastest_button"}'
             >
-              <span className="shrink-0 text-color-scheme-literal-blue-400">
-                <svg fill="none" height={24} width={24} aria-hidden="true">
-                  <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/MagnifyingGlass/md.svg#root"></use>
-                </svg>
-              </span>
+              <span className="shrink-0 text-color-scheme-literal-blue-400"></span>
               <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">Fastest trips</span>
             </button>
           </div>
@@ -1403,11 +1379,7 @@ export default function Index() {
               data-tracking-action="click_link"
               data-tracking-details='{"link_target":"price_calendar_cheapest_button"}'
             >
-              <span className="shrink-0 text-color-scheme-literal-blue-400">
-                <svg fill="none" height={24} width={24} aria-hidden="true">
-                  <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/MagnifyingGlass/md.svg#root"></use>
-                </svg>
-              </span>
+              <span className="shrink-0 text-color-scheme-literal-blue-400"></span>
               <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">Cheapest trips</span>
             </button>
             <button
@@ -1417,11 +1389,7 @@ export default function Index() {
               data-tracking-action="click_link"
               data-tracking-details='{"link_target":"price_calendar_fastest_button"}'
             >
-              <span className="shrink-0 text-color-scheme-literal-blue-400">
-                <svg fill="none" height={24} width={24} aria-hidden="true">
-                  <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/MagnifyingGlass/md.svg#root"></use>
-                </svg>
-              </span>
+              <span className="shrink-0 text-color-scheme-literal-blue-400"></span>
               <span className="font-weight-bold ps-050 pe-050 py-025 text-size-100 leading-150">Fastest trips</span>
             </button>
           </div>

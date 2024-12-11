@@ -77,3 +77,27 @@ interface Price {
   description: string;
   totalPrice: number;
 }
+
+interface APIResponse<T> {
+  code: number;
+  result: T;
+  success: boolean;
+  message: string;
+}
+interface StationInfo {
+  code: string;
+  name: string;
+  province: string;
+}
+interface SeatHold {
+  id: number;
+  seat: Seat;
+  train: Train;
+  departureStation: Station;
+  arrivalStation: Station;
+  departureDate: string;
+  holdStartTime: string;
+  expirationTime: string;
+  status: string;
+  departure: boolean;
+}

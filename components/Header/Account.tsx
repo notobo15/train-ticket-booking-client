@@ -6,11 +6,15 @@ import clsx from "clsx";
 import { GiReturnArrow } from "react-icons/gi";
 import { IoSettingsSharp, IoTicket } from "react-icons/io5";
 import { signOut } from "next-auth/react";
-import { Link } from "@/i18n/routing";
+import { Link, useRouter } from "@/i18n/routing";
+import { useAppDispatch } from "@/redux/hooks";
+import { clearToken } from "@/redux/slices/authSlice";
 
 export default function Account() {
   const [isShow, setIsShow] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null); // Thêm kiểu cho ref
+  const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const sidebarItems = [
     { href: "/account/trips", icon: <IoTicket size={24} />, text: "Trips" },
@@ -32,6 +36,10 @@ export default function Account() {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
       setIsShow(false); // Đóng dropdown nếu click ra ngoài
     }
+  };
+  const handleLogout = () => {
+    dispatch(clearToken());
+    router.push("/home");
   };
 
   useEffect(() => {
@@ -76,7 +84,13 @@ export default function Account() {
               </li>
             ))}
             <li>
-              <span className={styles.languageItem} onClick={() => signOut({ callbackUrl: "/en/home" })}>
+              <span
+                className={styles.languageItem}
+                onClick={
+                  // () => signOut({ callbackUrl: "/en/home" })
+                  handleLogout
+                }
+              >
                 Log Out
               </span>
             </li>

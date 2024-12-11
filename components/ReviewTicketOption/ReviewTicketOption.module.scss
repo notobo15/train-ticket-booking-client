@@ -13,7 +13,16 @@
   // border-bottom: 0.0625rem solid rgb(229, 236, 240);
   // transition: border-color 0.5s;
 }
-
+.contentWrapper {
+  padding-left: min(3.33333em, 4.16667%);
+  padding-right: min(3.33333em, 4.16667%);
+}
+.contentInner {
+  display: flex;
+  flex-wrap: nowrap;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+}
 .wrapper {
   padding-top: 6px;
 }
@@ -128,5 +137,12 @@
     margin-top: 24px;
     margin-bottom: 24px;
     padding-top: 0px;
+  }
+}
+@media (min-width: 1200px) {
+  .contentWrapper {
+    max-width: 80em;
+    margin-left: auto;
+    margin-right: auto;
   }
 }

@@ -1,9 +1,9 @@
 "use client";
 import { useAppSelector } from "@/redux/hooks";
-import { selectRootState } from "@/redux/slices/rootSlice";
+import { selectHomeState } from "@/redux/slices/homeSlice";
 
 export default function Index() {
-  const isLoading = useAppSelector(selectRootState).isLoading;
+  const { isLoading } = useAppSelector(selectHomeState);
 
   return (
     <div

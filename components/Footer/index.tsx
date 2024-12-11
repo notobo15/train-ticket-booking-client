@@ -31,11 +31,7 @@ export default function Index() {
                 <ul className="-mb-075 -ml-075 -mt-075 flex flex-row gap-150 sm:m-0 sm:flex-col sm:gap-0">
                   <li>
                     <span className="max-w-full font-weight-bold text-size-75 leading-100 inline-flex items-center gap-x-025">
-                      <span className="shrink-0">
-                        <svg fill="none" height={24} width={24} aria-hidden="true" className="text-icon-color-primary">
-                          <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Social/instagram/md.svg#root"></use>
-                        </svg>
-                      </span>
+                      <span className="shrink-0"></span>
                       <span className="">
                         <a
                           aria-label="Instagram"
@@ -49,11 +45,7 @@ export default function Index() {
                   </li>
                   <li>
                     <span className="max-w-full font-weight-bold text-size-75 leading-100 inline-flex items-center gap-x-025">
-                      <span className="shrink-0">
-                        <svg fill="none" height={24} width={24} aria-hidden="true" className="text-icon-color-primary">
-                          <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Social/facebook/md.svg#root"></use>
-                        </svg>
-                      </span>
+                      <span className="shrink-0"></span>
                       <span className="">
                         <a
                           aria-label="Facebook"
@@ -67,11 +59,7 @@ export default function Index() {
                   </li>
                   <li>
                     <span className="max-w-full font-weight-bold text-size-75 leading-100 inline-flex items-center gap-x-025">
-                      <span className="shrink-0">
-                        <svg fill="none" height={24} width={24} aria-hidden="true" className="text-icon-color-primary">
-                          <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/Social/x/md.svg#root"></use>
-                        </svg>
-                      </span>
+                      <span className="shrink-0"></span>
                       <span className="">
                         <a
                           aria-label="Twitter"
@@ -213,11 +201,7 @@ export default function Index() {
             <div className="hidden flex-1 sm:flex md:justify-end sm:hidden">
               <ul className="mb-200 md:mb-0">
                 <span className="max-w-full font-weight-bold text-size-87 leading-100 inline-flex items-center gap-x-025 no-underline">
-                  <span className="shrink-0">
-                    <svg fill="none" height={16} width={16} aria-hidden="true">
-                      <use href="https://www.busbud.com/pubweb-assets/horizon/Icons/1.12.5/QuestionMarkCircle/sm.svg#root"></use>
-                    </svg>
-                  </span>
+                  <span className="shrink-0"></span>
                   <span className="">
                     <a
                       className="focus-visible:outline-none focus-visible:ring aria-disabled:cursor-default hover:underline"

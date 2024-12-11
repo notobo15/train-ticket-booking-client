@@ -2,7 +2,7 @@
 import React from "react";
 import DatePickerInput from "./DatePickerInput";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { selectSearchState, setDate, setReturnDate } from "@/redux/features/searchSlice";
+import { selectSearchState, setDate, setReturnDate } from "@/redux/slices/searchSlice";
 import { formatDateToYMD } from "@/utils/formatDate";
 import { useTranslations } from "next-intl";
 
@@ -12,6 +12,8 @@ const MainComponent = () => {
   // const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   // const [returnDate, setReturnDate] = useState<Date | null>(null);
   const t = useTranslations("SearchForm");
+
+  console.log("selectedDate", selectedDate);
   return (
     <>
       <div className="w-12/24 sm:p-050">

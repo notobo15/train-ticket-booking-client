@@ -9,7 +9,7 @@ import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { RiTimeZoneLine } from "react-icons/ri";
 import { IoFilter, IoMoonOutline } from "react-icons/io5";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { selectSearchState, setIsOpenModalFilter, updateFilter } from "@/redux/features/searchSlice";
+import { selectSearchState, setIsOpenModalFilter, updateFilter } from "@/redux/slices/searchSlice";
 
 export default function FilterTime() {
   const dispatch = useAppDispatch();

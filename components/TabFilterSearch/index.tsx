@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./TabFilterSearch.module.scss";
 import clsx from "clsx";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { selectSearchState, setSortingOption } from "@/redux/features/searchSlice";
+import { selectSearchState, setSortingOption } from "@/redux/slices/searchSlice";
 
 export default function Index() {
   // const [sortingOptions, setSortingOptions] = useState([

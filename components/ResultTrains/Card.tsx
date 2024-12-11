@@ -10,21 +10,27 @@ import SleepingCarriage4 from "@/app/[locale]/search/SleepingCarriage4";
 import HardSeatCarriage from "@/app/[locale]/search/HardSeatCarriage";
 import { BsCupHot } from "react-icons/bs";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { selectSearchState, setCarriageId } from "@/redux/features/searchSlice";
+import {
+  selectSearchState,
+  setCarriage,
+  setCarriageId,
+  setCurrentCarriage,
+  setCurrentSeats,
+  setTrainId,
+} from "@/redux/slices/searchSlice";
 import CarriageList from "@/app/[locale]/search/CarriageList";
 import { convertTo12HourFormat, getPriceRange } from "@/utils/formatDate";
 import { RiPinDistanceLine } from "react-icons/ri";
-import {
-  useGetCarriageByIdQuery,
-  useGetCarriagesByTrainIdQuery,
-  useGetSeatsByCarriageQuery,
-} from "@/services/carriageApi";
+import { useGetCarriagesQuery, useGetSeatsByCarriageQuery } from "@/services/carriageApi";
 import SeatWrapper from "./SeatWrapper";
+import { useCreateSeatHoldMutation } from "@/services/seatApi";
+import useSeatHold from "@/hooks/useSeatHold";
 
 export default function Card({
-  //   arrivalDate,
-  //   departureDate,
-  //   trainId,
+  arrivalDate,
+  endStationCode,
+  startStationCode,
+  departureDate,
   trainType,
   departureTime,
   arrivalTime,
@@ -39,40 +45,44 @@ export default function Card({
   totalDistance,
   prices,
   onClick,
-}: Train & { onClick: (_: number) => void }) {
-  const searchState = useAppSelector(selectSearchState);
-
+  onClickSeat,
+  onClickCarriage,
+}: Train & { onClick: (_: number) => void; onClickSeat: any; onClickCarriage: any }) {
+  const { carriageType, currentCarriage, currentSeat, currentSeats } = useAppSelector(selectSearchState);
   const dispatch = useAppDispatch();
-
-  const carriageId = searchState.carriageId;
-
-  const { data: carriageData, isFetching } = useGetCarriageByIdQuery(carriageId, {
-    skip: carriageId === 0,
-  });
+  const [createSeatHold] = useCreateSeatHoldMutation();
 
   const [showCarriageList, setShowCarriageList] = useState<boolean>(false);
+  const [showSeatList, setShowSeatList] = useState<boolean>(false);
 
   const cardContainerRef = useRef<HTMLDivElement>(null);
   const handleClickInside = () => {
-    setShowCarriageList((prev) => !prev);
+    setShowCarriageList(true);
+    console.log("trainId", trainId);
+    console.log("currentCarriage", currentCarriage?.carriageId);
     onClick(trainId);
   };
+
   const handleClickOutside = (event: MouseEvent) => {
     if (cardContainerRef.current && !cardContainerRef.current.contains(event.target as Node)) {
-      setShowCarriageList(false);
       // dispatch(setCarriageId(0));
+      // dispatch(setCurrentCarriage(null));
+      setShowCarriageList(false);
+      // dispatch(setCurrentSeats([]));
     }
   };
+
   useEffect(() => {
+    // dispatch(setCarriage(carriageData?.result));
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
   return (
     <div ref={cardContainerRef}>
       <div className={styles.cardWrapper}>
+        {/* <button onClick={() => handleSendHold()}>Send Hold</button> */}
         <div className={styles.cardContainer} onClick={handleClickInside}>
           <div className={styles.cardMain}>
             <div className={styles.cardContent}>
@@ -128,23 +138,27 @@ export default function Card({
         </div>
         {showCarriageList && (
           <div className={styles.carrriageWrapper}>
-            <CarriageList carriages={carriages || []} />
-            {/* {searchState.carriageType === "softSeat" && <SeatList64 />} */}
-            {/* {searchState.carriageId !== 0 && <SeatList />} */}
-            {/* {searchState.carriageId !== 0 && <Bed6 />} */}
-
-            {carriageData && (
-              <SeatWrapper
-                prices={prices}
-                carriageType={searchState.carriageType}
-                carriageNumber={carriageData?.carriageNumber}
-                carriageClass={carriageData?.carriageClassName}
-                seats={carriageData?.seats || []}
+            {carriages && (
+              <CarriageList
+                carriages={carriages}
+                onClickCarriage={() => {
+                  onClickCarriage();
+                  setShowSeatList(true);
+                }}
               />
             )}
-            {/* {searchState.carriageType === 1 && <HardSeatCarriage prices={prices} seatList={seatList64} />}
-            {searchState.carriageType === 2 && <SleepingCarriage6 seatList={seatList} />}
-            {searchState.carriageType === 3 && <SleepingCarriage4 seatList={seatList32} />} */}
+
+            {currentCarriage && currentSeats?.length !== 0 && (
+              <SeatWrapper
+                onClickSeat={onClickSeat}
+                onClick={onClick}
+                prices={prices}
+                carriageType={carriageType}
+                carriageNumber={currentCarriage.carriageNumber}
+                carriageClass={currentCarriage.carriageClassName}
+                seats={currentSeats || []}
+              />
+            )}
           </div>
         )}
       </div>

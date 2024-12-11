@@ -9,7 +9,11 @@ import { BsCupHot } from "react-icons/bs";
 import { PiWarningCircle } from "react-icons/pi";
 import { RiRefund2Fill } from "react-icons/ri";
 import TripSelection from "./TripSelection";
+import { selectSearchState } from "@/redux/slices/searchSlice";
+import { useAppSelector } from "@/redux/hooks";
 export default function Index() {
+  const { step, train, trainReturn } = useAppSelector(selectSearchState);
+  const isReturnStep = step === "return";
   return (
     <div className={styles.wrapper}>
       <div>
@@ -22,7 +26,7 @@ export default function Index() {
                     <span>Trip selection</span>
                   </div>
                 </div>
-                <TripSelection />
+                <TripSelection train={isReturnStep ? trainReturn : train} />
               </div>
             </div>
             <div className={styles.content}>
