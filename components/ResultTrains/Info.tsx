@@ -4,7 +4,9 @@ import styles from "./ResultTrains.module.scss";
 import { useAppSelector } from "@/redux/hooks";
 import { selectSearchState } from "@/redux/slices/searchSlice";
 export default function Info() {
-  const { origin, destination } = useAppSelector(selectSearchState);
+  const { origin, destination, step } = useAppSelector(selectSearchState);
+  const isReturnStep = step === "return";
+
   return (
     <div className={styles.info}>
       <div className={styles.infoWrapper}>
@@ -14,7 +16,8 @@ export default function Info() {
         <div className={styles.infoBottom}>
           <FaLocationDot />
           <div>
-            From <strong className="px-1"> {origin} </strong> Arrive to <strong className="px-1">{destination}</strong>
+            From <strong className="px-1"> {isReturnStep ? destination : origin} </strong> Arrive to{" "}
+            <strong className="px-1">{isReturnStep ? origin : destination}</strong>
           </div>
         </div>
       </div>

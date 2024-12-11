@@ -13,13 +13,24 @@ export default function TripSelection({
   isShowHeader,
   title,
   date,
+  train,
 }: {
   className?: string;
   isShowHeader?: boolean;
   title?: string;
   date?: string;
+  train: Train | null;
 }) {
-  const { train } = useAppSelector(selectSearchState);
+  // const { train, trainReturn, step } = useAppSelector(selectSearchState);
+
+  // Use trainReturn for return trip, train for outbound
+  // const isReturnStep = step === "return";
+  // const selectedTrain = isReturnStep ? trainReturn : train;
+
+  // if (!selectedTrain) {
+  //   return <div>No train data available</div>;
+  // }
+
   return (
     <>
       {isShowHeader && (
@@ -27,8 +38,8 @@ export default function TripSelection({
           <div className="inline-flex max-w-full items-center gap-x-025 rounded-pill ps-075 pe-075 py-050 backdrop-blur-lg bg-color-scheme-literal-blue-100 text-color-scheme-literal-blue-800">
             <span className="font-weight-bold ps-050 pe-050 py-000 text-size-75 leading-100">
               <span className="max-w-full font-weight-bold text-size-75 leading-100 inline-block">{title}</span>
-              <span className="t-x5afcv-DsLabel-root-DsLabel-sizeLg-dash">–</span>
-              <span className="text-nowrap">{date}</span>
+              <span className="t-x5afcv-DsLabel-root-DsLabel-sizeLg-dash"> </span>
+              <span className="text-nowrap"> {date}</span>
             </span>
           </div>
         </div>
@@ -61,7 +72,7 @@ export default function TripSelection({
           <div className={styles.slotEnd}>
             <div className={styles.endContent}>
               <div>
-                <div className={styles.provinceLabelXs}>{train?.startProvinceName}</div>
+                <div className={styles.provinceLabelXs}>{train?.startStationName}</div>
                 <div className={styles.provinceLabelg}>{train?.startProvinceName}</div>
                 <Link
                   href={"https://www.google.com/maps/search/?api=1&query=10.767647,106.691065"}
@@ -72,7 +83,7 @@ export default function TripSelection({
                 </Link>
               </div>
               <div className={styles.trainName}>
-                <span className="max-w-full text-size-87 leading-100 inline-block">Train</span>
+                <span className="max-w-full text-size-87 leading-100 inline-block">{train?.trainNumber}</span>
               </div>
             </div>
           </div>
@@ -117,7 +128,7 @@ export default function TripSelection({
             <div className={styles.endContent}>
               <div>
                 <div className={styles.provinceLabelXs}>{train?.endStationName}</div>
-                <div className={styles.provinceLabelg}>{train?.endStationName}</div>
+                <div className={styles.provinceLabelg}>{train?.endProvinceName}</div>
                 <Link
                   href={"https://www.google.com/maps/search/?api=1&query=10.767647,106.691065"}
                   className={styles.ggmapLink}
@@ -126,11 +137,6 @@ export default function TripSelection({
                   <FiExternalLink size={16} />
                 </Link>
               </div>
-              {/* <div className={styles.trainName}>
-                <span className="max-w-full text-size-87 leading-100 inline-block">
-                  Airbus
-                </span>
-              </div> */}
             </div>
           </div>
         </div>

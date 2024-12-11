@@ -95,7 +95,7 @@ export default function BookingPage() {
         <div className={styles.main}>
           <div>
             <BtnBackResult onClick={() => {}} />
-            <ReviewTicketOption onClick={() => {}} />
+            {/* <ReviewTicketOption onClick={() => {}} /> */}
             <ReviewTicketOptionResult />
           </div>
         </div>

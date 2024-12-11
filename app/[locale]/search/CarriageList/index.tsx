@@ -10,7 +10,7 @@ import "swiper/css/scrollbar";
 import { Navigation, Scrollbar } from "swiper/modules";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
-export default function CarriageList({ carriages }: { carriages: Carriage[] }) {
+export default function CarriageList({ carriages, onClickCarriage }: { carriages: Carriage[]; onClickCarriage: any }) {
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
   return (
@@ -39,6 +39,7 @@ export default function CarriageList({ carriages }: { carriages: Carriage[] }) {
           <SwiperSlide key={index}>
             {/* {index === 0 && <div className={styles.trainHead}></div>} */}
             <Carriage
+              onClickCarriage={onClickCarriage}
               {...carriage}
               // seats={carriage.seats}
             />

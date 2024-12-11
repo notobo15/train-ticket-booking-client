@@ -5,13 +5,14 @@ import styles from "./SleepingCarriage4.module.scss";
 import Box from "../Box";
 import SeatListWrapper from "../SeatListWrapper";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { selectSearchState, setSeatId } from "@/redux/slices/searchSlice";
+import { selectSearchState, setCurrentSeat, setSeatId } from "@/redux/slices/searchSlice";
 import { useCreateSeatHoldMutation, useDeleteSeatHoldMutation } from "@/services/seatApi";
 import { RootState } from "@/redux/store";
 import { toast } from "react-toastify";
 
 type SleepingCarriage4Props = {
   seatList: Seat[];
+  onClickSeat: any;
 };
 
 const floorLabels = ["Tầng 2", "Tầng 1"];
@@ -33,7 +34,7 @@ function generateLayout(seatList: Seat[]) {
   return layout;
 }
 
-export default function SleepingCarriage4({ seatList }: SleepingCarriage4Props) {
+export default function SleepingCarriage4({ seatList, onClickSeat }: SleepingCarriage4Props) {
   const layout = generateLayout(seatList);
 
   const dispatch = useAppDispatch();
@@ -46,44 +47,46 @@ export default function SleepingCarriage4({ seatList }: SleepingCarriage4Props) 
     dispatch(setSeatId(id));
 
     // Kiểm tra xem ghế có trong danh sách `currentSeats` không (giả sử trạng thái "reserved" là ghế đã được giữ)
-    const existingSeat = currentSeats.find((seat) => seat.seatId === id);
+    const existingSeat = seatList.find((seat) => seat.seatId === id);
+    console.log("status", existingSeat?.status);
+    onClickSeat(existingSeat);
+    dispatch(setCurrentSeat(existingSeat || null));
+    // if (existingSeat) {
+    //   // Nếu ghế đã có trong danh sách, tiến hành xóa ghế
+    //   try {
+    //     // Gọi API để xóa giữ chỗ cho ghế
+    //     const response = await deleteSeatHold(id).unwrap();
+    //     if (response.success) {
+    //       // Nếu xóa thành công, bạn có thể cập nhật lại state Redux hoặc làm gì đó sau khi xóa thành công
+    //       console.log("Seat hold canceled successfully.");
+    //     }
+    //   } catch (error) {
+    //     console.error("Error removing seat hold:", error);
+    //   }
+    // } else {
+    //   // Nếu ghế chưa có trong danh sách, tiến hành thêm ghế vào danh sách giữ chỗ
+    //   try {
+    //     const seatHoldData = {
+    //       seatId: id,
+    //       trainId,
+    //       departureStationId,
+    //       arrivalStationId,
+    //       departureDate: date || "",
+    //       arrivalStationCode: origin,
+    //       departureStationCode: destination,
+    //       departure: false,
+    //     };
 
-    if (existingSeat) {
-      // Nếu ghế đã có trong danh sách, tiến hành xóa ghế
-      try {
-        // Gọi API để xóa giữ chỗ cho ghế
-        const response = await deleteSeatHold(id).unwrap();
-        if (response.success) {
-          // Nếu xóa thành công, bạn có thể cập nhật lại state Redux hoặc làm gì đó sau khi xóa thành công
-          console.log("Seat hold canceled successfully.");
-        }
-      } catch (error) {
-        console.error("Error removing seat hold:", error);
-      }
-    } else {
-      // Nếu ghế chưa có trong danh sách, tiến hành thêm ghế vào danh sách giữ chỗ
-      try {
-        const seatHoldData = {
-          seatId: id,
-          trainId,
-          departureStationId,
-          arrivalStationId,
-          departureDate: date || "",
-          arrivalStationCode: origin,
-          departureStationCode: destination,
-          departure: false,
-        };
-
-        // Gọi API để giữ ghế
-        const response = await createSeatHold(seatHoldData).unwrap();
-        if (response.success) {
-          console.log("Seat hold created successfully.");
-          toast.success(response.message, { autoClose: 1000 });
-        }
-      } catch (error) {
-        console.error("Error creating seat hold:", error);
-      }
-    }
+    //     // Gọi API để giữ ghế
+    //     const response = await createSeatHold(seatHoldData).unwrap();
+    //     if (response.success) {
+    //       console.log("Seat hold created successfully.");
+    //       toast.success(response.message, { autoClose: 1000 });
+    //     }
+    //   } catch (error) {
+    //     console.error("Error creating seat hold:", error);
+    //   }
+    // }
   };
   return (
     <>

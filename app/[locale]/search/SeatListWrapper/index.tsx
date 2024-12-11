@@ -8,19 +8,17 @@ import { selectSearchState } from "@/redux/slices/searchSlice";
 import BoxEmpty from "../BoxEmpty";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "@/i18n/routing";
-
+import * as NProgress from "nprogress";
 export default function SeatList({
   children,
   carriageClass,
   carriageNumber,
-  onNext,
 }: {
   children: React.ReactNode;
   carriageClass?: string;
   carriageNumber?: string;
-  onNext: any;
 }) {
-  const searchState = useAppSelector(selectSearchState);
+  const { seathold, seatholdReturn, step } = useAppSelector(selectSearchState);
   const searchParams = useSearchParams();
   const router = useRouter();
   return (
@@ -31,14 +29,14 @@ export default function SeatList({
             <div className={styles.title}>Chú thích</div>
 
             <div className={styles.info}>
-              <BoxEmpty background="##f0f8ff" />
+              <BoxEmpty background="#f0f8ff" />
               <div className={styles.infoName}>Ghế còn trống</div>
             </div>
-
+            {/* 
             <div className={styles.info}>
               <BoxEmpty background="yellow" />
               <div className={styles.infoName}>Ghế đang giữ</div>
-            </div>
+            </div> */}
             <div className={styles.info}>
               <BoxEmpty background="#ffc0cb" />
               <div className={styles.infoName}>Ghế đã đặt</div>
@@ -56,10 +54,14 @@ export default function SeatList({
         </div>
       </div>
       <div className={styles.footer}>
-        {/* <div className={styles.footerLeft}>
+        <div className={styles.footerLeft}>
           Ghế:
-          <span>{searchState.seats.join(", ")}</span>
-        </div> */}
+          <span>
+            {(step === "return" ? seatholdReturn : seathold)
+              .map((s) => `${s?.seat?.seatNumber} (${s?.seat?.seatType})`)
+              .join(", ")}
+          </span>
+        </div>
         <div className={styles.footerRight}>
           {/* Tổng cộng: */}
           {/* <span className={styles.footerTotal}>100000</span> */}
@@ -75,6 +77,7 @@ export default function SeatList({
               } else {
                 params.set("step", "return");
               }
+              NProgress.start();
               router.push(`?${params.toString()}`);
             }}
           >

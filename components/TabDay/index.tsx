@@ -27,6 +27,10 @@ export default function Index({ date }: TabDayProps) {
   const getHref = (selectedDate: string) => {
     const newParams = new URLSearchParams(searchParams.toString());
     newParams.set("date", selectedDate); // Update the date parameter
+    if (searchParams.get("return-date")) {
+      newParams.set("return-date", selectedDate); // Update the date parameter
+    }
+
     return `${pathname}?${newParams.toString()}`;
   };
 

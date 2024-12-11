@@ -13,7 +13,7 @@ import FloatingLabelInput from "@/components/FloatingLabelInput";
 import TripSelection from "@/components/ReviewTicketOptionResult/TripSelection";
 import { FaArrowRightLong, FaRegCircleCheck } from "react-icons/fa6";
 import { useAppSelector } from "@/redux/hooks";
-import { clearSeatHold, clearSeatHoldReturn, selectSearchState } from "@/redux/slices/searchSlice";
+import { selectSearchState } from "@/redux/slices/searchSlice";
 import { formatCurrencyVND } from "@/utils/formatDate";
 import { Link, useRouter } from "@/i18n/routing";
 import { GoCircle } from "react-icons/go";
@@ -23,7 +23,6 @@ import { useSearchParams } from "next/navigation";
 // Zod schema for validation
 import * as NProgress from "nprogress";
 import { useCheckoutMutation } from "@/services/orderApi";
-import { useAppDispatch } from "@/redux/store";
 const passengerSchema = z.object({
   fullname: z.string().min(1, "Full name is required"),
   identityNumber: z
@@ -32,7 +31,6 @@ const passengerSchema = z.object({
     .regex(/^\d+$/, "Identity Number must contain only digits")
     .min(1, "Identity Number is required"),
   seatNumber: z.string().min(1, "Seat Number is required"),
-  seatReturn: z.string().optional(),
   passengerType: z.string().min(1, "Passenger Type is required"),
 });
 
@@ -52,7 +50,7 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 const Index: React.FC = () => {
-  const { train, passagers, price, date, returnDate, origin, destination, seathold, trainReturn, seatholdReturn } =
+  const { train, passagers, price, date, returnDate, origin, destination, seathold } =
     useAppSelector(selectSearchState);
   const [createBooking, { isLoading, isError, data, error }] = useCreateBookingMutation();
   const params = useSearchParams();
@@ -70,9 +68,8 @@ const Index: React.FC = () => {
       passengers: seathold.map((seatHold, index) => ({
         fullname: "", // Để trống, chờ người dùng nhập
         identityNumber: "",
-        seatNumber: "", // Đặt số ghế từ seatHold
+        seatNumber: seatHold.seat.seatNumber, // Đặt số ghế từ seatHold
         passengerType: "", // Để trống, chờ người dùng nhập
-        seatReturn: "",
       })),
     },
   });
@@ -91,41 +88,25 @@ const Index: React.FC = () => {
       price: seatHold.seat.price, // Lấy giá từ seat
     })),
   ];
-
-  const seatOptionsReturn = [
-    { label: "Không Chọn", value: "", price: 0 },
-    ...seatholdReturn.map((seatHold: SeatHold) => ({
-      label: `${seatHold.seat.seatNumber} ${seatHold.seat.seatType}`,
-      value: seatHold.seat.seatId.toString(),
-      price: seatHold.seat.price,
-    })),
-  ];
-
-  const dispatch = useAppDispatch();
+  // const seatOptions = [
+  //   { label: "Không Chọn", value: "" },
+  //   { label: "A1", value: "1", price: 1000000 },
+  //   { label: "A2", value: "2", price: 1000000 },
+  //   { label: "A3", value: "3", price: 1000000 },
+  // ];
 
   // Watch the passengers field to get the selected seats
   const selectedSeats = watch("passengers").map((passenger) => passenger.seatNumber);
   const passengerOverviews = watch("passengers").map((passenger, index) => ({
     price: seatOptions.find((s) => s.value === passenger.seatNumber)?.price || 0,
-    name: passenger.fullname || `Passenger ${index + 1}`,
+    name:
+      passenger.fullname ||
+      `Passenger ${index + 1}: ${passagers.find((p) => p.id === Number(passenger.passengerType))?.title}`,
     type: passenger.passengerType,
   }));
 
-  const selectedSeatReturn = watch("passengers").map((passenger) => passenger.seatReturn);
-  const passengerReturnOverviews = watch("passengers").map((passenger, index) => ({
-    price: seatOptionsReturn.find((s) => s.value === passenger.seatReturn)?.price || 0,
-    name: passenger.fullname || `Passenger ${index + 1}`,
-    type: passenger.passengerType,
-  }));
-
-  const subSotal = formatCurrencyVND(
-    passengerOverviews.reduce((acc, p) => acc + (p.price || 0), 0) +
-      passengerReturnOverviews.reduce((acc, p) => acc + (p.price || 0), 0)
-  );
-  const total = formatCurrencyVND(
-    passengerOverviews.reduce((acc, p) => acc + (p.price || 0), 0) +
-      passengerReturnOverviews.reduce((acc, p) => acc + (p.price || 0), 0)
-  );
+  const subSotal = formatCurrencyVND(passengerOverviews.reduce((acc, p) => acc + (p.price || 0), 0));
+  const total = formatCurrencyVND(passengerOverviews.reduce((acc, p) => acc + (p.price || 0), 0));
   const view = params.get("view");
   const onSubmit = (data: FormValues) => {
     console.log("Form values:", data);
@@ -134,7 +115,7 @@ const Index: React.FC = () => {
       startStationCode: origin, // Ví dụ: ID ga đi, bạn có thể lấy từ input hoặc state
       endStationCode: destination, // Ví dụ: ID ga đến
       departureDate: date || "",
-      arrivalDate: returnDate || "",
+
       tickets: data.passengers.map((passenger) => ({
         departureDate: date, // Ngày khởi hành, bạn có thể lấy từ form
         seatId: parseInt(passenger.seatNumber), // Chuyển seatNumber thành seatId
@@ -144,8 +125,6 @@ const Index: React.FC = () => {
           passengerTypeId: parseInt(passenger.passengerType), // Chuyển loại hành khách thành passengerTypeId
           identityCardNumber: passenger.identityNumber,
         },
-        seatReturnId: passenger?.seatReturn ? parseInt(passenger?.seatReturn) : 0,
-        seatReturnPrice: seatOptionsReturn.find((s) => s.value === passenger?.seatReturn)?.price || 0,
       })),
       bookingTime: "",
     };
@@ -158,7 +137,6 @@ const Index: React.FC = () => {
           toast.success(response.message, { autoClose: 1000 });
           NProgress.start();
           // Chuyển hướng đến trang thanh toán với bookingId và view=payment
-
           router.push({
             pathname: "/checkout", // Đường dẫn đến trang thanh toán
             query: {
@@ -262,29 +240,6 @@ const Index: React.FC = () => {
                               {errors.passengers?.[index]?.seatNumber && (
                                 <ErrorMessage message={errors.passengers[index]?.seatNumber?.message} />
                               )}
-                              {returnDate && (
-                                <>
-                                  <Controller
-                                    name={`passengers.${index}.seatReturn`}
-                                    control={control}
-                                    defaultValue=""
-                                    render={({ field }) => (
-                                      <FloatingLabelSelect
-                                        label="Select a Seat for Return Trip"
-                                        value={field.value || ""}
-                                        onChange={field.onChange}
-                                        options={seatOptionsReturn}
-                                        className="my-4"
-                                        icon={<IoIosArrowDown size={24} />}
-                                        error={errors?.passengers?.[index]?.seatReturn?.message} // Correctly access nested error
-                                      />
-                                    )}
-                                  />
-                                  {errors?.passengers?.[index]?.seatReturn && (
-                                    <ErrorMessage message={errors.passengers[index]?.seatReturn?.message} />
-                                  )}
-                                </>
-                              )}
 
                               <Controller
                                 name={`passengers.${index}.passengerType`}
@@ -318,7 +273,7 @@ const Index: React.FC = () => {
                         data-testid="submit-button"
                       >
                         <span className="ps-100 pe-100 py-075 font-weight-bolder leading-125 text-size-112">
-                          {isLoading ? "Processing..." : "Continue to Payment"}
+                          Continue to payment
                         </span>
                         <span className="shrink-0 text-icon-color-primary-inverse">
                           <FaArrowRight size={32} />
@@ -343,24 +298,13 @@ const Index: React.FC = () => {
                       </div>
                       <hr className={styles.hr} />
                       <div className={styles.rightContainer}>
-                        <TripSelection
-                          title={"Outbound"}
-                          date={date || ""}
-                          train={train}
-                          isShowHeader={true}
-                          className="!p-0"
-                        />
+                        <TripSelection title={"Outbound"} date={date || ""} isShowHeader={true} className="!p-0" />
                       </div>
                       {returnDate !== null && (
                         <>
                           <hr className={styles.hr} />
                           <div className={styles.itemContent}>
-                            <TripSelection
-                              title={"Return"}
-                              date={returnDate || ""}
-                              train={trainReturn}
-                              isShowHeader={true}
-                            />
+                            <TripSelection title={"Return"} date={returnDate || ""} isShowHeader={true} />
                           </div>
                         </>
                       )}
@@ -379,7 +323,7 @@ const Index: React.FC = () => {
                         {returnDate !== null && (
                           <>
                             <hr className={styles.hr} />
-                            <Ticket from={destination} to={origin} passengers={passengerReturnOverviews} />
+                            <Ticket from={destination} to={origin} passengers={passengerOverviews} />
                           </>
                         )}
 
@@ -424,12 +368,12 @@ function PaymentMethod() {
   const [method, setMethod] = useState([
     {
       name: "VN Pay",
-      checked: true,
+      checked: false,
       image: "/icons/vnpay.webp",
     },
     {
       name: "PayPal",
-      checked: false,
+      checked: true,
       image: "/icons/paypal.webp",
     },
   ]);
@@ -551,7 +495,7 @@ function PaymentMethod() {
                 ${!accepted && "cursor-not-allowed"}
                 `}
                 onClick={handleCheckout} // Gọi hàm thanh toán
-                disabled={!accepted || isLoading} // Disable nút khi đang loading
+                disabled={!!accepted || isLoading} // Disable nút khi đang loading
               >
                 <span className="ps-100 pe-100 py-075 font-weight-bolder leading-125 text-size-112">
                   {isLoading ? "Processing..." : "Payment Now"}

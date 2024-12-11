@@ -4,6 +4,9 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface ISearchState {
   isOpenModalFilter: boolean;
   train: Train | null;
+  trainReturn: Train | null;
+  startStationInfo: StationInfo | null;
+  endStationInfo: StationInfo | null;
   date: string | null;
   returnDate: string | null;
   destination: string;
@@ -24,12 +27,18 @@ export interface ISearchState {
     midday: boolean;
     late: boolean;
   };
+  carts: Seat[];
   sortingOptions: SortingOption[];
   resultCount: number;
   carriage: Carriage | null | undefined;
   price: number;
+  view: "outbound" | "return" | string;
+  step: "outbound" | "return";
+  currentCarriage: { carriageId: number; carriageNumber: string; carriageClassName: string } | null;
+  currentSeat: Seat | null;
+  seathold: SeatHold[];
+  seatholdReturn: SeatHold[];
 }
-
 const initialState: ISearchState = {
   isOpenModalFilter: false,
   price: 0,
@@ -38,13 +47,16 @@ const initialState: ISearchState = {
   returnDate: null,
   destination: "",
   train: null,
+  trainReturn: null,
   origin: "",
   carriageId: 0,
+  carts: [],
   trainId: 0,
   carriage: null,
   departureStationId: 0,
   arrivalStationId: 0,
   departureDate: "string",
+  step: "outbound",
   passagers: [
     {
       id: 1,
@@ -89,6 +101,13 @@ const initialState: ISearchState = {
     { label: "Latest", isSelected: false },
   ],
   resultCount: 0,
+  startStationInfo: null,
+  endStationInfo: null,
+  view: "outbound",
+  currentCarriage: null,
+  currentSeat: null,
+  seathold: [],
+  seatholdReturn: [],
 };
 
 export const counterSlice = createSlice({
@@ -175,6 +194,15 @@ export const counterSlice = createSlice({
     setTrain: (state, action: PayloadAction<Train | null>) => {
       state.train = action.payload;
     },
+    setTrainReturn: (state, action: PayloadAction<Train | null>) => {
+      state.trainReturn = action.payload;
+    },
+    setStartStationInfo: (state, action: PayloadAction<StationInfo>) => {
+      state.startStationInfo = action.payload;
+    },
+    setEndStationInfo: (state, action: PayloadAction<StationInfo>) => {
+      state.endStationInfo = action.payload;
+    },
     // Xóa ghế theo seatId
     removeSeatById: (state, action: PayloadAction<number>) => {
       state.currentSeats = state.currentSeats.filter((seat) => seat.seatId !== action.payload);
@@ -192,6 +220,65 @@ export const counterSlice = createSlice({
     },
     setPrice: (state, action: PayloadAction<number>) => {
       state.price = action.payload;
+    },
+    setView: (state, action: PayloadAction<string>) => {
+      state.view = action.payload;
+    },
+    setStep: (state, action: PayloadAction<any>) => {
+      state.step = action.payload;
+    },
+    setCurrentCarriage: (
+      state,
+      action: PayloadAction<{
+        carriageId: number;
+        carriageNumber: string;
+        carriageClassName: string;
+        carriageClassId: number;
+      } | null>
+    ) => {
+      state.currentCarriage = action.payload;
+    },
+
+    addToCart: (state, action) => {
+      const seat = action.payload; // seat là đối tượng ghế
+      state.carts.push(seat);
+    },
+    // Xóa ghế khỏi giỏ hàng
+    removeFromCart: (state, action) => {
+      const seatId = action.payload; // seatId là id của ghế cần xóa
+      state.carts = state.carts.filter((seat) => seat.seatId !== seatId);
+    },
+    // Xóa tất cả ghế khỏi giỏ hàng
+    clearCart: (state) => {
+      state.carts = [];
+    },
+    setCurrentSeat: (state, action: PayloadAction<Seat | null>) => {
+      state.currentSeat = action.payload;
+    },
+    setCurrentSeats: (state, action: PayloadAction<Seat[]>) => {
+      state.currentSeats = action.payload;
+    },
+    addSeatHold: (state, action) => {
+      state.seathold.push(action.payload);
+    },
+    removeSeatHold: (state, action: PayloadAction<number>) => {
+      const seatId = action.payload;
+      // state.seathold = state.seathold.filter((seat) => seat.seat.seatId !== seatId);
+      state.seathold = state.seathold.filter((seat) => seat.id !== seatId);
+    },
+    clearSeatHold: (state, action: PayloadAction<void>) => {
+      state.seathold = [];
+    },
+    addSeatHoldReturn: (state, action) => {
+      state.seatholdReturn.push(action.payload);
+    },
+    removeSeatHoldReturn: (state, action: PayloadAction<number>) => {
+      const seatId = action.payload;
+      // state.seathold = state.seathold.filter((seat) => seat.seat.seatId !== seatId);
+      state.seatholdReturn = state.seathold.filter((seat) => seat.id !== seatId);
+    },
+    clearSeatHoldReturn: (state, action: PayloadAction<void>) => {
+      state.seatholdReturn = [];
     },
   },
 });
@@ -222,9 +309,26 @@ export const {
   addSeat,
   removeSeatById,
   updateSeatStatus,
-  setTrain,
   setCarriage,
   setPrice,
+  setTrain,
+  setTrainReturn,
+  setEndStationInfo,
+  setStartStationInfo,
+  setView,
+  setCurrentCarriage,
+  addToCart,
+  clearCart,
+  removeFromCart,
+  setCurrentSeat,
+  setCurrentSeats,
+  addSeatHold,
+  removeSeatHold,
+  setStep,
+  addSeatHoldReturn,
+  removeSeatHoldReturn,
+  clearSeatHold,
+  clearSeatHoldReturn,
 } = counterSlice.actions;
 
 export default counterSlice.reducer;

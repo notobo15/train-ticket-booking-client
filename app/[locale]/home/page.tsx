@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import "@/styles/styles.css";
 import Header from "@/components/Header";
 import Banner from "@/components/Banner";
@@ -13,12 +13,14 @@ import TopTravel from "@/components/TopTravel";
 import PopularTrain from "@/components/PopularTrain";
 import { useTranslations } from "next-intl";
 import useSeatsSocket from "@/hooks/useSeatsSocket";
+import { useAppDispatch } from "@/redux/hooks";
+import { clearSeatHold, clearSeatHoldReturn } from "@/redux/slices/searchSlice";
 // import { useSession } from "next-auth/react";
 export default function Index() {
   // const { data } = useSession();
   // console.log("data", data);
-  const { seats, toggleSeatStatus } = useSeatsSocket();
-  console.log("seats", seats);
+  // const { seats, toggleSeatStatus } = useSeatsSocket();
+
   const t = useTranslations("SearchForm");
   return (
     <>

@@ -100,3 +100,10 @@
     grid-column: 2 / -2;
   }
 }
+@media (min-width: 1200px) {
+  .contentWrapper {
+    max-width: 80em;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

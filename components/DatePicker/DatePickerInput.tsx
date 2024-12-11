@@ -26,7 +26,7 @@ const CustomInput = React.forwardRef<HTMLDivElement, any>(
         <input
           className={styles.input}
           type="text"
-          defaultValue={value || ""}
+          value={value || ""}
           placeholder={value ? undefined : placeholder}
           name={name}
         />
@@ -59,6 +59,7 @@ const DatePickerInput = ({
   const [selectedDate, setSelectedDate] = useState<Date | null>(defaultValue ? new Date(defaultValue) : null);
 
   useEffect(() => {
+    // Ensure the selected date is updated whenever the defaultValue changes
     setSelectedDate(defaultValue ? new Date(defaultValue) : null);
   }, [defaultValue]);
 
@@ -66,14 +67,13 @@ const DatePickerInput = ({
     <div className={styles.wrapper}>
       <DatePicker
         name={name}
-        value={formatDateToYMD(selectedDate)}
         selected={selectedDate}
         minDate={minDate || undefined}
-        dateFormat="EEE, MMM dd"
+        dateFormat="YYYY-MM-dd"
         placeholderText={placeholder}
         onChange={(date: Date | null) => {
-          setSelectedDate(date);
-          onDateChange(date);
+          setSelectedDate(date); // Update selectedDate when user selects a date
+          onDateChange(date); // Notify parent of the change
         }}
         className={clsx({ "date-return": isReturnDate })}
         customInput={
@@ -82,9 +82,10 @@ const DatePickerInput = ({
             placeholder={placeholder}
             isReturnDate={isReturnDate}
             onClear={() => {
-              setSelectedDate(null);
-              onDateChange(null);
+              setSelectedDate(null); // Clear selected date
+              onDateChange(null); // Notify parent of the change
             }}
+            value={selectedDate ? formatDateToYMD(selectedDate) : ""}
           />
         }
         renderCustomHeader={({

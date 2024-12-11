@@ -3,7 +3,14 @@ import React, { useEffect, useState } from "react";
 import SelectStation from "./SelectStation";
 import { FaExchangeAlt } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { selectSearchState, setArrivalStationId, setDestination, setOrigin } from "@/redux/slices/searchSlice";
+import {
+  selectSearchState,
+  setArrivalStationId,
+  setDestination,
+  setEndStationInfo,
+  setOrigin,
+  setStartStationInfo,
+} from "@/redux/slices/searchSlice";
 import { useGetProvincesWithStationsQuery, useLazyGetProvincesWithStationsQuery } from "@/services/provinceApi";
 import { formatOptions } from "@/utils/formatOptions";
 import { useTranslations } from "next-intl";
@@ -11,27 +18,10 @@ import { useTranslations } from "next-intl";
 export default function Index({ errors }: { errors: { origin: boolean; destination: boolean } }) {
   const dispatch = useAppDispatch();
   const { origin, destination } = useAppSelector(selectSearchState);
-  // const options = [
-  //   {
-  //     label: "Miền Bắc",
-  //     options: [
-  //       { label: "Ga Hà Nội", value: "ga-hanoi" },
-  //       { label: "Ga Long Biên", value: "ga-longbien" },
-  //     ],
-  //   },
-  //   {
-  //     label: "Miền Nam",
-  //     options: [
-  //       { label: "Ga Sài Gòn", value: "ga-saigon" },
-  //       { label: "Ga Bình Triệu", value: "ga-binhtrieu" },
-  //     ],
-  //   },
-  // ];
+
   const t = useTranslations("SearchForm");
   const [fetchProvincesWithStations, { data, error, isFetching }] = useLazyGetProvincesWithStationsQuery();
-
-  // if (isLoading) return <div>Loading...</div>;
-  // if (error) return <div>Error occurred</div>;
+  const provincesWithStations = data?.result || [];
 
   useEffect(() => {
     if (origin || destination) {
@@ -42,6 +32,35 @@ export default function Index({ errors }: { errors: { origin: boolean; destinati
   const handleFetchData = () => {
     fetchProvincesWithStations();
   };
+
+  const handleSelectStation = (stationId: string, isOrigin: boolean) => {
+    // Tìm ga từ dữ liệu provincesWithStations
+    const stationInfo = provincesWithStations
+      .flatMap((province) => province.stations)
+      .find((station) => station.code === stationId);
+
+    if (stationInfo) {
+      // Tìm fullName của tỉnh thuộc về ga
+      const provinceFullName = provincesWithStations.find((province) =>
+        province.stations.some((station) => station.code === stationId)
+      )?.fullName;
+
+      if (provinceFullName) {
+        const stationData = {
+          code: stationInfo.code,
+          name: stationInfo.stationName,
+          province: provinceFullName, // Province là fullName của tỉnh
+        };
+
+        if (isOrigin) {
+          dispatch(setStartStationInfo(stationData)); // Cập nhật thông tin ga xuất phát
+        } else {
+          dispatch(setEndStationInfo(stationData)); // Cập nhật thông tin ga đến
+        }
+      }
+    }
+  };
+
   const options = data ? formatOptions(data.result) : [];
   return (
     <>
@@ -58,6 +77,7 @@ export default function Index({ errors }: { errors: { origin: boolean; destinati
           value={origin}
           onSelect={(value) => {
             dispatch(setOrigin(value));
+            handleSelectStation(value, true);
           }}
           error={errors.origin}
         />
@@ -81,7 +101,10 @@ export default function Index({ errors }: { errors: { origin: boolean; destinati
           label={t("destination")}
           options={options}
           value={destination}
-          onSelect={(value) => dispatch(setDestination(value))}
+          onSelect={(value) => {
+            dispatch(setDestination(value));
+            handleSelectStation(value, false);
+          }}
           error={errors.destination}
         />
       </div>

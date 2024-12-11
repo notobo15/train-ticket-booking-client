@@ -11,6 +11,8 @@ import authSlice from "./slices/authSlice";
 import { seatApi } from "@/services/seatApi";
 
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
+import { bookingApi } from "@/services/bookingApi";
+import { orderApi } from "@/services/orderApi";
 
 const createNoopStorage = () => {
   return {
@@ -43,6 +45,8 @@ const rootReducer = combineReducers({
   [trainsApi.reducerPath]: trainsApi.reducer,
   [carriageApi.reducerPath]: carriageApi.reducer,
   [seatApi.reducerPath]: seatApi.reducer,
+  [bookingApi.reducerPath]: bookingApi.reducer,
+  [orderApi.reducerPath]: orderApi.reducer,
 });
 
 export const store = configureStore({
@@ -53,7 +57,9 @@ export const store = configureStore({
       trainsApi.middleware,
       carriageApi.middleware,
       authApi.middleware,
-      seatApi.middleware
+      seatApi.middleware,
+      bookingApi.middleware,
+      orderApi.middleware
     ),
 });
 

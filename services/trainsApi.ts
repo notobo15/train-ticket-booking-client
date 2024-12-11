@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export interface SearchParams {
-  departureDate: string;
+  departureDate: string | null;
   startStationCode: string;
   endStationCode: string;
   passengerCount: number;
-  roundTrip: boolean;
+  // roundTrip: boolean;,,
 }
 
 export const trainsApi = createApi({

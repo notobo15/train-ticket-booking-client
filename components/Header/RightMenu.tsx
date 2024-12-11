@@ -58,9 +58,9 @@ const HeaderMenu: React.FC = () => {
           <li className="hidden sm:block">
             <Account />
           </li>
-          <li className="hidden sm:block">
+          {/* <li className="hidden sm:block">
             <Cart icon={<FaCartShopping size={24} />} count={cartItems.length} cartItems={cartItems} />
-          </li>
+          </li> */}
         </>
       ) : (
         <li className="hidden sm:block">

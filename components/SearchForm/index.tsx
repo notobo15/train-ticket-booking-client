@@ -8,12 +8,13 @@ import { selectSearchState } from "@/redux/slices/searchSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useRouter } from "@/i18n/routing";
 import { setIsLoading } from "@/redux/slices/homeSlice";
+import * as NProgress from "nprogress";
 export default function Index({ btnSubmit = "Search" }: { btnSubmit?: string }) {
   const router = useRouter();
   const { origin, destination } = useAppSelector(selectSearchState);
   const [errorStations, setErrorStations] = useState({ origin: false, destination: false });
   const dispatch = useAppDispatch();
-  const [isPending, startTransition] = useTransition();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -37,12 +38,8 @@ export default function Index({ btnSubmit = "Search" }: { btnSubmit?: string }) 
     formData.forEach((value, key) => {
       queryParams.append(key, value.toString());
     });
-    startTransition(() => {
-      router.replace(`/search?${queryParams.toString()}`);
-    });
-    // router.push(`/search?${queryParams.toString()}`);
-
-    // dispatch(setIsLoading(true));
+    NProgress.start();
+    router.push(`/search?${queryParams.toString()}`, { scroll: true });
   };
   useEffect(() => {
     if (origin) {
@@ -64,6 +61,7 @@ export default function Index({ btnSubmit = "Search" }: { btnSubmit?: string }) 
   return (
     <form
       // action="/search"
+      // method="get"
       onSubmit={handleSubmit}
       className="group flex flex-wrap lg:rounded-md lg:bg-color-canvas-primary lg:shadow-md"
     >

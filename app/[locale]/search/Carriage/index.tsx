@@ -4,7 +4,14 @@ import styles from "./Carriage.module.scss";
 import clsx from "clsx";
 // import SeatList from "../SeatList";
 import { useAppDispatch } from "@/redux/hooks";
-import { setCarriageId, setCarriageType } from "@/redux/slices/searchSlice";
+import {
+  setCarriageId,
+  setCarriageType,
+  setCurrentCarriage,
+  setCurrentSeat,
+  setCurrentSeats,
+} from "@/redux/slices/searchSlice";
+// import useSeatHold from "@/hooks/useSeatHold";
 
 const carriageTypes: Record<string, string> = {
   "1": "bg-blue-200",
@@ -39,14 +46,33 @@ export default function Carriage({
   // carriageColor,
   carriageNumber,
   carriageClassId,
-}: Carriage) {
+  onClickCarriage,
+}: Carriage & { onClickCarriage: any }) {
   const carriageColor = carriageTypes[carriageClassId];
+  // const { seats: carriageData, sendDeleteHold, sendGetList, sendHold } = useSeatHold();
 
   const dispatch = useAppDispatch();
 
   const handleShowSeats = () => {
     dispatch(setCarriageId(carriageId));
     dispatch(setCarriageType(carriageClassId));
+    dispatch(
+      setCurrentCarriage({
+        carriageId: carriageId,
+        carriageClassName: carriageClassName,
+        carriageNumber: carriageNumber,
+        carriageClassId: carriageClassId,
+      })
+    );
+    onClickCarriage({
+      carriageId: carriageId,
+      carriageClassName: carriageClassName,
+      carriageNumber: carriageNumber,
+      carriageClassId: carriageClassId,
+    });
+
+    // sendGetList(seatRequestData);
+    // dispatch(setCurrentSeats(carriageData?.result?.seats));
   };
 
   return (

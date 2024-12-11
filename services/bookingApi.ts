@@ -8,20 +8,23 @@ interface Passenger {
 }
 
 interface Ticket {
-  startStationId: number;
-  endStationId: number;
-  departureDate: string;
   seatId: number;
   price: number;
   passenger: Passenger;
-  departure: boolean;
+  departure?: boolean;
+  seatReturnId?: number;
+  seatReturnPrice?: number;
 }
 
-interface BookingRequest {
+export interface BookingRequest {
   bookingTime: string;
-  startStationId: number;
-  endStationId: number;
+  startStationId?: number;
+  endStationId?: number;
+  startStationCode: string;
+  endStationCode: string;
   tickets: Ticket[];
+  departureDate: string;
+  arrivalDate: string;
 }
 
 interface BookingResponse {
@@ -32,6 +35,35 @@ interface BookingResponse {
   tickets: Ticket[];
   status: string;
 }
+export interface BookingResult {
+  bookingId: number;
+  bookingTime: string; // ISO String
+  totalPrice: number;
+  startStation: string;
+  endStation: string;
+  departureDate: string; // ISO Date
+  status: string;
+  arrivalDate: string;
+  tickets: {
+    ticketId: number;
+    price: number;
+    bookingDate: string; // ISO Date
+    status: string;
+    seatId: number | null;
+    seatNumber: string;
+    seatType: string | null;
+    carriageName: string;
+    trainName: string;
+    departureDate: string;
+    passenger: {
+      fullName: string;
+      identityCardNumber: string;
+      passengerType: string;
+      passengerId: number;
+    };
+    departure: boolean;
+  }[];
+}
 
 // Tạo API cho booking
 export const bookingApi = createApi({
@@ -39,7 +71,7 @@ export const bookingApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
   endpoints: (builder) => ({
     // Mutation để đặt vé
-    createBooking: builder.mutation<BookingResponse, BookingRequest>({
+    createBooking: builder.mutation<APIResponse<null>, BookingRequest>({
       query: (bookingData) => ({
         url: "/bookings", // Địa chỉ endpoint để tạo booking
         method: "POST",
@@ -47,10 +79,13 @@ export const bookingApi = createApi({
       }),
     }),
     // Query để lấy thông tin về một booking (nếu cần)
-    getBookingById: builder.query<BookingResponse, number>({
+    getBookingById: builder.query<APIResponse<BookingResult>, number>({
       query: (bookingId) => `/bookings/${bookingId}`, // Địa chỉ lấy thông tin booking theo ID
+    }),
+    getBooking: builder.query<APIResponse<BookingResult[]>, void>({
+      query: () => `/bookings`,
     }),
   }),
 });
 
-export const { useCreateBookingMutation, useGetBookingByIdQuery } = bookingApi;
+export const { useCreateBookingMutation, useGetBookingByIdQuery, useGetBookingQuery } = bookingApi;
