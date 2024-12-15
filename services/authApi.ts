@@ -7,54 +7,77 @@ export interface LoginParams {
 
 export interface LoginResponse {
   code: number;
-  result: {
-    token: string;
-    authenticated: boolean;
+  success: boolean;
+  errors:
+    | {
+        errorCode: number;
+        fieldName: string;
+        description: string;
+      }[]
+    | null;
+  data: {
+    id: string;
+    userName: string;
+    email: string;
+    isVerified: boolean;
+    roles: string[];
+    jwToken: string;
   };
 }
 export interface Response<T> {
-  code: number;
-  message: string;
-  result: T;
+  success: number;
+  errors:
+    | {
+        errorCode: number;
+        fieldName: string;
+        description: string;
+      }[]
+    | null;
+  data: T;
 }
 
 export interface SignUpParams {
-  username: string;
+  email: string;
   password: string;
   confirmPassword: string;
-  firstName: string;
-  lastName: string;
+  name: string;
+}
+
+export interface ResetPasswordRequest {
+  email: string;
+  token: string;
+  newPassword: string;
 }
 export const authApi = createApi({
   reducerPath: "authApi",
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_AUTH_BASE_URL }),
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_BACKEND_URL }),
   endpoints: (builder) => ({
     login: builder.mutation<LoginResponse, LoginParams>({
       query: (credentials) => ({
-        url: "auth/token",
+        url: "/api/v1/Account/Authenticate",
         method: "POST",
         body: credentials,
       }),
     }),
-    signUp: builder.mutation<Response<null>, SignUpParams>({
+    signUp: builder.mutation<Response<string>, SignUpParams>({
       query: (userData) => ({
-        url: "auth/signup",
+        url: "/api/v1/Account/Register",
         method: "POST",
         body: userData,
       }),
     }),
-    forgotPassword: builder.mutation({
-      query: (email) => ({
-        url: "auth/forgot-password",
+    forgotPassword: builder.mutation<Response<string>, { email: string }>({
+      query: (body) => ({
+        url: "/api/v1/Account/ForgotPassword",
         method: "POST",
-        body: { email },
+        body: body,
       }),
     }),
-    resetPassword: builder.mutation({
-      query: ({ token, newPassword }) => ({
-        url: "auth/reset-password",
+    resetPassword: builder.mutation<Response<string>, ResetPasswordRequest>({
+      query: (body) => ({
+        url: "/api/v1/Account/ResetPassword",
         method: "POST",
-        body: { token, newPassword },
+        body: body,
       }),
     }),
   }),

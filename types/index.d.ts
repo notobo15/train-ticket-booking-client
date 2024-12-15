@@ -18,7 +18,7 @@ interface IPassager {
 }
 interface Station {
   stationId: number;
-  stationName: string;
+  name: string;
   code: string;
   ggmapLink: string;
 }
@@ -84,6 +84,12 @@ interface APIResponse<T> {
   success: boolean;
   message: string;
 }
+interface Response<T> {
+  data: T;
+  success: boolean;
+  errors: any;
+}
+
 interface StationInfo {
   code: string;
   name: string;

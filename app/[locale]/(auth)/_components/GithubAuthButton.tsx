@@ -1,14 +1,19 @@
 import React from "react";
 import ButtonAccount from "@/components/ButtonAccount";
-import { FaFacebook } from "react-icons/fa";
-import { signIn } from "next-auth/react";
+import { FaGithub } from "react-icons/fa";
 export default function GithubAuthButton() {
+  const handleLogin = () => {
+    window.location.href = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/Account/LoginWithGitHub`;
+  };
   return (
     <div>
       <ButtonAccount
-        icon={<FaFacebook size={20} />}
-        label="Continue with Facebook"
-        onClick={() => signIn("facebook")}
+        icon={<FaGithub size={20} />}
+        label="Continue with Github"
+        bgColor="#444444"
+        color="#ffffff"
+        // onClick={() => signIn("facebook")}
+        onClick={handleLogin}
       />
     </div>
   );

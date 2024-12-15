@@ -10,7 +10,7 @@ export interface SearchParams {
 
 export const trainsApi = createApi({
   reducerPath: "trainsApi",
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_BACKEND_URL }),
   endpoints: (builder) => ({
     // postSearchTrains: builder.mutation<Train[], SearchParams>({
     //   query: (params) => ({
@@ -19,11 +19,11 @@ export const trainsApi = createApi({
     //     body: params,
     //   }),
     // }),
-    postSearchTrains: builder.query<Train[], SearchParams>({
+    postSearchTrains: builder.query<Response<Train[]>, SearchParams>({
       query: (params) => ({
-        url: "trains/search",
-        method: "POST",
-        body: params,
+        url: "/api/v1/Train/SearchTrains/search",
+        method: "GET",
+        params: params,
       }),
     }),
   }),

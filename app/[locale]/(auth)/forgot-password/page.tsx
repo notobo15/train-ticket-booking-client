@@ -10,10 +10,11 @@ import ErrorMessage from "@/components/ErrorMessage";
 import SuccessMessage from "@/components/SuccessMessage";
 import { Link } from "@/i18n/routing";
 import { useForgotPasswordMutation } from "@/services/authApi";
+import { toast } from "react-toastify"; // Thêm toast để hiển thị thông báo lỗi
 
 export default function ForgotPassword() {
   const [isSuccess, setIsSuccess] = useState(false);
-  const [forgotPassword, { isLoading, isSuccess: success, isError, error }] = useForgotPasswordMutation(); // Sử dụng hook từ RTK Query
+  const [forgotPassword, { isLoading }] = useForgotPasswordMutation(); // Sử dụng hook từ RTK Query
 
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid email address").required("Email is required"),
@@ -26,12 +27,34 @@ export default function ForgotPassword() {
     validationSchema,
     onSubmit: async (values) => {
       try {
-        const response = await forgotPassword(values.email).unwrap();
-        if (response.code === 1000) {
-          setIsSuccess(true);
+        const response = await forgotPassword({ email: values.email }).unwrap(); // Gửi yêu cầu API
+        if (response.success) {
+          setIsSuccess(true); // Hiển thị thông báo thành công
+        } else {
+          const apiErrors = Array.isArray(response.errors) ? response.errors : [];
+          if (apiErrors.length > 0) {
+            const errorMessages = apiErrors.map((error: { fieldName: string | null; description: string }) =>
+              error.fieldName ? `${error.fieldName}: ${error.description}` : error.description
+            );
+
+            // Hiển thị danh sách lỗi trong toast
+            toast.error(
+              <div>
+                <strong>Failed to reset password:</strong>
+                <ul>
+                  {errorMessages.map((message, index) => (
+                    <li key={index}>{message}</li>
+                  ))}
+                </ul>
+              </div>
+            );
+          } else {
+            toast.error("An unexpected error occurred. Please try again.");
+          }
         }
       } catch (err) {
         console.error("Failed to send reset email:", err);
+        toast.error("An error occurred. Please try again.");
       }
     },
   });
@@ -47,13 +70,15 @@ export default function ForgotPassword() {
           </p>
         </div>
         <div className={styles.main}>
-          <SuccessMessage message="Your reset link with the instructions is on its way! Allow 10 minutes for the email to arrive." />
+          {isSuccess && (
+            <SuccessMessage message="Your reset link with the instructions is on its way! Allow 10 minutes for the email to arrive." />
+          )}
           <form onSubmit={formik.handleSubmit} className={styles.form}>
             {formik.touched.email && formik.errors.email ? <ErrorMessage message={formik.errors.email} /> : null}
 
             <FloatingLabelInput
               id="email"
-              disabled={isSuccess}
+              disabled={isSuccess || isLoading} // Vô hiệu hóa khi thành công hoặc đang gửi
               label="Email Address"
               type="email"
               value={formik.values.email}
@@ -62,7 +87,11 @@ export default function ForgotPassword() {
               error={formik.touched.email && formik.errors.email}
             />
 
-            <ButtonAccount type="submit" label={isLoading ? "Sending..." : "Send reset link"} />
+            <ButtonAccount
+              type="submit"
+              label={isLoading ? "Sending..." : "Send reset link"}
+              disabled={isLoading} // Vô hiệu hóa nút khi đang gửi
+            />
           </form>
         </div>
         <div className={styles.hr}></div>

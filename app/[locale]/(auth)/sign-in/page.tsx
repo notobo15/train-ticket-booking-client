@@ -21,6 +21,7 @@ import { useLoginMutation } from "@/services/authApi"; // Import the login mutat
 import { setToken, setUser } from "@/redux/slices/authSlice";
 
 import { getCookie, getCookies, setCookie, deleteCookie, hasCookie } from "cookies-next";
+import GithubAuthButton from "../_components/GithubAuthButton";
 export default function Index() {
   const [isShowFormSignIn, setIsShowFormSignIn] = useState(false);
   const router = useRouter();
@@ -31,13 +32,13 @@ export default function Index() {
   const [login, { isLoading, isError, error, data }] = useLoginMutation();
 
   const validationSchema = Yup.object({
-    username: Yup.string().required("Username is required"),
+    email: Yup.string().email().required("Email is required"),
     password: Yup.string().required("Password is required"),
   });
 
   const formik = useFormik({
     initialValues: {
-      username: "",
+      email: "",
       password: "",
     },
     validationSchema,
@@ -46,66 +47,49 @@ export default function Index() {
       dispatch(setIsLoading(true));
       startTransition(() => {
         login({
-          username: values.username,
+          username: values.email,
           password: values.password,
         })
           .unwrap()
           .then(async (response) => {
-            if (response.result.authenticated) {
+            if (response.success) {
               toast.success("Signed In Successfully!", { autoClose: 1000 });
-              localStorage.setItem("jwtToken", response.result.token); // Save token to local storage
-              await setCookie("jwtToken", response.result.token);
-              dispatch(setToken(response.result.token));
-              dispatch(
-                setUser({
-                  username: values.username,
-                })
-              );
+              dispatch(setToken(response.data.jwToken));
+              dispatch(setUser(response.data));
               // Redirect to home page
               router.push("/home");
-            } else {
-              formik.resetForm();
-              if (usernameRef.current) {
-                usernameRef.current.focus();
-              }
-              toast.error("Failed to sign in. Please check your credentials.");
             }
-            dispatch(setIsLoading(false));
           })
           .catch((error) => {
             dispatch(setIsLoading(false));
-            toast.error("An error occurred. Please try again.");
+
+            // Kiểm tra lỗi HTTP 400
+            if (error?.status === 400 && error?.data?.errors) {
+              const apiErrors = error.data.errors;
+              const errorMessages = apiErrors.map(
+                (err: { fieldName: string; description: string }) => `${err.fieldName}: ${err.description}`
+              );
+
+              toast.error(
+                <div>
+                  <strong>Failed to sign in:</strong>
+                  <ul>
+                    {errorMessages.map((message: string, index: number) => (
+                      <li key={index}>{message}</li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            } else {
+              toast.error("An unexpected error occurred. Please try again.");
+            }
+          })
+          .finally(() => {
+            dispatch(setIsLoading(false));
           });
       });
     },
   });
-
-  // useEffect(() => {
-  //   if (data) {
-  //     // Automatically redirect if login successful
-  //     router.push("/home");
-  //   }
-  // }, [data, router]);
-
-  // const handleGoogleLogin = useGoogleOneTapLogin({
-  //   onSuccess: async (credentialResponse) => {
-  //     try {
-  //       const res = await axios.post("http://localhost:8080/api/auth/login-with-google", {
-  //         token: credentialResponse.credential, // Google token from the response
-  //       });
-  //       localStorage.setItem("jwtToken", res.data.token); // Save JWT to local storage
-  //       toast.success("Signed in with Google successfully!", { autoClose: 1000 });
-  //       router.push("/home"); // Redirect after successful login
-  //     } catch (error) {
-  //       console.error("Google login failed:", error);
-  //       toast.error("An error occurred while logging in with Google.");
-  //     }
-  //   },
-  //   onError: () => {
-  //     toast.error("Google login failed.");
-  //   },
-  // });
-
   return (
     <>
       <DialogForm>
@@ -116,6 +100,7 @@ export default function Index() {
           <div className={styles.main}>
             <FacebookAuthButton />
             <GoogleAuthButton />
+            <GithubAuthButton />
             <div className={styles.labelTextOr}>
               <span>OR</span>
             </div>
@@ -130,15 +115,15 @@ export default function Index() {
               <form onSubmit={formik.handleSubmit} className={styles.form}>
                 <FloatingLabelInput
                   ref={usernameRef}
-                  id="username"
-                  label="Username Address"
-                  type="text"
-                  value={formik.values.username}
+                  id="email"
+                  label="Email Address"
+                  type="email"
+                  value={formik.values.email}
                   onChange={formik.handleChange}
                   className="my-4"
-                  error={formik.touched.username && formik.errors.username}
+                  error={formik.touched.email && formik.errors.email}
                 />
-                {formik.touched.username && formik.errors.username && <ErrorMessage message={formik.errors.username} />}
+                {formik.touched.email && formik.errors.email && <ErrorMessage message={formik.errors.email} />}
                 <PasswordInput
                   id="password"
                   label="Password"

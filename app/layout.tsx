@@ -48,17 +48,17 @@ export default async function RootLayout({ children, params }: Props) {
     <html lang={locale} suppressHydrationWarning={true}>
       <body suppressHydrationWarning={true}>
         <NextTopLoader showSpinner={false} />
-        <Script src="https://accounts.google.com/gsi/client" strategy="beforeInteractive" />
-        <SessionWrapper>
-          <NextIntlClientProvider messages={messages}>
-            <ReduxProvider>
-              {/* <PersistGateWrapper> */}
-              <ToastContainer />
-              {children}
-              {/* </PersistGateWrapper> */}
-            </ReduxProvider>
-          </NextIntlClientProvider>
-        </SessionWrapper>
+        {/* <Script src="https://accounts.google.com/gsi/client" strategy="beforeInteractive" /> */}
+        {/* <SessionWrapper> */}
+        <NextIntlClientProvider messages={messages}>
+          <ReduxProvider>
+            {/* <PersistGateWrapper> */}
+            <ToastContainer />
+            {children}
+            {/* </PersistGateWrapper> */}
+          </ReduxProvider>
+        </NextIntlClientProvider>
+        {/* </SessionWrapper> */}
       </body>
     </html>
   );

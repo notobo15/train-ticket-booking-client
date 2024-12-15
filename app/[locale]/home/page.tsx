@@ -15,11 +15,29 @@ import { useTranslations } from "next-intl";
 import useSeatsSocket from "@/hooks/useSeatsSocket";
 import { useAppDispatch } from "@/redux/hooks";
 import { clearSeatHold, clearSeatHoldReturn } from "@/redux/slices/searchSlice";
+import { useDispatch } from "react-redux";
+import { useRouter } from "@/i18n/routing";
+import { setToken } from "@/redux/slices/authSlice";
+import { useSearchParams } from "next/navigation";
 // import { useSession } from "next-auth/react";
 export default function Index() {
   // const { data } = useSession();
   // console.log("data", data);
   // const { seats, toggleSeatStatus } = useSeatsSocket();
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const token = searchParams.get("token");
+
+    if (token) {
+      dispatch(setToken(token));
+      router.push("/home");
+    } else {
+      router.push("/home");
+    }
+  }, [router, dispatch]);
 
   const t = useTranslations("SearchForm");
   return (

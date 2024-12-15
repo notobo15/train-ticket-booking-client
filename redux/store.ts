@@ -34,10 +34,15 @@ const seachPersistConfig = {
   key: "seach",
   storage: storage,
 };
+const authPersistConfig = {
+  key: "auth",
+  storage: storage,
+};
 const persistedReducer = persistReducer(seachPersistConfig, searchSlice);
+const authPersistedReducer = persistReducer(authPersistConfig, authSlice);
 
 const rootReducer = combineReducers({
-  auth: authSlice,
+  auth: authPersistedReducer,
   search: persistedReducer,
   home: homeReducer,
   [authApi.reducerPath]: authApi.reducer,

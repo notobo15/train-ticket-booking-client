@@ -56,14 +56,12 @@ const fetchSeats = async ({
   carriageId: number;
 }) => {
   try {
-    const response = await axios.get(`http://localhost:8080/api/carriages/${carriageId}/seats`, {
-      params: {
-        trainId,
-        departureStationCode,
-        arrivalStationCode,
-        departureDate,
-        carriageId,
-      },
+    const response = await axios.post(`https://localhost:5001/api/v1/Seats/GetSeatsStatus/status`, {
+      trainId,
+      departureStationCode,
+      arrivalStationCode,
+      departureDate,
+      carriageId,
     });
     return response.data;
   } catch (error) {
@@ -96,7 +94,7 @@ const createSeatHold = async ({
     seatId,
   };
   try {
-    const response = await axios.post("http://localhost:8080/api/seatholds", params);
+    const response = await axios.post("https://localhost:5001/api/v1/SeatHold/CreateSeatHold", params);
     return response.data;
   } catch (error) {
     console.error("Error creating seat hold:", error);
@@ -106,7 +104,7 @@ const createSeatHold = async ({
 
 const deleteSeatHold = async ({ seatholdId }: { seatholdId: number }) => {
   try {
-    const response = await axios.delete(`http://localhost:8080/api/seatholds/${seatholdId}`);
+    const response = await axios.delete(`'https://localhost:5001/api/v1/SeatHold/DeleteSeatHold/${seatholdId}`);
     return response.data;
   } catch (error) {
     console.error("Error deleting seat hold:", error);
@@ -199,7 +197,7 @@ function Result() {
         carriageId: carriageId,
       };
       const data = await fetchSeats(params);
-      dispatch(setCurrentSeats(data?.result?.seats));
+      dispatch(setCurrentSeats(data?.data));
     },
     [trainId, origin, destination, date, carriageId, dispatch]
   );
@@ -231,7 +229,7 @@ function Result() {
             dispatch(addSeatHold(createSeat.result)); // Lưu vào seathold
           }
           const seats = await fetchSeats(params);
-          dispatch(setCurrentSeats(seats?.result?.seats));
+          dispatch(setCurrentSeats(seats?.result));
         } else {
           toast.error(createSeat.message, { autoClose: 1000 });
         }
@@ -245,7 +243,7 @@ function Result() {
         if (deleteSeat.success) {
           toast.success(deleteSeat.message, { autoClose: 1000 });
           const seats = await fetchSeats(params);
-          dispatch(setCurrentSeats(seats?.result?.seats));
+          dispatch(setCurrentSeats(seats?.result));
           if (isReturnStep) {
             dispatch(removeSeatHoldReturn(seatholdId)); // Xóa khỏi seatholdreturn
           } else {

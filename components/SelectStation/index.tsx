@@ -21,7 +21,7 @@ export default function Index({ errors }: { errors: { origin: boolean; destinati
 
   const t = useTranslations("SearchForm");
   const [fetchProvincesWithStations, { data, error, isFetching }] = useLazyGetProvincesWithStationsQuery();
-  const provincesWithStations = data?.result || [];
+  const provincesWithStations = data?.data || [];
 
   useEffect(() => {
     if (origin || destination) {
@@ -48,7 +48,7 @@ export default function Index({ errors }: { errors: { origin: boolean; destinati
       if (provinceFullName) {
         const stationData = {
           code: stationInfo.code,
-          name: stationInfo.stationName,
+          name: stationInfo.name,
           province: provinceFullName, // Province là fullName của tỉnh
         };
 
@@ -61,7 +61,7 @@ export default function Index({ errors }: { errors: { origin: boolean; destinati
     }
   };
 
-  const options = data ? formatOptions(data.result) : [];
+  const options = data ? formatOptions(data.data) : [];
   return (
     <>
       <div

@@ -75,6 +75,7 @@ export default function Index({ onClickSeat, onClickCarriage }: { onClickSeat: a
   // };
   const { isFetching, error, data } = usePostSearchTrainsQuery(params);
 
+  console.log("data", data);
   // useEffect(() => {
   //   postSearchTrains(params);
   // }, [postSearchTrains]);
@@ -83,14 +84,14 @@ export default function Index({ onClickSeat, onClickCarriage }: { onClickSeat: a
   const isAnyFilterSelected = Object.values(checkedItems).some((value) => value);
 
   const filteredData = isAnyFilterSelected
-    ? data?.filter((item: any) => {
+    ? data?.data.filter((item: any) => {
         if (checkedItems.nighttime && item.departureTime < "06:00") return true;
         if (checkedItems.early && item.departureTime >= "06:00" && item.departureTime < "11:00") return true;
         if (checkedItems.midday && item.departureTime >= "11:00" && item.departureTime < "17:00") return true;
         if (checkedItems.late && item.departureTime >= "17:00") return true;
         return false;
       })
-    : data;
+    : data?.data;
 
   const sortedData = filteredData
     ? [...filteredData].sort((a, b) => {

@@ -33,7 +33,7 @@ export const formatOptions = (data: Province[]): GroupedOption[] => {
 
     province.stations.forEach((station) => {
       groupedOptions[region].options.push({
-        label: station.stationName,
+        label: station.name,
         value: station.code,
       });
     });

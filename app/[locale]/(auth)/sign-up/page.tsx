@@ -13,6 +13,7 @@ import FacebookAuthButton from "../_components/FacebookAuthButton";
 import GoogleAuthButton from "../_components/GoogleAuthButton";
 import { toast } from "react-toastify";
 import { useSignUpMutation } from "@/services/authApi"; // Import the signup mutation hook
+import GithubAuthButton from "../_components/GithubAuthButton";
 
 export default function Index() {
   const router = useRouter();
@@ -21,9 +22,8 @@ export default function Index() {
   const [signUp, { isLoading }] = useSignUpMutation();
 
   const validationSchema = Yup.object({
-    username: Yup.string().required("Username is required"),
-    firstName: Yup.string().required("First name is required"),
-    lastName: Yup.string().required("Last name is required"),
+    email: Yup.string().required("email is required"),
+    name: Yup.string().required("Last name is required"),
     password: Yup.string().min(8, "Password must be at least 8 characters").required("Password is required"),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), undefined], "Passwords must match")
@@ -33,32 +33,50 @@ export default function Index() {
   // Formik form setup
   const formik = useFormik({
     initialValues: {
-      username: "",
-      firstName: "",
-      lastName: "",
+      email: "",
+      name: "",
       password: "",
       confirmPassword: "",
     },
     validationSchema,
     onSubmit: async (values) => {
       const userData = {
-        username: values.username,
+        email: values.email,
         password: values.password,
         confirmPassword: values.confirmPassword,
-        firstName: values.firstName,
-        lastName: values.lastName,
+        name: values.name,
       };
 
       try {
-        const response = await signUp(userData).unwrap(); // Use RTK Query to sign up
-        if (response.code === 1000) {
-          toast.success(response.message, { autoClose: 2000 });
+        const response = await signUp(userData).unwrap();
+
+        if (response.success) {
+          toast.success(response.data, { autoClose: 2000 });
           router.push("/sign-in");
         } else {
-          toast.error(`Sign Up Failed. ${response.message}`, { autoClose: 2000 });
+          const apiErrors = Array.isArray(response.errors) ? response.errors : [];
+          if (apiErrors.length > 0) {
+            const errorMessages = apiErrors.map((error: { fieldName: string | null; description: string }) =>
+              error.fieldName ? `${error.fieldName}: ${error.description}` : error.description
+            );
+
+            // Hiển thị danh sách lỗi trong toast
+            toast.error(
+              <div>
+                <strong>Sign Up Failed:</strong>
+                <ul>
+                  {errorMessages.map((message, index) => (
+                    <li key={index}>{message}</li>
+                  ))}
+                </ul>
+              </div>
+            );
+          } else {
+            toast.error("Sign Up Failed. Please try again.");
+          }
         }
       } catch (err) {
-        toast.error("Sign Up Failed. Please try again.", { autoClose: 2000 });
+        toast.error("Sign Up Failed. Please try again.");
       }
     },
   });
@@ -74,6 +92,7 @@ export default function Index() {
         <div className={styles.main}>
           <FacebookAuthButton />
           <GoogleAuthButton />
+          <GithubAuthButton />
           <div className={styles.labelTextOr}>
             <span>OR</span>
           </div>
@@ -87,36 +106,24 @@ export default function Index() {
           ) : (
             <form onSubmit={formik.handleSubmit} className={styles.form}>
               <FloatingLabelInput
-                id="username"
-                label="Username"
-                value={formik.values.username}
+                id="email"
+                label="email"
+                value={formik.values.email}
                 onChange={formik.handleChange}
                 className="my-4"
-                error={formik.touched.username && formik.errors.username}
+                error={formik.touched.email && formik.errors.email}
               />
-              {formik.touched.username && formik.errors.username && <ErrorMessage message={formik.errors.username} />}
+              {formik.touched.email && formik.errors.email && <ErrorMessage message={formik.errors.email} />}
 
               <FloatingLabelInput
-                id="firstName"
-                label="First Name"
-                value={formik.values.firstName}
-                onChange={formik.handleChange}
-                className="my-4"
-                error={formik.touched.firstName && formik.errors.firstName}
-              />
-              {formik.touched.firstName && formik.errors.firstName && (
-                <ErrorMessage message={formik.errors.firstName} />
-              )}
-
-              <FloatingLabelInput
-                id="lastName"
+                id="name"
                 label="Last Name"
-                value={formik.values.lastName}
+                value={formik.values.name}
                 onChange={formik.handleChange}
                 className="my-4"
-                error={formik.touched.lastName && formik.errors.lastName}
+                error={formik.touched.name && formik.errors.name}
               />
-              {formik.touched.lastName && formik.errors.lastName && <ErrorMessage message={formik.errors.lastName} />}
+              {formik.touched.name && formik.errors.name && <ErrorMessage message={formik.errors.name} />}
 
               <PasswordInput
                 id="password"

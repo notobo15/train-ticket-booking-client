@@ -9,12 +9,17 @@ import ErrorMessage from "@/components/ErrorMessage";
 import PasswordInput from "@/components/PasswordInput";
 import { useSearchParams } from "next/navigation";
 import { useResetPasswordMutation } from "@/services/authApi";
+import { toast } from "react-toastify";
+import { useRouter } from "@/i18n/routing";
 
 export default function ResetPassword() {
+  const router = useRouter();
   const [isSuccess, setIsSuccess] = useState(false);
   const searchParams = useSearchParams();
-  const token = searchParams.get("token");
-  const [resetPassword, { isLoading, isSuccess: success, isError, error }] = useResetPasswordMutation(); // Sử dụng hook từ RTK Query
+  const rawToken = searchParams.get("token") || "";
+  const token = rawToken.replace(/ /g, "+");
+  const email = searchParams.get("email") || "";
+  const [resetPassword, { isLoading }] = useResetPasswordMutation();
 
   const validationSchema = Yup.object({
     password: Yup.string().min(8, "Password must be at least 8 characters").required("Password is required"),
@@ -31,12 +36,43 @@ export default function ResetPassword() {
     validationSchema,
     onSubmit: async (values) => {
       try {
-        const response = await resetPassword({ token, newPassword: values.password }).unwrap();
-        if (response.code === 1000) {
+        const response = await resetPassword({
+          token,
+          email,
+          newPassword: values.password,
+        }).unwrap();
+
+        if (response.success) {
           setIsSuccess(true);
+          toast.success(response.data || "Password has been reset successfully.", { autoClose: 2000 });
+          // Redirect user to login after a short delay
+          setTimeout(() => {
+            router.push("/sign-in");
+          }, 3000);
+        } else {
+          const apiErrors = Array.isArray(response.errors) ? response.errors : [];
+          if (apiErrors.length > 0) {
+            const errorMessages = apiErrors.map(
+              (error) => (error.fieldName ? `${error.fieldName}: ` : "") + error.description
+            );
+
+            toast.error(
+              <div>
+                <strong>Reset Password Failed:</strong>
+                <ul>
+                  {errorMessages.map((message, index) => (
+                    <li key={index}>{message}</li>
+                  ))}
+                </ul>
+              </div>
+            );
+          } else {
+            toast.error("Failed to reset password. Please try again.");
+          }
         }
       } catch (err) {
         console.error("Failed to reset password:", err);
+        toast.error("An unexpected error occurred. Please try again.", { autoClose: false });
       }
     },
   });
@@ -77,7 +113,7 @@ export default function ResetPassword() {
                 <ErrorMessage message={formik.errors.confirmPassword} />
               ) : null}
 
-              <ButtonAccount type="submit" label={isLoading ? "Resetting..." : "Confirm"} />
+              <ButtonAccount type="submit" label={isLoading ? "Resetting..." : "Confirm"} disabled={isLoading} />
             </form>
           )}
         </div>
