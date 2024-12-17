@@ -50,10 +50,10 @@ export default async function RootLayout({ children, params }: Props) {
         <NextTopLoader showSpinner={false} />
         {/* <Script src="https://accounts.google.com/gsi/client" strategy="beforeInteractive" /> */}
         {/* <SessionWrapper> */}
+        <ToastContainer />
         <NextIntlClientProvider messages={messages}>
           <ReduxProvider>
             {/* <PersistGateWrapper> */}
-            <ToastContainer />
             {children}
             {/* </PersistGateWrapper> */}
           </ReduxProvider>

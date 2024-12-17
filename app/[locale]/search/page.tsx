@@ -31,6 +31,8 @@ import {
   removeSeatHoldReturn,
   clearSeatHold,
   clearSeatHoldReturn,
+  addAllSeatHold,
+  addAllSeatHoldReturn,
 } from "@/redux/slices/searchSlice";
 import { formatDateToYMD } from "@/utils/formatDate";
 import TabFilterSearch from "@/components/TabFilterSearch";
@@ -40,7 +42,8 @@ import { setIsLoading } from "@/redux/slices/homeSlice";
 import { useRouter } from "@/i18n/routing";
 import axios from "axios";
 import { toast } from "react-toastify";
-
+import * as signalR from "@microsoft/signalr";
+import { selectAuthState } from "@/redux/slices/authSlice";
 // API calls
 const fetchSeats = async ({
   trainId,
@@ -94,7 +97,9 @@ const createSeatHold = async ({
     seatId,
   };
   try {
-    const response = await axios.post("https://localhost:5001/api/v1/SeatHold/CreateSeatHold", params);
+    const response = await axios.post("https://localhost:5001/api/v1/SeatHold/CreateSeatHold", params, {
+      headers: {},
+    });
     return response.data;
   } catch (error) {
     console.error("Error creating seat hold:", error);
@@ -187,82 +192,187 @@ function Result() {
     useAppSelector(selectSearchState);
   const isReturnStep = step === "return";
 
-  const handleClickCarriage = useCallback(
-    async (carriage: any) => {
-      const params = {
-        trainId,
-        departureStationCode: isReturnStep ? destination : origin,
-        arrivalStationCode: isReturnStep ? origin : destination,
-        departureDate: isReturnStep ? returnDate : date,
-        carriageId: carriageId,
-      };
-      const data = await fetchSeats(params);
-      dispatch(setCurrentSeats(data?.data));
-    },
-    [trainId, origin, destination, date, carriageId, dispatch]
-  );
+  // const handleClickCarriage = useCallback(
+  //   async (carriage: any) => {
+  //     const params = {
+  //       trainId,
+  //       departureStationCode: isReturnStep ? destination : origin,
+  //       arrivalStationCode: isReturnStep ? origin : destination,
+  //       departureDate: isReturnStep ? returnDate : date,
+  //       carriageId: carriageId,
+  //     };
+  //     const data = await fetchSeats(params);
+  //     dispatch(setCurrentSeats(data?.data));
+  //   },
+  //   [trainId, origin, destination, date, carriageId, dispatch]
+  // );
 
-  const handleClickSeat = useCallback(
-    async (seat: Seat) => {
-      const params = {
-        trainId,
-        carriageId: carriageId,
-        seatId: seat.seatId,
-        departureStationCode: isReturnStep ? destination : origin,
-        arrivalStationCode: isReturnStep ? origin : destination,
-        departureDate: isReturnStep ? returnDate : date,
-      };
-
-      if (seat.status === "available") {
-        if (isReturnStep && seatholdReturn.length === seathold.length) {
-          toast.error("Không thể đặt nhiều số vé khi đi.");
-          return;
-        }
-
-        const createSeat = await createSeatHold(params);
-
-        if (createSeat.success) {
-          toast.success(createSeat.message, { autoClose: 1000 });
-          if (isReturnStep) {
-            dispatch(addSeatHoldReturn(createSeat.result)); // Lưu vào seatholdreturn
-          } else {
-            dispatch(addSeatHold(createSeat.result)); // Lưu vào seathold
-          }
-          const seats = await fetchSeats(params);
-          dispatch(setCurrentSeats(seats?.result));
+  const handleCarriageChange = () => {
+    if (connection) {
+      // setLoading(true); // Start loading when switching groups
+      // setCarriageId(newCarriageId);
+      connection
+        .invoke("LeaveCarriageGroup", carriageId, userId)
+        .then(() => {})
+        .catch((err) => {
+          console.error("Error leaving group:", err);
+          // setLoading(false); // Stop loading if there's an error
+        });
+    } else {
+    }
+  };
+  const updateSeatStatus = async (seat: Seat) => {
+    // const seat = seats.find((s) => s.seatId === seatId);
+    if (seat && connection) {
+      const newStatus = seat.status === "booked" ? "available" : "booked";
+      try {
+        await connection.invoke(
+          "UpdateSeatStatus",
+          trainId,
+          currentCarriage?.carriageId,
+          origin,
+          destination,
+          date,
+          seat?.seatId,
+          newStatus,
+          userId
+        );
+        if (newStatus === "booked") {
+          toast.success("Giữ chổ thành công.", { autoClose: 1000 });
         } else {
-          toast.error(createSeat.message, { autoClose: 1000 });
+          toast.success("Xóa chổ thành công.", { autoClose: 1000 });
         }
-      } else if (seat.status === "booked") {
-        const seatholdId = isReturnStep
-          ? seatholdReturn.find((s) => s.seat?.seatId === seat.seatId)?.id || 0
-          : seathold.find((s) => s.seat?.seatId === seat.seatId)?.id || 0;
-
-        const deleteSeat = await deleteSeatHold({ seatholdId });
-
-        if (deleteSeat.success) {
-          toast.success(deleteSeat.message, { autoClose: 1000 });
-          const seats = await fetchSeats(params);
-          dispatch(setCurrentSeats(seats?.result));
-          if (isReturnStep) {
-            dispatch(removeSeatHoldReturn(seatholdId)); // Xóa khỏi seatholdreturn
-          } else {
-            dispatch(removeSeatHold(seatholdId)); // Xóa khỏi seathold
-          }
-        } else {
-          toast.error(deleteSeat.message, { autoClose: 1000 });
-        }
+      } catch (err) {
+        console.error("Error updating seat:", err);
+        toast.error("Có lỗi xảy ra.", { autoClose: 1000 });
       }
-    },
-    [trainId, origin, destination, date, carriageId, seathold, seatholdReturn, isReturnStep, dispatch]
-  );
+    }
+  };
+
+  // const handleClickSeat = useCallback(
+  //   async (seat: Seat) => {
+  //     const params = {
+  //       trainId,
+  //       carriageId: carriageId,
+  //       seatId: seat.seatId,
+  //       departureStationCode: isReturnStep ? destination : origin,
+  //       arrivalStationCode: isReturnStep ? origin : destination,
+  //       departureDate: isReturnStep ? returnDate : date,
+  //     };
+
+  //     if (seat.status === "available") {
+  //       if (isReturnStep && seatholdReturn.length === seathold.length) {
+  //         toast.error("Không thể đặt nhiều số vé khi đi.");
+  //         return;
+  //       }
+
+  //       const createSeat = await createSeatHold(params);
+
+  //       if (createSeat.success) {
+  //         toast.success(createSeat.message, { autoClose: 1000 });
+  //         if (isReturnStep) {
+  //           dispatch(addSeatHoldReturn(createSeat.result)); // Lưu vào seatholdreturn
+  //         } else {
+  //           dispatch(addSeatHold(createSeat.result)); // Lưu vào seathold
+  //         }
+  //         const seats = await fetchSeats(params);
+  //         dispatch(setCurrentSeats(seats?.result));
+  //       } else {
+  //         toast.error(createSeat.message, { autoClose: 1000 });
+  //       }
+  //     } else if (seat.status === "booked") {
+  //       const seatholdId = isReturnStep
+  //         ? seatholdReturn.find((s) => s.seat?.seatId === seat.seatId)?.id || 0
+  //         : seathold.find((s) => s.seat?.seatId === seat.seatId)?.id || 0;
+
+  //       const deleteSeat = await deleteSeatHold({ seatholdId });
+
+  //       if (deleteSeat.success) {
+  //         toast.success(deleteSeat.message, { autoClose: 1000 });
+  //         const seats = await fetchSeats(params);
+  //         dispatch(setCurrentSeats(seats?.result));
+  //         if (isReturnStep) {
+  //           dispatch(removeSeatHoldReturn(seatholdId)); // Xóa khỏi seatholdreturn
+  //         } else {
+  //           dispatch(removeSeatHold(seatholdId)); // Xóa khỏi seathold
+  //         }
+  //       } else {
+  //         toast.error(deleteSeat.message, { autoClose: 1000 });
+  //       }
+  //     }
+  //   },
+  //   [trainId, origin, destination, date, carriageId, seathold, seatholdReturn, isReturnStep, dispatch]
+  // );
+  // const { userId } = useAppSelector(selectAuthState);
+  const userId = "08dd1b6d-7759-4fb7-8a61-62fce35d1b8f";
+  const [connection, setConnection] = useState<signalR.HubConnection | null>(null);
+
+  useEffect(() => {
+    // Initialize SignalR connection
+    const connect = new signalR.HubConnectionBuilder()
+      .withUrl("https://localhost:5001/seatsHub")
+      // .withUrl("http://localhost:5101/seatsHub")
+      .withAutomaticReconnect()
+      .build();
+
+    connect
+      .start()
+      .then(() => {
+        console.log("Connected to SignalR!");
+        setConnection(connect);
+
+        // Join initial group
+        // setLoading(true); // Start loading when joining the group
+        connect
+          .invoke("JoinCarriageGroup", trainId, currentCarriage?.carriageId, origin, destination, date, userId)
+          // .then(() => setLoading(false)) // Stop loading when group is joined
+          .catch((err) => {
+            console.error("Error joining group:", err);
+            // setLoading(false); // Stop loading if there's an error
+          });
+
+        // Get user ID
+        connect
+          .invoke("GetConnectionId")
+          // .then((id) => setUserId(id))
+          .catch((err) => console.error(err));
+      })
+      .catch((err) => console.error("Connection failed:", err));
+
+    // Listen for updates to seat data
+    connect.on("SeatsData", (data: IResponse<Seat[]>) => {
+      console.log("seats từ websocket :", data);
+      if (data.success) {
+        dispatch(setCurrentSeats(data?.data));
+        // setSeats(data?.data);
+        // toast.success("Giữ chổ thành công.", { autoClose: 1000 });
+      } else {
+        toast.error("Có lỗi xảy ra.", { autoClose: 1000 });
+      }
+    });
+    connect.on("UserSeatHolds", (data: IResponse<Seat[]>) => {
+      console.log("MySeats:", data);
+      if (data.success) {
+        dispatch(addAllSeatHold(data.data));
+        // dispatch(addAllSeatHoldReturn(data.data));
+        // if (isReturnStep) {
+        //   dispatch(addSeatHoldReturn(createSeat.result)); // Lưu vào seatholdreturn
+        // } else {
+        //   dispatch(addSeatHold(createSeat.result)); // Lưu vào seathold
+        // }
+      }
+    });
+    return () => {
+      if (connection) connection.stop();
+    };
+  }, [carriageId]);
 
   return (
     <div>
       <TabDay date={isReturnStep ? returnDate : date} />
       {returnDate && <TabRouteTrip isOutbound={!isReturnStep} />}
       <TabFilterSearch />
-      <ResultTrains onClickSeat={handleClickSeat} onClickCarriage={handleClickCarriage} />
+      <ResultTrains onClickSeat={updateSeatStatus} onClickCarriage={handleCarriageChange} />
     </div>
   );
 }

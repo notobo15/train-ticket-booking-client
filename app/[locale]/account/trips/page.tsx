@@ -3,9 +3,16 @@ import React from "react";
 import styles from "./trips.module.scss";
 import { BookingResult, useGetBookingByIdQuery, useGetBookingQuery } from "@/services/bookingApi";
 import { QRCode } from "antd";
+import { useAppSelector } from "@/redux/store";
+import { selectAuthState } from "@/redux/slices/authSlice";
 export default function Index() {
   // const { data, error, isLoading } = useGetBookingByIdQuery(11);
-  const { data, error, isFetching } = useGetBookingQuery();
+
+  const { user } = useAppSelector(selectAuthState);
+
+  const { data, error, isFetching } = useGetBookingQuery(user?.id || "");
+
+  console.log("data", data);
   if (isFetching) {
     // Hiển thị trạng thái loading
     return (
@@ -17,7 +24,7 @@ export default function Index() {
       </div>
     );
   }
-  return <>{data?.success ? <Booking booking={data?.result} /> : <Empty />}</>;
+  return <>{data?.success ? <Booking booking={data?.data} /> : <Empty />}</>;
 }
 
 function Booking({ booking }: { booking: BookingResult[] }) {
@@ -26,7 +33,7 @@ function Booking({ booking }: { booking: BookingResult[] }) {
       <div className="min-h-screen bg-gray-50 p-4">
         {booking.map((item) => (
           <div key={item.bookingId} className="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 mb-6">
-            <h1 className="text-2xl font-bold text-gray-800 mb-4">Booking #{item.bookingId}</h1>
+            <h1 className="text-2xl font-bold text-gray-800 mb-4">Booking #{item.id}</h1>
             <div className="text-gray-600 mb-4">
               <p>
                 <strong>Start Station:</strong> {item.startStation}
@@ -52,37 +59,37 @@ function Booking({ booking }: { booking: BookingResult[] }) {
 
             <h2 className="text-xl font-semibold text-gray-700 mt-6 mb-4">Tickets</h2>
             <div className="space-y-4">
-              {item.tickets.map((ticket) => (
+              {item?.tickets?.map((ticket) => (
                 <div key={ticket.ticketId} className="bg-gray-100 p-4 rounded-lg flex items-center justify-between">
                   <div>
                     <p className="text-gray-700">
-                      <strong>Passenger Name:</strong> {ticket.passenger.fullName}
+                      <strong>Passenger Name:</strong> {ticket.passenger?.fullName}
                     </p>
                     <p className="text-gray-700">
-                      <strong>Seat Number:</strong> {ticket.seatNumber}
+                      <strong>Seat Number:</strong> {ticket?.seatNumber}
                     </p>
                     <p className="text-gray-700">
-                      <strong>Train:</strong> {ticket.trainName}
+                      <strong>Train:</strong> {ticket?.trainName}
                     </p>
                     <p className="text-gray-700">
-                      <strong>Seat Type:</strong> {ticket.seatType}
+                      <strong>Seat Type:</strong> {ticket?.seatType}
                     </p>
                     <p className="text-gray-700">
-                      <strong>Number Carriage:</strong> {ticket.carriageName}
+                      <strong>Number Carriage:</strong> {ticket?.carriageName}
                     </p>
                     <p className="text-gray-700">
-                      <strong>Passenger Type:</strong> {ticket.passenger.passengerType}
+                      <strong>Passenger Type:</strong> {ticket.passenger?.passengerType}
                     </p>
                     <p className="text-gray-700">
-                      <strong>Departure Date:</strong> {ticket.departureDate} VND
+                      <strong>Departure Date:</strong> {ticket?.departureDate}
                     </p>
                     <p className="text-gray-700">
-                      <strong>Price:</strong> {ticket.price.toLocaleString()} VND
+                      <strong>Price:</strong> {ticket?.price?.toLocaleString()} VND
                     </p>
                   </div>
                   <div className="ml-4">
                     {/* QR Code cho mỗi ticket */}
-                    <QRCode value={`Ticket ID: ${ticket.ticketId}, Seat Number: ${ticket.seatNumber}`} size={100} />
+                    <QRCode value={`Ticket ID: ${ticket.ticketId}, Seat Number: ${ticket?.seatNumber}`} size={140} />
                   </div>
                 </div>
               ))}

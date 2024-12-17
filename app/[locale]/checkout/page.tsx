@@ -24,6 +24,7 @@ import { useSearchParams } from "next/navigation";
 import * as NProgress from "nprogress";
 import { useCheckoutMutation } from "@/services/orderApi";
 import { useAppDispatch } from "@/redux/store";
+import { selectAuthState } from "@/redux/slices/authSlice";
 const passengerSchema = z.object({
   fullname: z.string().min(1, "Full name is required"),
   identityNumber: z
@@ -52,8 +53,20 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 const Index: React.FC = () => {
-  const { train, passagers, price, date, returnDate, origin, destination, seathold, trainReturn, seatholdReturn } =
-    useAppSelector(selectSearchState);
+  const {
+    train,
+    passagers,
+    price,
+    date,
+    returnDate,
+    origin,
+    destination,
+    seathold,
+    trainReturn,
+    seatholdReturn,
+    trainId,
+  } = useAppSelector(selectSearchState);
+  const { userId, user } = useAppSelector(selectAuthState);
   const [createBooking, { isLoading, isError, data, error }] = useCreateBookingMutation();
   const params = useSearchParams();
   const router = useRouter();
@@ -85,23 +98,21 @@ const Index: React.FC = () => {
   });
   const seatOptions = [
     { label: "Không Chọn", value: "", price: 0 },
-    ...seathold.map((seatHold: SeatHold) => ({
-      label: `${seatHold.seat.seatNumber} ${seatHold.seat.seatType}`, // Chuyển seatNumber thành label
-      value: seatHold.seat.seatId.toString(), // Chuyển seatId thành string cho value
-      price: seatHold.seat.price, // Lấy giá từ seat
+    ...seathold.map((seatHold: Seat) => ({
+      label: `${seatHold.seatNumber} ${seatHold.seatType}`, // Chuyển seatNumber thành label
+      value: seatHold.seatId.toString(), // Chuyển seatId thành string cho value
+      price: seatHold.price, // Lấy giá từ seat
     })),
   ];
 
   const seatOptionsReturn = [
     { label: "Không Chọn", value: "", price: 0 },
-    ...seatholdReturn.map((seatHold: SeatHold) => ({
-      label: `${seatHold.seat.seatNumber} ${seatHold.seat.seatType}`,
-      value: seatHold.seat.seatId.toString(),
-      price: seatHold.seat.price,
+    ...seatholdReturn.map((seatHold: Seat) => ({
+      label: `${seatHold.seatNumber} ${seatHold.seatType}`,
+      value: seatHold.seatId.toString(),
+      price: seatHold.price,
     })),
   ];
-
-  const dispatch = useAppDispatch();
 
   // Watch the passengers field to get the selected seats
   const selectedSeats = watch("passengers").map((passenger) => passenger.seatNumber);
@@ -131,11 +142,13 @@ const Index: React.FC = () => {
     console.log("Form values:", data);
 
     const bookingData: BookingRequest = {
+      userId: user?.id,
       startStationCode: origin, // Ví dụ: ID ga đi, bạn có thể lấy từ input hoặc state
       endStationCode: destination, // Ví dụ: ID ga đến
       departureDate: date || "",
       arrivalDate: returnDate || "",
       tickets: data.passengers.map((passenger) => ({
+        trainId: trainId,
         departureDate: date, // Ngày khởi hành, bạn có thể lấy từ form
         seatId: parseInt(passenger.seatNumber), // Chuyển seatNumber thành seatId
         price: seatOptions.find((s) => s.value === passenger.seatNumber)?.price || 0, // Giá vé, bạn có thể tính giá hoặc lấy từ đâu đó
@@ -147,7 +160,6 @@ const Index: React.FC = () => {
         seatReturnId: passenger?.seatReturn ? parseInt(passenger?.seatReturn) : 0,
         seatReturnPrice: seatOptionsReturn.find((s) => s.value === passenger?.seatReturn)?.price || 0,
       })),
-      bookingTime: "",
     };
     console.log("bookingData", bookingData);
     createBooking(bookingData)
@@ -155,14 +167,14 @@ const Index: React.FC = () => {
       .then((response) => {
         if (response.success) {
           // Hiển thị thông báo thành công
-          toast.success(response.message, { autoClose: 1000 });
+          // toast.success(response.message, { autoClose: 1000 });
           NProgress.start();
           // Chuyển hướng đến trang thanh toán với bookingId và view=payment
 
           router.push({
             pathname: "/checkout", // Đường dẫn đến trang thanh toán
             query: {
-              bookingId: response.result,
+              bookingId: response.data,
               view: "payment",
               price: passengerOverviews.reduce((acc, p) => acc + (p.price || 0), 0),
             }, // Thêm params vào URL
@@ -448,18 +460,20 @@ function PaymentMethod() {
     if (selectedMethod?.name === "VN Pay") {
       const checkoutData = {
         amount: Number(params.get("price")) || 0,
-        orderInfo: params.get("bookingId") || "",
+        orderId: params.get("bookingId") || "",
       };
 
       try {
         const response = await checkout(checkoutData).unwrap(); // Gọi API checkout
         console.log(response);
-        if (response?.status) {
+        if (response?.url) {
           // Nếu API trả về thành công, chuyển hướng đến URL thanh toán
+          toast.success(response.message);
+
           window.location.href = response.url;
         } else {
           // Xử lý lỗi nếu thanh toán không thành công
-          alert(response.message || "Failed to process payment");
+          toast.success(response.message || "Failed to process payment");
         }
       } catch (err) {
         console.error("Error during checkout:", error);

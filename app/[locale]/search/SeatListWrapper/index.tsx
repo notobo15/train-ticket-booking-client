@@ -57,9 +57,7 @@ export default function SeatList({
         <div className={styles.footerLeft}>
           Ghế:
           <span>
-            {(step === "return" ? seatholdReturn : seathold)
-              .map((s) => `${s?.seat?.seatNumber} (${s?.seat?.seatType})`)
-              .join(", ")}
+            {(step === "return" ? seatholdReturn : seathold).map((s) => `${s?.seatNumber} (${s?.seatType})`).join(", ")}
           </span>
         </div>
         <div className={styles.footerRight}>

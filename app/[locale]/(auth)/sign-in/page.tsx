@@ -54,7 +54,7 @@ export default function Index() {
           .then(async (response) => {
             if (response.success) {
               toast.success("Signed In Successfully!", { autoClose: 1000 });
-              dispatch(setToken(response.data.jwToken));
+              // dispatch(setToken(response.data.jwToken));
               dispatch(setUser(response.data));
               // Redirect to home page
               router.push("/home");

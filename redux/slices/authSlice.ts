@@ -4,14 +4,16 @@ import { deleteCookie } from "cookies-next";
 
 interface AuthState {
   token: string | null;
-  user: { userName: string } | null;
+  user: { userName: string; id: string } | null;
   isAuthenticated: boolean;
+  userId: string;
 }
 
 const initialState: AuthState = {
   token: null,
   user: null,
   isAuthenticated: false,
+  userId: "",
 };
 
 const authSlice = createSlice({
@@ -22,7 +24,7 @@ const authSlice = createSlice({
       state.token = action.payload;
       state.isAuthenticated = true;
     },
-    setUser(state, action: PayloadAction<{ userName: string }>) {
+    setUser(state, action) {
       state.user = action.payload;
       state.isAuthenticated = true;
     },

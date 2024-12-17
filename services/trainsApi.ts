@@ -25,8 +25,15 @@ export const trainsApi = createApi({
         method: "GET",
         params: params,
       }),
+      // keepUnusedDataFor: 0.1,
+    }),
+    getTrainSchedules: builder.query<Response<Train[]>, SearchParams>({
+      query: (params) => ({
+        url: `/api/v1/Train/SearchTrainSchedules`,
+        params: params,
+      }),
     }),
   }),
 });
 
-export const { usePostSearchTrainsQuery } = trainsApi;
+export const { usePostSearchTrainsQuery, useLazyGetTrainSchedulesQuery } = trainsApi;

@@ -32,6 +32,18 @@ interface Province {
   codeName: string;
   stations: Station[];
 }
+
+interface Route {
+  id: number;
+  distance: number;
+  trainName: string | null;
+  startStationName: string;
+  endStationName: string;
+  arrivalTime: string;
+  departureTime: string;
+  status: string | null;
+  dateNumber: number;
+}
 interface Train {
   trainId: number;
   trainNumber: string;
@@ -50,6 +62,7 @@ interface Train {
   totalDuration: string;
   carriages: Carriage[];
   prices: Price[];
+  routes: Route[];
 }
 interface Seat {
   seatId: number;
@@ -89,7 +102,11 @@ interface Response<T> {
   success: boolean;
   errors: any;
 }
-
+interface IResponse<T> {
+  data: T;
+  success: boolean;
+  errors: any;
+}
 interface StationInfo {
   code: string;
   name: string;

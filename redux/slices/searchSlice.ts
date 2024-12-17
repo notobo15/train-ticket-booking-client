@@ -36,8 +36,8 @@ export interface ISearchState {
   step: "outbound" | "return";
   currentCarriage: { carriageId: number; carriageNumber: string; carriageClassName: string } | null;
   currentSeat: Seat | null;
-  seathold: SeatHold[];
-  seatholdReturn: SeatHold[];
+  seathold: Seat[];
+  seatholdReturn: Seat[];
 }
 const initialState: ISearchState = {
   isOpenModalFilter: false,
@@ -261,10 +261,13 @@ export const counterSlice = createSlice({
     addSeatHold: (state, action) => {
       state.seathold.push(action.payload);
     },
+    addAllSeatHold: (state, action) => {
+      state.seathold = action.payload;
+    },
     removeSeatHold: (state, action: PayloadAction<number>) => {
       const seatId = action.payload;
       // state.seathold = state.seathold.filter((seat) => seat.seat.seatId !== seatId);
-      state.seathold = state.seathold.filter((seat) => seat.id !== seatId);
+      state.seathold = state.seathold.filter((seat) => seat.seatId !== seatId);
     },
     clearSeatHold: (state, action: PayloadAction<void>) => {
       state.seathold = [];
@@ -272,10 +275,13 @@ export const counterSlice = createSlice({
     addSeatHoldReturn: (state, action) => {
       state.seatholdReturn.push(action.payload);
     },
+    addAllSeatHoldReturn: (state, action) => {
+      state.seatholdReturn = action.payload;
+    },
     removeSeatHoldReturn: (state, action: PayloadAction<number>) => {
       const seatId = action.payload;
       // state.seathold = state.seathold.filter((seat) => seat.seat.seatId !== seatId);
-      state.seatholdReturn = state.seathold.filter((seat) => seat.id !== seatId);
+      state.seatholdReturn = state.seathold.filter((seat) => seat.seatId !== seatId);
     },
     clearSeatHoldReturn: (state, action: PayloadAction<void>) => {
       state.seatholdReturn = [];
@@ -329,6 +335,8 @@ export const {
   removeSeatHoldReturn,
   clearSeatHold,
   clearSeatHoldReturn,
+  addAllSeatHold,
+  addAllSeatHoldReturn,
 } = counterSlice.actions;
 
 export default counterSlice.reducer;

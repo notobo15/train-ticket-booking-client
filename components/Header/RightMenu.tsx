@@ -50,6 +50,9 @@ const HeaderMenu: React.FC = () => {
       <li className="hidden sm:block">
         <Item label={t("policy")} url="/policy" />
       </li>
+      <li className="hidden sm:block">
+        <Item label={t("schedules")} url="/train-schedule" />
+      </li>
       {/* <li className="hidden sm:block">
         <Item label={t("help")} url="/help" />
       </li> */}

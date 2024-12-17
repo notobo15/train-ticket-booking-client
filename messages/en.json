@@ -6,7 +6,8 @@
   "Header": {
     "policy": "Policy",
     "help": "Help",
-    "signin": "Sign In"
+    "signin": "Sign In",
+    "schedules": "Schedules"
   },
 
   "HomePage": {

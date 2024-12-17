@@ -38,7 +38,7 @@ export default function Index({}: ReviewTicketOptionProps) {
   };
 
   const totalPrice = seathold.reduce((prev, seat) => {
-    return prev + (seat?.seat?.price || 0);
+    return prev + (seat?.price || 0);
   }, 0);
   return (
     <div className={styles.wrapper}>

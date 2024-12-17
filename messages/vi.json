@@ -6,7 +6,8 @@
   "Header": {
     "policy": "Chính sách",
     "help": "Trợ giúp",
-    "signin": "Đăng nhập"
+    "signin": "Đăng nhập",
+    "schedules": "Lịch trình"
   },
   "HomePage": {
     "title": "Tìm vé xe buýt giá rẻ cho chuyến đi tiếp theo của bạn",

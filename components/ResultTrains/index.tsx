@@ -73,7 +73,7 @@ export default function Index({ onClickSeat, onClickCarriage }: { onClickSeat: a
     // roundTrip: !!searchState.returnDate,
   };
   // };
-  const { isFetching, error, data } = usePostSearchTrainsQuery(params);
+  const { isFetching, error, data } = usePostSearchTrainsQuery(params, {});
 
   console.log("data", data);
   // useEffect(() => {
@@ -128,7 +128,8 @@ export default function Index({ onClickSeat, onClickCarriage }: { onClickSeat: a
               <div className={styles.main}>
                 <Info />
                 {isFetching && <CardSkeleton />}
-                {sortedData &&
+                {!isFetching &&
+                  sortedData &&
                   sortedData.map((item, index: number) => (
                     <Card
                       onClickCarriage={onClickCarriage}
@@ -138,7 +139,7 @@ export default function Index({ onClickSeat, onClickCarriage }: { onClickSeat: a
                       onClick={(trainId) => {
                         // setCurentTrainId(trainId);
                         dispatch(setTrainId(trainId));
-
+                        dispatch(setCurrentSeats([]));
                         var t = sortedData.find((i) => i.trainId === trainId) || null;
 
                         if (isReturnStep) {

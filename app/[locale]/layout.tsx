@@ -13,18 +13,18 @@ type Props = {
 export default function RootLayout({ children }: Props) {
   const clientId = process.env.NEXT_PUBLIC_GOOGLE_ID as string;
 
-  const dispatch = useAppDispatch();
-  useLayoutEffect(() => {
-    const loadTokenFromCookie = async () => {
-      const token = getCookie("jwtToken");
+  // const dispatch = useAppDispatch();
+  // useLayoutEffect(() => {
+  //   const loadTokenFromCookie = async () => {
+  //     const token = getCookie("jwtToken");
 
-      if (token) {
-        dispatch(setToken(token as string)); // Cập nhật Redux store với token
-      }
-    };
+  //     if (token) {
+  //       dispatch(setToken(token as string)); // Cập nhật Redux store với token
+  //     }
+  //   };
 
-    loadTokenFromCookie(); // Gọi hàm bất đồng bộ để lấy token
-  }, [dispatch]);
+  //   loadTokenFromCookie(); // Gọi hàm bất đồng bộ để lấy token
+  // }, [dispatch]);
   return (
     <>
       <GoogleOAuthProvider clientId={clientId}>
@@ -35,6 +35,6 @@ export default function RootLayout({ children }: Props) {
   );
 }
 
-async function getToken() {
-  return await getCookie("jwtToken");
-}
+// async function getToken() {
+//   return await getCookie("jwtToken");
+// }
